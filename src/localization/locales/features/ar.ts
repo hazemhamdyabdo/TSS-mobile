@@ -550,12 +550,6 @@ export const arFeatures = {
     badges: {
       nationalTeam: 'المنتخب الوطني',
     },
-    addTypes: {
-      player: 'لاعب',
-      coach: 'مدرب',
-      referee: 'حكم',
-      administrator: 'اداري',
-    },
     details: {
       player: 'تفاصيل اللاعب',
       coach: 'تفاصيل المدرب',

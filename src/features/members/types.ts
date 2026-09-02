@@ -90,5 +90,3 @@ export type MembersState = {
   totalCount: number;
   suspendedCount: number;
 };
-
-export type AddMemberActionId = 'addPlayer' | 'addCoach' | 'addReferee' | 'addAdministrator';

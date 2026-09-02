@@ -11,7 +11,6 @@ import OptionPickerBottomSheet, {
 import type { SelectOption } from '@/components/form/types';
 import ScreenSafeAreaView from '@/components/ScreenSafeAreaView';
 import CreateBackButton from '@/features/create/components/CreateBackButton';
-import { CREATE_ROUTES } from '@/features/create/constants/actions';
 import { useMockListFetch } from '@/hooks/useMockListFetch';
 import { RTL_CONTAINER_STYLE, RTL_TEXT_STYLE } from '@/localization/direction';
 import { cairo } from '@/theme/typography';
@@ -19,7 +18,7 @@ import { cairo } from '@/theme/typography';
 import { getMembers } from '../api';
 import { FILTER_ICON_XML, PLUS_ICON_XML } from '../constants/iconXml';
 import { useMembersState } from '../hooks/useMembersState';
-import type { AddMemberActionId, Member, MemberCategory, MemberStatusFilter } from '../types';
+import type { Member, MemberCategory, MemberStatusFilter } from '../types';
 import AdministratorCard from './AdministratorCard';
 import CoachCard from './CoachCard';
 import MemberCategoryChips from './MemberCategoryChips';
@@ -28,13 +27,6 @@ import MemberStatCards from './MemberStatCards';
 import MembersSkeleton from './MembersSkeleton';
 import PlayerCard from './PlayerCard';
 import RefereeCard from './RefereeCard';
-
-const ADD_OPTIONS: SelectOption[] = [
-  { value: 'addPlayer', labelKey: 'members.addTypes.player' },
-  { value: 'addCoach', labelKey: 'members.addTypes.coach' },
-  { value: 'addReferee', labelKey: 'members.addTypes.referee' },
-  { value: 'addAdministrator', labelKey: 'members.addTypes.administrator' },
-];
 
 const FILTER_OPTIONS: SelectOption[] = [
   { value: 'all', labelKey: 'members.filters.all' },
@@ -48,7 +40,6 @@ export default function MembersScreen() {
   const router = useRouter();
   const state = useMembersState();
   const isLoading = useMockListFetch(getMembers);
-  const addSheetRef = useRef<OptionPickerBottomSheetRef>(null);
   const filterSheetRef = useRef<OptionPickerBottomSheetRef>(null);
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState<MemberCategory>('player');
@@ -73,29 +64,6 @@ export default function MembersScreen() {
       return t(item.nameKey).toLowerCase().includes(normalized);
     });
   }, [category, query, state.items, statusFilter, t]);
-
-  const handleAddSelect = (value: string) => {
-    const actionId = value as AddMemberActionId;
-
-    switch (actionId) {
-      case 'addPlayer':
-        router.push(CREATE_ROUTES.addPlayer);
-        return;
-      case 'addCoach':
-        router.push(CREATE_ROUTES.addCoach);
-        return;
-      case 'addReferee':
-        router.push(CREATE_ROUTES.addReferee);
-        return;
-      case 'addAdministrator':
-        router.push(CREATE_ROUTES.addAdministrator);
-        return;
-      default: {
-        const exhaustive: never = actionId;
-        throw new Error(`Unhandled add member action: ${exhaustive}`);
-      }
-    }
-  };
 
   const openDetails = (member: Member) => {
     if (member.category === 'administrator') {
@@ -132,7 +100,7 @@ export default function MembersScreen() {
               />
               <Pressable
                 accessibilityRole="button"
-                onPress={() => addSheetRef.current?.open()}
+                onPress={() => router.push('/fast-management')}
                 className="h-[42px] flex-row items-center gap-2 rounded-[10px] bg-primary px-3"
                 style={RTL_CONTAINER_STYLE}>
                 <SvgXml xml={PLUS_ICON_XML} width={16} height={16} />
@@ -175,7 +143,6 @@ export default function MembersScreen() {
           </>
         )}
       </ScrollView>
-      <OptionPickerBottomSheet ref={addSheetRef} options={ADD_OPTIONS} onSelect={handleAddSelect} />
       <OptionPickerBottomSheet
         ref={filterSheetRef}
         options={FILTER_OPTIONS}

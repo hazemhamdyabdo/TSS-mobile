@@ -550,12 +550,6 @@ export const enFeatures = {
     badges: {
       nationalTeam: 'National team',
     },
-    addTypes: {
-      player: 'Player',
-      coach: 'Coach',
-      referee: 'Referee',
-      administrator: 'Administrator',
-    },
     details: {
       player: 'Player details',
       coach: 'Coach details',
