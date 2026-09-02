@@ -513,4 +513,114 @@ export const enFeatures = {
       },
     },
   },
+  more: {
+    hub: {
+      title: 'More',
+      items: {
+        clubs: {
+          title: 'Clubs',
+          subtitle: 'View all clubs and their statistics',
+        },
+        rankings: {
+          title: 'Rankings',
+          subtitle: 'View rankings for all federation members',
+        },
+        results: {
+          title: 'Results',
+          subtitle: 'View all federation competition results',
+        },
+        punishments: {
+          title: 'Sanctions',
+          subtitle: 'Manage sanctions for federation members',
+        },
+        transfers: {
+          title: 'Transfers',
+          subtitle: 'Manage player transfers between clubs',
+        },
+        settings: {
+          title: 'Settings',
+          subtitle: 'View your personal settings and other options',
+        },
+      },
+    },
+    placeholder: {
+      body: 'This section will be added soon.',
+    },
+    settings: {
+      title: 'Settings',
+      email: 'Email',
+      phone: 'Phone number',
+      logout: 'Log out',
+      logoutConfirm: 'Are you sure you want to log out?',
+      sections: {
+        profile: 'Profile settings',
+        app: 'App settings',
+        about: 'About the federation',
+      },
+      rows: {
+        profile: 'Profile',
+        notifications: 'Notifications',
+        language: 'Language',
+        privacy: 'Privacy',
+        help: 'Help',
+        darkMode: 'Dark theme',
+      },
+    },
+    profile: {
+      title: 'Profile',
+      save: 'Save changes',
+      saved: 'Your changes were saved successfully.',
+      changePhoto: 'Change photo',
+      fields: {
+        name: 'Name',
+        phone: 'Mobile number',
+        email: 'Email',
+        role: 'Role',
+      },
+    },
+    language: {
+      title: 'Language',
+      heading: 'Choose language',
+      subtitle: 'Choose your preferred language for the app',
+      noteTitle: 'Language settings',
+      noteBody:
+        'Changing the language updates the app interface immediately. Some content may stay in the original language.',
+      options: {
+        ar: {
+          name: 'Arabic',
+          region: 'Arabic (Saudi Arabia)',
+        },
+        en: {
+          name: 'English',
+          region: 'English (United States)',
+        },
+      },
+    },
+    notifications: {
+      title: 'Notifications',
+      enabled: {
+        title: 'Enable notifications',
+        subtitle: 'Make this a priority to ensure a fast response.',
+      },
+      transferRequests: {
+        title: 'Transfer request',
+        subtitle: 'Notify me when a player requests a transfer from one club to another',
+      },
+      featureUpdates: {
+        title: 'Feature updates',
+        subtitle: 'Notify users about new features and improvements added to the service.',
+      },
+    },
+    info: {
+      privacyBody:
+        'We respect your privacy. Your data is used to manage the federation, competitions, and transfers according to Saudi Fencing Federation policies.',
+      helpBody:
+        'For help using the app or questions about federation services, contact support from the contact page.',
+    },
+    errors: {
+      required: 'This field is required',
+      invalidEmail: 'Enter a valid email',
+      invalidPhone: 'Enter a valid mobile number',
+    },
+  },
 };

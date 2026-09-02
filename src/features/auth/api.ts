@@ -6,6 +6,7 @@ import {
 } from './store/authState';
 import type { ContactMessage } from './types';
 import { createMockId, mockDelay, MockApiError } from '@/utils/mockApi';
+import { resetMockStores } from '@/utils/resetMockStores';
 
 export async function hydrateAuthState() {
   const session = await loadStoredSession();
@@ -44,6 +45,6 @@ export async function submitContactMessage(input: Omit<ContactMessage, 'id'>) {
 
 export async function signOut() {
   await mockDelay(150, 250);
-  setAuthSessionInState(null);
   await persistSession(null);
+  resetMockStores();
 }
