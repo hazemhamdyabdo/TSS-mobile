@@ -6,15 +6,12 @@ import AuthBackButton from './AuthBackButton';
 import AuthHeroBackground from './AuthHeroBackground';
 import AuthSheet from './AuthSheet';
 import ContactForm from './ContactForm';
-import { useTextStartAlign, useWritingDirection } from '@/localization/direction';
+import { RTL_TEXT_STYLE } from '@/localization/direction';
 import { cairo } from '@/theme/typography';
 
 export default function ContactScreen() {
   const { t } = useTranslation();
   const router = useRouter();
-  const textAlign = useTextStartAlign();
-  const writingDirection = useWritingDirection();
-
   return (
     <AuthHeroBackground>
       <AuthSheet className="max-h-[90%]">
@@ -29,12 +26,12 @@ export default function ContactScreen() {
             <View className="w-full items-start gap-1.5">
               <Text
                 className="w-full text-xl leading-[26px] text-accent"
-                style={{ fontFamily: cairo.bold, textAlign, writingDirection }}>
+                style={{ fontFamily: cairo.bold, ...RTL_TEXT_STYLE }}>
                 {t('auth.contactTitle')}
               </Text>
               <Text
                 className="w-full text-sm text-sec-text"
-                style={{ fontFamily: cairo.regular, textAlign, writingDirection }}>
+                style={{ fontFamily: cairo.regular, ...RTL_TEXT_STYLE }}>
                 {t('auth.contactSubtitle')}
               </Text>
             </View>

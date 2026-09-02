@@ -6,7 +6,7 @@ import AuthBackButton from './AuthBackButton';
 import AuthHeroBackground from './AuthHeroBackground';
 import AuthSheet from './AuthSheet';
 import OtpForm from './OtpForm';
-import { useTextStartAlign, useWritingDirection } from '@/localization/direction';
+import { RTL_TEXT_STYLE } from '@/localization/direction';
 import { cairo } from '@/theme/typography';
 import { toArabicIndicDigits } from '@/utils/digits';
 
@@ -24,9 +24,6 @@ function formatDisplayPhone(phone: string, language: string) {
 export default function OtpScreen({ phone }: OtpScreenProps) {
   const { t, i18n } = useTranslation();
   const router = useRouter();
-  const textAlign = useTextStartAlign();
-  const writingDirection = useWritingDirection();
-
   return (
     <AuthHeroBackground>
       <AuthSheet>
@@ -38,18 +35,18 @@ export default function OtpScreen({ phone }: OtpScreenProps) {
             <View className="w-full items-start gap-1.5">
               <Text
                 className="w-full text-xl leading-[26px] text-accent"
-                style={{ fontFamily: cairo.bold, textAlign, writingDirection }}>
+                style={{ fontFamily: cairo.bold, ...RTL_TEXT_STYLE }}>
                 {t('auth.otpTitle')}
               </Text>
               <Text
                 className="w-full text-sm text-sec-text"
-                style={{ fontFamily: cairo.regular, textAlign, writingDirection }}>
+                style={{ fontFamily: cairo.regular, ...RTL_TEXT_STYLE }}>
                 {t('auth.otpSubtitle', { phone: formatDisplayPhone(phone, i18n.language) })}
               </Text>
               <Pressable onPress={() => router.back()} className="w-full">
                 <Text
                   className="w-full text-sm text-primary"
-                  style={{ fontFamily: cairo.regular, textAlign, writingDirection }}>
+                  style={{ fontFamily: cairo.regular, ...RTL_TEXT_STYLE }}>
                   {t('auth.changeNumber')}
                 </Text>
               </Pressable>

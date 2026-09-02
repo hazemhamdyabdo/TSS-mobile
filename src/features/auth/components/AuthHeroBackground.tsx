@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import type { ReactNode } from 'react';
 import { KeyboardAvoidingView, Platform, View } from 'react-native';
 
-import { useWritingDirection } from '@/localization/direction';
+import { RTL_CONTAINER_STYLE } from '@/localization/direction';
 
 const welcomeBackground = require('@/assets/images/welcome-background.jpg');
 
@@ -12,10 +12,8 @@ type AuthHeroBackgroundProps = {
 };
 
 export default function AuthHeroBackground({ children }: AuthHeroBackgroundProps) {
-  const direction = useWritingDirection();
-
   return (
-    <View className="flex-1 bg-black" style={{ direction }}>
+    <View className="flex-1 bg-black" style={RTL_CONTAINER_STYLE}>
       <StatusBar style="light" />
       <Image
         source={welcomeBackground}

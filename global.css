@@ -4,6 +4,16 @@
 
 @import "nativewind/theme";
 
+/*
+ * The app is always right-to-left. `src/app/+html.tsx` ships `<html dir="rtl">`, and this
+ * pins the react-native-web root containers so nothing can inherit its way back to LTR.
+ */
+html,
+body,
+#root {
+  direction: rtl;
+}
+
 :root {
   --font-display:
     Spline Sans, Inter, ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji,

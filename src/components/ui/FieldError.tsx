@@ -1,6 +1,6 @@
 import { Text } from 'react-native';
 
-import { useTextStartAlign, useWritingDirection } from '@/localization/direction';
+import { RTL_TEXT_STYLE } from '@/localization/direction';
 import { cairo } from '@/theme/typography';
 
 type FieldErrorProps = {
@@ -8,13 +8,10 @@ type FieldErrorProps = {
 };
 
 export default function FieldError({ message }: FieldErrorProps) {
-  const textAlign = useTextStartAlign();
-  const writingDirection = useWritingDirection();
-
   return (
     <Text
       className="w-full text-xs leading-[18px] text-rejected"
-      style={{ fontFamily: cairo.regular, textAlign, writingDirection }}>
+      style={{ fontFamily: cairo.regular, ...RTL_TEXT_STYLE }}>
       {message}
     </Text>
   );

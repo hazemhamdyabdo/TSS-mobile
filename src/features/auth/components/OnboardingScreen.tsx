@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import AuthHeroBackground from './AuthHeroBackground';
-import { useTextStartAlign, useWritingDirection } from '@/localization/direction';
+import { RTL_TEXT_STYLE } from '@/localization/direction';
 import { cairo } from '@/theme/typography';
 
 const startArrow = require('@/assets/images/auth/start-arrow.png');
@@ -14,9 +14,6 @@ export default function OnboardingScreen() {
   const { t } = useTranslation();
   const router = useRouter();
   const insets = useSafeAreaInsets();
-  const textAlign = useTextStartAlign();
-  const writingDirection = useWritingDirection();
-
   return (
     <AuthHeroBackground>
       <View
@@ -29,12 +26,12 @@ export default function OnboardingScreen() {
           <View className="w-full items-start gap-3">
             <Text
               className="w-full text-[60px] leading-[72px] text-slate-50"
-              style={{ fontFamily: cairo.bold, textAlign, writingDirection }}>
+              style={{ fontFamily: cairo.bold, ...RTL_TEXT_STYLE }}>
               {`${t('auth.onboardingTitleLine1')}\n${t('auth.onboardingTitleLine2')}`}
             </Text>
             <Text
               className="w-full text-[26px] leading-[26px] text-slate-200"
-              style={{ fontFamily: cairo.medium, textAlign, writingDirection }}>
+              style={{ fontFamily: cairo.medium, ...RTL_TEXT_STYLE }}>
               {t('auth.onboardingSubtitle')}
             </Text>
           </View>

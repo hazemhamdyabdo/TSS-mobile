@@ -1,7 +1,7 @@
 import { Image } from 'expo-image';
 import { Text, TextInput, View } from 'react-native';
 
-import { useTextStartAlign } from '@/localization/direction';
+import { TEXT_INPUT_START_ALIGN } from '@/localization/direction';
 import { colors } from '@/theme/colors';
 import { cairo } from '@/theme/typography';
 
@@ -23,8 +23,6 @@ export default function PhoneNumberField({
   countryCode,
   hasError = false,
 }: PhoneNumberFieldProps) {
-  const textAlign = useTextStartAlign();
-
   return (
     <View
       className={`h-12 w-full flex-row items-center gap-2 rounded-[10px] border bg-white px-4 ${hasError ? 'border-rejected' : 'border-slate-100'}`}
@@ -35,7 +33,7 @@ export default function PhoneNumberField({
         placeholder={placeholder}
         placeholderTextColor={colors.secText}
         keyboardType="phone-pad"
-        textAlign={textAlign}
+        textAlign={TEXT_INPUT_START_ALIGN}
         className="min-w-0 flex-1 text-sm leading-[18px] text-label"
         style={{ fontFamily: cairo.regular }}
       />

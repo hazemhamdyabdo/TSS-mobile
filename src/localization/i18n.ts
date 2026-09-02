@@ -1,23 +1,24 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import * as Localization from 'expo-localization';
-import * as Updates from 'expo-updates';
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
-import { DevSettings, I18nManager, Platform } from 'react-native';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as Localization from "expo-localization";
+import * as Updates from "expo-updates";
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+import { DevSettings, I18nManager, Platform } from "react-native";
 
-import ar from './locales/ar.json';
-import en from './locales/en.json';
-import { arFeatures } from './locales/features/ar';
-import { enFeatures } from './locales/features/en';
+import { APP_DIRECTION } from "./direction";
+import ar from "./locales/ar.json";
+import en from "./locales/en.json";
+import { arFeatures } from "./locales/features/ar";
+import { enFeatures } from "./locales/features/en";
 
-export type AppLanguage = 'ar' | 'en';
+export type AppLanguage = "ar" | "en";
 
-export const DEFAULT_LANGUAGE: AppLanguage = 'ar';
+export const DEFAULT_LANGUAGE: AppLanguage = "ar";
 
 /** Flip to true when language can be chosen from settings or the device locale. */
 const ALLOW_DYNAMIC_LANGUAGE = false;
 
-const LANGUAGE_KEY = '@tff/language';
+const LANGUAGE_KEY = "@tff/language";
 
 const resources = {
   en: { translation: { ...en, ...enFeatures } },
@@ -26,7 +27,7 @@ const resources = {
 
 function deviceLanguage(): AppLanguage {
   const locale = Localization.getLocales()[0]?.languageCode;
-  return locale === 'en' ? 'en' : 'ar';
+  return locale === "en" ? "en" : "ar";
 }
 
 function resolveLanguage(storedLanguage: string | null): AppLanguage {
@@ -34,7 +35,7 @@ function resolveLanguage(storedLanguage: string | null): AppLanguage {
     return DEFAULT_LANGUAGE;
   }
 
-  if (storedLanguage === 'en' || storedLanguage === 'ar') {
+  if (storedLanguage === "en" || storedLanguage === "ar") {
     return storedLanguage;
   }
 
@@ -42,33 +43,33 @@ function resolveLanguage(storedLanguage: string | null): AppLanguage {
 }
 
 function applyDocumentDirection(language: AppLanguage) {
-  if (Platform.OS !== 'web' || typeof document === 'undefined') {
+  if (Platform.OS !== "web" || typeof document === "undefined") {
     return;
   }
 
-  const shouldBeRtl = language === 'ar';
-  document.documentElement.dir = shouldBeRtl ? 'rtl' : 'ltr';
+  document.documentElement.dir = APP_DIRECTION;
   document.documentElement.lang = language;
 }
 
 async function applyRtl(language: AppLanguage) {
-  const shouldBeRtl = language === 'ar';
-
   applyDocumentDirection(language);
+
+  // react-native-web implements allowRTL/forceRTL as no-ops and has no
+  // swapLeftAndRightInRTL at all, so the document `dir` above is the whole story on web.
+  if (Platform.OS === "web") {
+    return;
+  }
+
   // Keep NativeWind physical left/right utilities (text-right, items-end)
-  // from being inverted when the layout engine is RTL.
+  // from being inverted by the RTL layout engine.
   I18nManager.swapLeftAndRightInRTL(false);
 
-  if (I18nManager.isRTL === shouldBeRtl) {
+  if (I18nManager.isRTL) {
     return;
   }
 
-  I18nManager.allowRTL(shouldBeRtl);
-  I18nManager.forceRTL(shouldBeRtl);
-
-  if (Platform.OS === 'web') {
-    return;
-  }
+  I18nManager.allowRTL(true);
+  I18nManager.forceRTL(true);
 
   if (__DEV__) {
     DevSettings.reload();

@@ -1,4 +1,4 @@
-import '../../global.css';
+import "../../global.css";
 
 import {
   Cairo_400Regular,
@@ -6,18 +6,20 @@ import {
   Cairo_600SemiBold,
   Cairo_700Bold,
   useFonts,
-} from '@expo-google-fonts/cairo';
-import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
-import { DarkTheme, DefaultTheme, ThemeProvider, Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect, useState } from 'react';
-import { useColorScheme } from 'react-native';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+} from "@expo-google-fonts/cairo";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+import { DarkTheme, DefaultTheme, Stack, ThemeProvider } from "expo-router";
+import * as SplashScreen from "expo-splash-screen";
+import type { ReactNode } from "react";
+import { useEffect, useState } from "react";
+import { useColorScheme, View } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
-import SplashView from '@/features/auth/components/SplashScreen';
-import { hydrateAuthState } from '@/features/auth/api';
-import { initializeI18n } from '@/localization/i18n';
+import { hydrateAuthState } from "@/features/auth/api";
+import SplashView from "@/features/auth/components/SplashScreen";
+import { RTL_CONTAINER_STYLE } from "@/localization/direction";
+import { initializeI18n } from "@/localization/i18n";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -50,29 +52,54 @@ export default function RootLayout() {
 
   const fontsReady = fontsLoaded || Boolean(fontError);
 
+  const isReady = fontsReady && appReady;
+
   useEffect(() => {
-    if (fontsReady && appReady) {
+    if (isReady) {
       SplashScreen.hideAsync();
     }
-  }, [fontsReady, appReady]);
+  }, [isReady]);
 
-  if (!fontsReady || !appReady) {
-    return <SplashView />;
-  }
-
+  // Always mount <Stack> on the first frame. Returning splash instead of the
+  // navigator lets expo-router's Android getInitialURL Promise call setState on
+  // NavigationContainer before it has committed (LogBox: "component that hasn't
+  // mounted yet"). Keep the native splash up and overlay a JS splash until boot.
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <RtlAppShell>
       <SafeAreaProvider>
         <BottomSheetModalProvider>
-          <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-            <Stack screenOptions={{ headerShown: false, animation: 'fade' }}>
+          <ThemeProvider
+            value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+          >
+            <Stack screenOptions={{ headerShown: false, animation: "fade" }}>
               <Stack.Screen name="index" />
               <Stack.Screen name="(auth)" />
               <Stack.Screen name="(tabs)" />
+              <Stack.Screen name="fast-management" />
+              <Stack.Screen name="add-player" />
+              <Stack.Screen name="add-coach" />
+              <Stack.Screen name="add-referee" />
+              <Stack.Screen name="add-competition" />
+              <Stack.Screen name="add-club" />
+              <Stack.Screen name="add-administrator" />
+              <Stack.Screen name="add-punishment" />
             </Stack>
           </ThemeProvider>
         </BottomSheetModalProvider>
       </SafeAreaProvider>
+      {isReady ? null : (
+        <View style={{ position: "absolute", top: 0, right: 0, bottom: 0, left: 0 }}>
+          <SplashView />
+        </View>
+      )}
+    </RtlAppShell>
+  );
+}
+
+function RtlAppShell({ children }: { children: ReactNode }) {
+  return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <View style={[{ flex: 1 }, RTL_CONTAINER_STYLE]}>{children}</View>
     </GestureHandlerRootView>
   );
 }

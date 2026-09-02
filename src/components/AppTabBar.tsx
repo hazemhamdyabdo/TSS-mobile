@@ -1,4 +1,5 @@
 import { Image } from "expo-image";
+import { useRouter } from "expo-router";
 import type { BottomTabBarProps } from "expo-router/js-tabs";
 import { useTranslation } from "react-i18next";
 import { Pressable, Text, View } from "react-native";
@@ -54,6 +55,7 @@ function TabItem({ name, label, focused, onPress }: TabItemProps) {
 
 export default function AppTabBar({ state, navigation }: BottomTabBarProps) {
   const { t } = useTranslation();
+  const router = useRouter();
   const insets = useSafeAreaInsets();
   const focusedName = state.routes[state.index]?.name;
   const focusedTab = isTabName(focusedName ?? "") ? focusedName : null;
@@ -129,6 +131,7 @@ export default function AppTabBar({ state, navigation }: BottomTabBarProps) {
         <Pressable
           accessibilityRole="button"
           accessibilityLabel={t("tabs.add")}
+          onPress={() => router.push("/fast-management")}
           className="items-center gap-1"
         >
           <View
