@@ -1,6 +1,8 @@
 {
   "common": {
     "back": "Back",
-    "ok": "OK"
+    "ok": "OK",
+    "cancel": "Cancel",
+    "delete": "Delete"
   }
 }

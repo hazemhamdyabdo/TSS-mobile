@@ -83,6 +83,7 @@ export default function RootLayout() {
               <Stack.Screen name="add-club" />
               <Stack.Screen name="add-administrator" />
               <Stack.Screen name="add-punishment" />
+              <Stack.Screen name="competition/[id]" />
             </Stack>
           </ThemeProvider>
         </BottomSheetModalProvider>

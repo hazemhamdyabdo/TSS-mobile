@@ -1,4 +1,5 @@
 import { resetAuthState } from '@/features/auth/store/authState';
+import { resetCompetitionsState } from '@/features/competitions/store/competitionsState';
 import { resetCreateState } from '@/features/create/store/createState';
 import { resetHomeState } from '@/features/home/store/homeState';
 
@@ -8,5 +9,6 @@ export function resetMockStores() {
   resetAuthState();
   resetHomeState();
   resetCreateState();
+  resetCompetitionsState();
   resetMockIdCounter();
 }
