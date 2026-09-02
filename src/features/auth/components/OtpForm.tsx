@@ -27,12 +27,25 @@ function formatTimer(seconds: number) {
   return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
 }
 
+function otpCellBorderClass({ hasError, isActive }: { hasError: boolean; isActive: boolean }) {
+  if (hasError) {
+    return 'border-rejected';
+  }
+
+  if (isActive) {
+    return 'border-primary';
+  }
+
+  return 'border-slate-100';
+}
+
 export default function OtpForm({ phone }: OtpFormProps) {
   const { t } = useTranslation();
   const router = useRouter();
   const inputRef = useRef<TextInput>(null);
   const [secondsLeft, setSecondsLeft] = useState(OTP_RESEND_SECONDS);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
   const schema = useMemo(() => createOtpSchema(t), [t]);
 
   const {
@@ -95,6 +108,8 @@ export default function OtpForm({ phone }: OtpFormProps) {
                   ref={inputRef}
                   value={value}
                   onChangeText={(next) => onChange(onlyDigits(next).slice(0, OTP_LENGTH))}
+                  onFocus={() => setIsFocused(true)}
+                  onBlur={() => setIsFocused(false)}
                   keyboardType="number-pad"
                   maxLength={OTP_LENGTH}
                   caretHidden
@@ -106,12 +121,15 @@ export default function OtpForm({ phone }: OtpFormProps) {
                 <View className="w-full flex-row justify-between">
                   {Array.from({ length: OTP_LENGTH }).map((_, index) => {
                     const digit = digits[index] ?? '';
-                    const hasError = Boolean(errors.otp);
+                    const borderClass = otpCellBorderClass({
+                      hasError: Boolean(errors.otp),
+                      isActive: isFocused && index === Math.min(digits.length, OTP_LENGTH - 1),
+                    });
 
                     return (
                       <View
                         key={index}
-                        className={`size-16 items-center justify-center rounded-[10px] border bg-white ${hasError ? 'border-rejected' : 'border-slate-100'}`}>
+                        className={`size-16 items-center justify-center rounded-[10px] border bg-white ${borderClass}`}>
                         <Text
                           className="text-xl text-sec-text"
                           style={{ fontFamily: cairo.regular }}>

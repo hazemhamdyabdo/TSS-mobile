@@ -1,24 +1,31 @@
-import { useRouter } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import { Pressable, ScrollView, Text, View } from 'react-native';
-import { useTranslation } from 'react-i18next';
+import { useRouter } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import { useTranslation } from "react-i18next";
+import { Pressable, ScrollView, Text, View } from "react-native";
 
-import ScreenSafeAreaView from '@/components/ScreenSafeAreaView';
-import CreateScreenHeader from '@/features/create/components/CreateScreenHeader';
-import { RTL_CONTAINER_STYLE, RTL_TEXT_STYLE } from '@/localization/direction';
-import { cairo } from '@/theme/typography';
+import ScreenSafeAreaView from "@/components/ScreenSafeAreaView";
+import CreateScreenHeader from "@/features/create/components/CreateScreenHeader";
+import { RTL_CONTAINER_STYLE, RTL_TEXT_STYLE } from "@/localization/direction";
+import { cairo } from "@/theme/typography";
 
-import { MORE_HUB_ACTIONS } from '../constants/actions';
-import MoreHubIcon from './MoreHubIcon';
+import { MORE_HUB_ACTIONS } from "../constants/actions";
+import MoreHubIcon from "./MoreHubIcon";
 
 export default function MoreScreen() {
   const { t } = useTranslation();
   const router = useRouter();
 
   return (
-    <ScreenSafeAreaView className="flex-1 bg-background" edges={['top']} style={RTL_CONTAINER_STYLE}>
+    <ScreenSafeAreaView
+      className="flex-1 bg-background"
+      edges={["top"]}
+      style={RTL_CONTAINER_STYLE}
+    >
       <StatusBar style="dark" />
-      <CreateScreenHeader title={t('more.hub.title')} onBack={() => router.navigate('/(tabs)')} />
+      <CreateScreenHeader
+        title={t("more.hub.title")}
+        onBack={() => router.navigate("/(tabs)")}
+      />
       <ScrollView
         className="flex-1"
         contentContainerClassName="gap-2 px-5 pb-8 pt-4"

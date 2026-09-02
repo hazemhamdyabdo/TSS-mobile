@@ -1,10 +1,10 @@
-import { StatusBar } from "expo-status-bar";
 import type { ReactNode } from "react";
 import { KeyboardAvoidingView, Platform, ScrollView } from "react-native";
 
 import ScreenSafeAreaView from "@/components/ScreenSafeAreaView";
 import { RTL_CONTAINER_STYLE } from "@/localization/direction";
 
+import { StatusBar } from "expo-status-bar";
 import CreateScreenHeader from "./CreateScreenHeader";
 
 type CreateFormLayoutProps = {

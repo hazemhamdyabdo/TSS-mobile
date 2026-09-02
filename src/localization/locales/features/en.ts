@@ -98,6 +98,8 @@ export const enFeatures = {
     phoneLabel: 'Mobile number',
     phonePlaceholder: '12 345 6789',
     countryCode: '+966',
+    selectCountry: 'Select country',
+    searchCountry: 'Search country or code',
     verify: 'Verify',
     noAccount: "Don't have an account?",
     contactFederation: 'Contact the federation',

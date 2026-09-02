@@ -22,6 +22,10 @@ export function isValidSaPhone(value: string) {
     return false;
   }
 
+  if (digits.startsWith(SA_DIAL_CODE) && digits.length > 9) {
+    return isValidPhoneNumber(`+${digits}`);
+  }
+
   return (
     isValidPhoneNumber(digits, 'SA') ||
     isValidPhoneNumber(`+${SA_DIAL_CODE}${digits}`, 'SA')

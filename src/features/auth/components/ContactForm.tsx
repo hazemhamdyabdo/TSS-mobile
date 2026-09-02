@@ -95,7 +95,6 @@ export default function ContactForm() {
                 value={value}
                 onChangeText={onChange}
                 placeholder={t("auth.phonePlaceholder")}
-                countryCode={t("auth.countryCode")}
                 hasError={Boolean(errors.phone)}
               />
             )}

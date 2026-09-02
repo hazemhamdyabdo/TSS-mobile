@@ -1,31 +1,39 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { MaterialDesignIcons } from '@react-native-vector-icons/material-design-icons';
-import { Image } from 'expo-image';
-import * as ImagePicker from 'expo-image-picker';
-import { useRouter } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import { useMemo, useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
-import { Alert, KeyboardAvoidingView, Platform, Pressable, ScrollView, Text, View } from 'react-native';
-import { useTranslation } from 'react-i18next';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { MaterialDesignIcons } from "@react-native-vector-icons/material-design-icons";
+import { Image } from "expo-image";
+import * as ImagePicker from "expo-image-picker";
+import { useRouter } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import { useMemo, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import {
+  Alert,
+  KeyboardAvoidingView,
+  Platform,
+  Pressable,
+  ScrollView,
+  Text,
+  View,
+} from "react-native";
 
-import ScreenSafeAreaView from '@/components/ScreenSafeAreaView';
-import PrimaryButton from '@/components/ui/PrimaryButton';
-import CreateScreenHeader from '@/features/create/components/CreateScreenHeader';
-import { RTL_CONTAINER_STYLE, RTL_TEXT_STYLE } from '@/localization/direction';
-import { colors } from '@/theme/colors';
-import { cairo } from '@/theme/typography';
+import ScreenSafeAreaView from "@/components/ScreenSafeAreaView";
+import PrimaryButton from "@/components/ui/PrimaryButton";
+import CreateScreenHeader from "@/features/create/components/CreateScreenHeader";
+import { RTL_CONTAINER_STYLE, RTL_TEXT_STYLE } from "@/localization/direction";
+import { colors } from "@/theme/colors";
+import { cairo } from "@/theme/typography";
 
-import { updateProfile } from '../api';
-import { useMoreState } from '../hooks/useMoreState';
+import { updateProfile } from "../api";
+import { useMoreState } from "../hooks/useMoreState";
 import {
   createProfileSchema,
   type ProfileSchemaValues,
-} from '../schemas/profileSchema';
-import ProfilePhoneField from './ProfilePhoneField';
-import ProfileTextField from './ProfileTextField';
+} from "../schemas/profileSchema";
+import ProfilePhoneField from "./ProfilePhoneField";
+import ProfileTextField from "./ProfileTextField";
 
-const defaultAvatar = require('@/assets/images/home/avatar.png');
+const defaultAvatar = require("@/assets/images/home/avatar.png");
 
 export default function ProfileScreen() {
   const { t } = useTranslation();
@@ -52,7 +60,7 @@ export default function ProfileScreen() {
 
   const pickAvatar = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ['images'],
+      mediaTypes: ["images"],
       quality: 0.8,
     });
 
@@ -73,8 +81,8 @@ export default function ProfileScreen() {
         phone: values.phone,
         avatarUri,
       });
-      Alert.alert(t('more.profile.title'), t('more.profile.saved'), [
-        { text: t('common.ok'), onPress: () => router.back() },
+      Alert.alert(t("more.profile.title"), t("more.profile.saved"), [
+        { text: t("common.ok"), onPress: () => router.back() },
       ]);
     } finally {
       setIsSubmitting(false);
@@ -84,14 +92,14 @@ export default function ProfileScreen() {
   return (
     <ScreenSafeAreaView
       className="flex-1 bg-background"
-      edges={['top', 'bottom']}
+      edges={["top", "bottom"]}
       style={RTL_CONTAINER_STYLE}
     >
       <StatusBar style="dark" />
-      <CreateScreenHeader title={t('more.profile.title')} />
+      <CreateScreenHeader title={t("more.profile.title")} />
       <KeyboardAvoidingView
         className="flex-1"
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
       >
         <ScrollView
           className="flex-1"
@@ -102,17 +110,25 @@ export default function ProfileScreen() {
           <View className="w-full items-center gap-2">
             <View className="size-[95px] items-center justify-center">
               <View className="size-[95px] overflow-hidden rounded-full border-2 border-white">
-                <Image source={avatarSource} style={{ width: 95, height: 95 }} contentFit="cover" />
+                <Image
+                  source={avatarSource}
+                  style={{ width: 95, height: 95 }}
+                  contentFit="cover"
+                />
               </View>
               <Pressable
                 accessibilityRole="button"
-                accessibilityLabel={t('more.profile.changePhoto')}
+                accessibilityLabel={t("more.profile.changePhoto")}
                 onPress={() => {
                   void pickAvatar();
                 }}
                 className="absolute bottom-1 right-1 size-8 items-center justify-center overflow-hidden rounded-full bg-primary"
               >
-                <MaterialDesignIcons name="camera-outline" size={16} color={colors.white} />
+                <MaterialDesignIcons
+                  name="camera-outline"
+                  size={16}
+                  color={colors.white}
+                />
               </Pressable>
             </View>
             <View className="items-center gap-3">
@@ -139,10 +155,10 @@ export default function ProfileScreen() {
               name="name"
               render={({ field: { onChange, value } }) => (
                 <ProfileTextField
-                  label={t('more.profile.fields.name')}
+                  label={t("more.profile.fields.name")}
                   value={value}
                   onChangeText={onChange}
-                  placeholder={t('more.profile.fields.name')}
+                  placeholder={t("more.profile.fields.name")}
                   error={errors.name?.message}
                 />
               )}
@@ -152,10 +168,10 @@ export default function ProfileScreen() {
               name="phone"
               render={({ field: { onChange, value } }) => (
                 <ProfilePhoneField
-                  label={t('more.profile.fields.phone')}
+                  label={t("more.profile.fields.phone")}
                   value={value}
                   onChangeText={onChange}
-                  placeholder={t('more.profile.fields.phone')}
+                  placeholder={t("more.profile.fields.phone")}
                   error={errors.phone?.message}
                 />
               )}
@@ -165,27 +181,27 @@ export default function ProfileScreen() {
               name="email"
               render={({ field: { onChange, value } }) => (
                 <ProfileTextField
-                  label={t('more.profile.fields.email')}
+                  label={t("more.profile.fields.email")}
                   value={value}
                   onChangeText={onChange}
-                  placeholder={t('more.profile.fields.email')}
+                  placeholder={t("more.profile.fields.email")}
                   keyboardType="email-address"
                   error={errors.email?.message}
                 />
               )}
             />
             <ProfileTextField
-              label={t('more.profile.fields.role')}
+              label={t("more.profile.fields.role")}
               value={t(profile.roleKey)}
               onChangeText={() => undefined}
-              placeholder={t('more.profile.fields.role')}
+              placeholder={t("more.profile.fields.role")}
               editable={false}
               showPencil={false}
             />
           </View>
 
           <PrimaryButton
-            title={t('more.profile.save')}
+            title={t("more.profile.save")}
             onPress={handleSubmit(onSubmit)}
             loading={isSubmitting}
           />

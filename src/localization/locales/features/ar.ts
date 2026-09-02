@@ -98,6 +98,8 @@ export const arFeatures = {
     phoneLabel: 'رقم الجوال',
     phonePlaceholder: '١٢ ٣٤٥ ٦٧٨٩',
     countryCode: '٩٦٦+',
+    selectCountry: 'اختر الدولة',
+    searchCountry: 'ابحث باسم الدولة أو الرمز',
     verify: 'تحقق',
     noAccount: 'ليس لديك حساب؟',
     contactFederation: 'تواصل مع الاتحاد',
