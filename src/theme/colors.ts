@@ -16,6 +16,8 @@ export const colors = {
   info: '#419ffd',
   info50: '#e8f3fe',
   tabIndicator: '#ffc92c',
+  pending: '#fbbf24',
+  approved: '#34d399',
   rejected: '#f87171',
   neutral300: '#a3a3a3',
   neutral500: '#525252',

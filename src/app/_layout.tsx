@@ -84,6 +84,7 @@ export default function RootLayout() {
               <Stack.Screen name="add-administrator" />
               <Stack.Screen name="add-punishment" />
               <Stack.Screen name="competition/[id]" />
+              <Stack.Screen name="member/[id]" />
               <Stack.Screen name="settings" />
               <Stack.Screen name="profile" />
               <Stack.Screen name="language" />

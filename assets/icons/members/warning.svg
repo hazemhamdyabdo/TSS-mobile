@@ -1,0 +1,10 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="streamline-flex:warning-diamond" clip-path="url(#clip0_0_160)">
+<path id="Vector" d="M7.99999 4.67652V8.60795M7.99999 10.6148V11.3234M1.74514 6.34509C3.09096 4.6729 4.61073 3.14852 6.27885 1.79766C7.30514 0.964517 8.53599 0.970232 9.56342 1.79766C11.2375 3.14303 12.759 4.66796 14.1006 6.34509C14.8869 7.32452 14.8926 8.5508 14.1006 9.52909C12.74 11.2173 11.202 12.7545 9.51314 14.1142C8.55085 14.8914 7.32457 14.8857 6.36114 14.1142C4.65527 12.7516 3.10665 11.203 1.74399 9.49709C0.972565 8.53366 0.967994 7.30737 1.74514 6.34509Z" stroke="#FBBF24" stroke-width="1.14286" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0_0_160">
+<rect width="16" height="16" fill="white"/>
+</clipPath>
+</defs>
+</svg>
