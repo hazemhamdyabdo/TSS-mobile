@@ -46,7 +46,7 @@ export default function QuickActionsSection({
             key={action.id}
             accessibilityRole="button"
             onPress={() => router.push(CREATE_ROUTES[action.id])}
-            className="h-15 flex-1 items-center justify-center gap-1 overflow-hidden rounded-lg border border-slate-100 bg-white p-2"
+            className="h-20  flex-1 items-center justify-center gap-1 overflow-hidden rounded-lg border border-slate-100 bg-white p-4 "
           >
             <View className="size-6 items-center justify-center">
               <QuickActionIcon actionId={action.id} />

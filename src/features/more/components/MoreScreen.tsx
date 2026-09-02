@@ -21,7 +21,7 @@ export default function MoreScreen() {
       edges={["top"]}
       style={RTL_CONTAINER_STYLE}
     >
-      <StatusBar style="dark" />
+      <StatusBar style="auto" />
       <CreateScreenHeader
         title={t("more.hub.title")}
         onBack={() => router.navigate("/(tabs)")}

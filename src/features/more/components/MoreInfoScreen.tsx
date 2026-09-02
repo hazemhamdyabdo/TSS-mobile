@@ -24,7 +24,7 @@ export default function MoreInfoScreen({
       edges={["top", "bottom"]}
       style={RTL_CONTAINER_STYLE}
     >
-      <StatusBar style="dark" />
+      <StatusBar style="auto" />
       <CreateScreenHeader title={t(titleKey)} />
       <View className="px-5 pt-4">
         <View className="w-full overflow-hidden rounded-lg border border-slate-100 bg-white p-6">

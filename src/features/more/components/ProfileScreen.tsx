@@ -95,7 +95,7 @@ export default function ProfileScreen() {
       edges={["top", "bottom"]}
       style={RTL_CONTAINER_STYLE}
     >
-      <StatusBar style="dark" />
+      <StatusBar style="auto" />
       <CreateScreenHeader title={t("more.profile.title")} />
       <KeyboardAvoidingView
         className="flex-1"

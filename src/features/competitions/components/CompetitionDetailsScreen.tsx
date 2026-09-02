@@ -93,7 +93,7 @@ export default function CompetitionDetailsScreen() {
       edges={["top"]}
       style={RTL_CONTAINER_STYLE}
     >
-      <StatusBar style="dark" />
+      <StatusBar style="auto" />
       <View
         className="flex-row items-center justify-between px-5 py-3"
         style={RTL_CONTAINER_STYLE}

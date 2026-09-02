@@ -20,7 +20,7 @@ export default function FastManagementScreen() {
       edges={["top", "bottom"]}
       style={RTL_CONTAINER_STYLE}
     >
-      <StatusBar style="dark" />
+      <StatusBar style="auto" />
       <CreateScreenHeader title={t("create.hub.title")} />
       <ScrollView
         className="flex-1"

@@ -40,7 +40,7 @@ export default function SettingsScreen() {
       edges={["top", "bottom"]}
       style={RTL_CONTAINER_STYLE}
     >
-      <StatusBar style="dark" />
+      <StatusBar style="auto" />
       <CreateScreenHeader title={t("more.settings.title")} />
       <ScrollView
         className="flex-1"

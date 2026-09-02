@@ -37,7 +37,7 @@ export default function MemberDetailsScreen() {
         edges={["top", "bottom"]}
         style={RTL_CONTAINER_STYLE}
       >
-        <StatusBar style="dark" />
+        <StatusBar style="auto" />
         <CreateScreenHeader title={t("members.details.player")} />
         <View className="flex-1 items-center justify-center px-5">
           <Text
@@ -57,7 +57,7 @@ export default function MemberDetailsScreen() {
       edges={["top", "bottom"]}
       style={RTL_CONTAINER_STYLE}
     >
-      <StatusBar style="dark" />
+      <StatusBar style="auto" />
       <CreateScreenHeader title={t(detailsTitleKey(member.category))} />
       <ScrollView
         className="flex-1"

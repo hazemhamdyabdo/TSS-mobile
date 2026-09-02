@@ -50,7 +50,7 @@ export default function NotificationsSettingsScreen() {
       edges={["top", "bottom"]}
       style={RTL_CONTAINER_STYLE}
     >
-      <StatusBar style="dark" />
+      <StatusBar style="auto" />
       <CreateScreenHeader title={t("more.notifications.title")} />
       <View className="gap-2 px-5 pt-4">
         {PREF_ROWS.map((row) => (

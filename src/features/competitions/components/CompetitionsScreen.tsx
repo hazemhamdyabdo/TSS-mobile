@@ -71,7 +71,7 @@ export default function CompetitionsScreen() {
       edges={["top"]}
       style={RTL_CONTAINER_STYLE}
     >
-      <StatusBar style="dark" />
+      <StatusBar style="auto" />
       <ScrollView
         className="flex-1"
         contentContainerClassName="gap-4 px-5 pb-28 pt-2"

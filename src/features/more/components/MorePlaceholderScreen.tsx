@@ -24,7 +24,7 @@ export default function MorePlaceholderScreen({
       edges={["top", "bottom"]}
       style={RTL_CONTAINER_STYLE}
     >
-      <StatusBar style="dark" />
+      <StatusBar style="auto" />
       <CreateScreenHeader title={t(`more.hub.items.${section}.title`)} />
       <View className="flex-1 items-center justify-center px-5">
         <Text

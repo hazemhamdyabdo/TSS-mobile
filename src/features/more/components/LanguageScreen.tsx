@@ -37,7 +37,7 @@ export default function LanguageScreen() {
       edges={["top", "bottom"]}
       style={RTL_CONTAINER_STYLE}
     >
-      <StatusBar style="dark" />
+      <StatusBar style="auto" />
       <CreateScreenHeader title={t("more.language.title")} />
       <View className="gap-3 px-5 pt-4">
         <View className="w-full items-start gap-3">
