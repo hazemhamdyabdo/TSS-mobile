@@ -7,11 +7,13 @@ import { RTL_CONTAINER_STYLE, RTL_TEXT_STYLE } from '@/localization/direction';
 import { colors } from '@/theme/colors';
 import { cairo } from '@/theme/typography';
 
-import { COMPETITOR_PHOTOS } from '../constants/competitorPhotos';
 import type { MatchResult, MatchSide, NationalityCode } from '../types';
 
-const saFlag = require('@/assets/images/ksa-flag.png');
+const saFlag = require('@/assets/images/ksa-rotate-flag.png');
 const qaFlag = require('@/assets/images/qatr-flag.png');
+
+const FLAG_WIDTH = 41;
+const FLAG_HEIGHT = 65;
 
 type MatchResultCardProps = {
   result: MatchResult;
@@ -30,42 +32,65 @@ function flagFor(code: NationalityCode) {
   }
 }
 
-function SideBlock({ side, align }: { side: MatchSide; align: 'start' | 'end' }) {
-  const { t } = useTranslation();
-  const isStart = align === 'start';
+function CornerFlag({
+  nationality,
+  edge,
+}: {
+  nationality: NationalityCode;
+  edge: 'left' | 'right';
+}) {
+  const isLeft = edge === 'left';
+  const designedForLeft = nationality === 'qa';
+  const shouldFlip = designedForLeft !== isLeft;
 
   return (
-    <View className={`min-w-0 flex-1 ${isStart ? 'items-start' : 'items-end'}`}>
-      <View className="flex-row items-center gap-1.5" style={isStart ? RTL_CONTAINER_STYLE : undefined}>
-        <View className="size-10 overflow-hidden rounded-full bg-slate-100">
-          <Image
-            source={COMPETITOR_PHOTOS[side.photoId]}
-            style={{ width: 40, height: 40 }}
-            contentFit="cover"
-          />
-        </View>
-        <View className={isStart ? 'items-start' : 'items-end'}>
-          <Text className="text-xs text-accent" style={{ fontFamily: cairo.semiBold, ...RTL_TEXT_STYLE }}>
-            {t(side.nameKey)}
-          </Text>
-          <View className="flex-row items-center gap-1" style={isStart ? RTL_CONTAINER_STYLE : undefined}>
-            <View className="size-3.5 overflow-hidden rounded-sm">
-              <Image source={flagFor(side.nationality)} style={{ width: 14, height: 14 }} contentFit="cover" />
-            </View>
-            <Text className="text-[10px] text-slate-400" style={{ fontFamily: cairo.regular, ...RTL_TEXT_STYLE }}>
-              {t(`competitions.nationality.${side.nationality}`)}
-            </Text>
-          </View>
-        </View>
-      </View>
+    <Image
+      pointerEvents="none"
+      source={flagFor(nationality)}
+      contentFit="contain"
+      style={{
+        position: 'absolute',
+        top: isLeft ? -7 : -4,
+        left: isLeft ? -13 : undefined,
+        right: isLeft ? undefined : -8,
+        width: FLAG_WIDTH,
+        height: FLAG_HEIGHT,
+        transform: shouldFlip ? [{ scaleX: -1 }] : undefined,
+      }}
+    />
+  );
+}
+
+function NameBlock({ side }: { side: MatchSide }) {
+  const { t } = useTranslation();
+
+  return (
+    <View className="max-w-[110px] items-center gap-2">
+      <Text
+        className="text-sm text-accent"
+        numberOfLines={1}
+        style={{ fontFamily: cairo.medium, ...RTL_TEXT_STYLE }}>
+        {t(side.nameKey)}
+      </Text>
+      <Text
+        className="text-xs text-slate-400"
+        numberOfLines={1}
+        style={{ fontFamily: cairo.regular, ...RTL_TEXT_STYLE }}>
+        {t(`competitions.nationality.${side.nationality}`)}
+      </Text>
     </View>
   );
 }
 
 function ScoreBox({ score, winner }: { score: number; winner: boolean }) {
   return (
-    <View className={`h-8 w-8 items-center justify-center rounded-md ${winner ? 'bg-primary' : 'bg-slate-100'}`}>
-      <Text className={`text-xs ${winner ? 'text-white' : 'text-label'}`} style={{ fontFamily: cairo.semiBold }}>
+    <View
+      className={`h-8 w-8 items-center justify-center rounded-md ${
+        winner ? 'bg-primary/10' : 'bg-slate-100'
+      }`}>
+      <Text
+        className={`text-sm ${winner ? 'text-primary' : 'text-slate-500'}`}
+        style={{ fontFamily: cairo.medium }}>
         {score}
       </Text>
     </View>
@@ -75,37 +100,42 @@ function ScoreBox({ score, winner }: { score: number; winner: boolean }) {
 export default function MatchResultCard({ result }: MatchResultCardProps) {
   const { t } = useTranslation();
   const startWins = result.startSide.score > result.endSide.score;
+  const endWins = result.endSide.score > result.startSide.score;
 
   return (
-    <View className="overflow-hidden rounded-lg border border-slate-100 bg-white p-3">
-      <View className="flex-row items-center gap-2" style={RTL_CONTAINER_STYLE}>
-        <SideBlock side={result.startSide} align="start" />
-        <View className="flex-row items-center gap-1.5" style={RTL_CONTAINER_STYLE}>
+    <View className="overflow-hidden rounded-lg border border-slate-100 bg-white pb-2">
+      <CornerFlag nationality={result.startSide.nationality} edge="right" />
+      <CornerFlag nationality={result.endSide.nationality} edge="left" />
+
+      <View
+        className="z-10 flex-row items-center justify-center gap-4 px-4 py-2"
+        style={RTL_CONTAINER_STYLE}>
+        <NameBlock side={result.startSide} />
+        <View className="flex-row items-center gap-2" style={RTL_CONTAINER_STYLE}>
           <ScoreBox score={result.startSide.score} winner={startWins} />
-          <MaterialDesignIcons name="fencing" size={18} color={colors.secText} />
-          <ScoreBox score={result.endSide.score} winner={!startWins} />
+          <MaterialDesignIcons name="fencing" size={22} color={colors.primary} />
+          <ScoreBox score={result.endSide.score} winner={endWins} />
         </View>
-        <SideBlock side={result.endSide} align="end" />
+        <NameBlock side={result.endSide} />
       </View>
-      <View className="mt-3 items-center gap-1.5">
-        <View className="rounded-3xl bg-slate-50 px-2 py-1">
-          <Text className="text-[10px] text-slate-400" style={{ fontFamily: cairo.medium }}>
+
+      <View className="z-10 items-center gap-2">
+        <View className="rounded-3xl bg-slate-300/20 px-1.5 py-1">
+          <Text className="text-[9px] text-slate-400" style={{ fontFamily: cairo.medium }}>
             {t(result.roundKey)}
           </Text>
         </View>
-        <View className="flex-row items-center gap-3">
-          <View className="flex-row items-center gap-1">
-            <Text className="text-[10px] text-slate-400" style={{ fontFamily: cairo.medium }}>
-              {t(result.dateKey)}
-            </Text>
-            <MaterialDesignIcons name="calendar-month-outline" size={10} color={colors.secText} />
-          </View>
-          <View className="flex-row items-center gap-1">
-            <Text className="text-[10px] text-slate-400" style={{ fontFamily: cairo.medium }}>
-              {t(result.timeKey)}
-            </Text>
-            <MaterialDesignIcons name="clock-outline" size={10} color={colors.secText} />
-          </View>
+        <View className="flex-row items-center gap-1" style={RTL_CONTAINER_STYLE}>
+          <MaterialDesignIcons name="calendar-month-outline" size={10} color={colors.slate400} />
+          <Text className="text-[10px] text-slate-400" style={{ fontFamily: cairo.medium }}>
+            {t(result.dateKey)}
+          </Text>
+        </View>
+        <View className="flex-row items-center gap-1" style={RTL_CONTAINER_STYLE}>
+          <MaterialDesignIcons name="clock-outline" size={10} color={colors.slate400} />
+          <Text className="text-[10px] text-slate-400" style={{ fontFamily: cairo.medium }}>
+            {t(result.timeKey)}
+          </Text>
         </View>
       </View>
     </View>

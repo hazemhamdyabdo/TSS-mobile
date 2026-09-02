@@ -17,8 +17,10 @@ import {
   View,
 } from "react-native";
 
+import FormField from "@/components/form/FormField";
 import ScreenSafeAreaView from "@/components/ScreenSafeAreaView";
 import PrimaryButton from "@/components/ui/PrimaryButton";
+import PhoneNumberField from "@/features/auth/components/PhoneNumberField";
 import CreateScreenHeader from "@/features/create/components/CreateScreenHeader";
 import { RTL_CONTAINER_STYLE, RTL_TEXT_STYLE } from "@/localization/direction";
 import { colors } from "@/theme/colors";
@@ -30,7 +32,7 @@ import {
   createProfileSchema,
   type ProfileSchemaValues,
 } from "../schemas/profileSchema";
-import ProfilePhoneField from "./ProfilePhoneField";
+import { toPhoneFieldValue } from "../utils/phone";
 import ProfileTextField from "./ProfileTextField";
 
 const defaultAvatar = require("@/assets/images/home/avatar.png");
@@ -52,7 +54,7 @@ export default function ProfileScreen() {
     defaultValues: {
       name: profile.name,
       email: profile.email,
-      phone: profile.phone,
+      phone: toPhoneFieldValue(profile.phone),
     },
   });
 
@@ -167,13 +169,17 @@ export default function ProfileScreen() {
               control={control}
               name="phone"
               render={({ field: { onChange, value } }) => (
-                <ProfilePhoneField
+                <FormField
                   label={t("more.profile.fields.phone")}
-                  value={value}
-                  onChangeText={onChange}
-                  placeholder={t("more.profile.fields.phone")}
                   error={errors.phone?.message}
-                />
+                >
+                  <PhoneNumberField
+                    value={value}
+                    onChangeText={onChange}
+                    placeholder={t("auth.phonePlaceholder")}
+                    hasError={Boolean(errors.phone)}
+                  />
+                </FormField>
               )}
             />
             <Controller
