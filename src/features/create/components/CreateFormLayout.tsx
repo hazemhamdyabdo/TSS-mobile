@@ -4,7 +4,6 @@ import { KeyboardAvoidingView, Platform, ScrollView } from "react-native";
 import ScreenSafeAreaView from "@/components/ScreenSafeAreaView";
 import { RTL_CONTAINER_STYLE } from "@/localization/direction";
 
-import { StatusBar } from "expo-status-bar";
 import CreateScreenHeader from "./CreateScreenHeader";
 
 type CreateFormLayoutProps = {
@@ -22,7 +21,7 @@ export default function CreateFormLayout({
       edges={["top", "bottom"]}
       style={RTL_CONTAINER_STYLE}
     >
-      <StatusBar style="dark" />
+      {/* <StatusBar style="  dark" /> */}
       <CreateScreenHeader title={title} />
       <KeyboardAvoidingView
         className="flex-1"

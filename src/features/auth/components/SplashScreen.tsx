@@ -12,7 +12,7 @@ export default function SplashScreen() {
       className="flex-1 bg-background"
       edges={["top", "bottom"]}
     >
-      <StatusBar style="dark" />
+      <StatusBar style="auto" />
       <View className="flex-1 items-center justify-center">
         <View className="size-[269px] overflow-hidden rounded-full">
           <Image

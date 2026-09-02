@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import { ScrollView } from "react-native";
 
 import ScreenSafeAreaView from "@/components/ScreenSafeAreaView";
@@ -18,7 +17,7 @@ export default function HomeScreen() {
 
   return (
     <ScreenSafeAreaView className="flex-1 bg-background" edges={["top"]}>
-      <StatusBar style="dark" />
+      {/* <StatusBar style="dark" /> */}
       <ScrollView
         className="flex-1"
         contentContainerClassName="gap-4 px-5 pb-28 pt-2"
