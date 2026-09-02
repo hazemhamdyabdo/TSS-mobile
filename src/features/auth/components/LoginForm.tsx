@@ -5,14 +5,15 @@ import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 
-import AuthDivider from './AuthDivider';
-import PhoneNumberField from './PhoneNumberField';
-import { requestOtp } from '../api';
-import { createLoginSchema, toNationalSaPhone, type LoginFormValues } from '../schemas/loginSchema';
-import FieldError from '@/components/ui/FieldError';
-import FormLabel from '@/components/ui/FormLabel';
+import FieldError from '@/components/form/FieldError';
+import FormLabel from '@/components/form/FormLabel';
 import OutlineButton from '@/components/ui/OutlineButton';
 import PrimaryButton from '@/components/ui/PrimaryButton';
+
+import { requestOtp } from '../api';
+import { createLoginSchema, toNationalSaPhone, type LoginFormValues } from '../schemas/loginSchema';
+import AuthDivider from './AuthDivider';
+import PhoneNumberField from './PhoneNumberField';
 
 export default function LoginForm() {
   const { t } = useTranslation();

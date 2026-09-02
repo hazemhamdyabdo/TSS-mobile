@@ -10,9 +10,9 @@ import PrimaryButton from '@/components/ui/PrimaryButton';
 import { createClub } from '../api';
 import { CLUB_CATEGORY_OPTIONS, REGION_OPTIONS } from '../constants/options';
 import { createAddClubSchema, type AddClubFormValues } from '../schemas/addClubSchema';
-import FormSelectField from './FormSelectField';
-import FormTextField from './FormTextField';
-import FormUploadField from './FormUploadField';
+import FormSelectField from '@/components/form/FormSelectField';
+import FormTextField from '@/components/form/FormTextField';
+import FormUploadField from '@/components/form/FormUploadField';
 
 const EMPTY_VALUES: AddClubFormValues = {
   clubName: '',

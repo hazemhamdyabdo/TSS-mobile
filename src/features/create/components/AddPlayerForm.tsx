@@ -5,6 +5,11 @@ import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Alert, View } from 'react-native';
 
+import FormDateField from '@/components/form/FormDateField';
+import FormRow from '@/components/form/FormRow';
+import FormSelectField from '@/components/form/FormSelectField';
+import FormTextField from '@/components/form/FormTextField';
+import FormUploadField from '@/components/form/FormUploadField';
 import PrimaryButton from '@/components/ui/PrimaryButton';
 
 import { createPlayer } from '../api';
@@ -17,11 +22,6 @@ import {
   WEAPON_OPTIONS,
 } from '../constants/options';
 import { createAddPlayerSchema, type AddPlayerFormValues } from '../schemas/addPlayerSchema';
-import FormDateField from './FormDateField';
-import FormRow from './FormRow';
-import FormSelectField from './FormSelectField';
-import FormTextField from './FormTextField';
-import FormUploadField from './FormUploadField';
 
 const EMPTY_VALUES: AddPlayerFormValues = {
   name: '',
@@ -263,11 +263,14 @@ export default function AddPlayerForm() {
       </FormRow>
 
       <FormUploadField
-        variant="passport"
+        variant="accent"
         label={t('create.fields.passportPhoto')}
         required
         uri={attachmentUri}
         error={errors.attachmentUri?.message}
+        typesHint={t('create.passport.types')}
+        panelTitle={t('create.passport.title')}
+        panelHint={t('create.passport.hint')}
         onChange={(file) => {
           setValue('attachmentUri', file.uri, { shouldValidate: true });
           setValue('attachmentType', file.type, { shouldValidate: true });

@@ -8,10 +8,9 @@ import { forwardRef, useCallback, useImperativeHandle, useMemo, useRef } from 'r
 import { Pressable, Text } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
+import type { SelectOption } from '@/components/form/types';
 import { RTL_TEXT_STYLE } from '@/localization/direction';
 import { cairo } from '@/theme/typography';
-
-import type { SelectOption } from '../types';
 
 export type OptionPickerBottomSheetRef = {
   open: () => void;

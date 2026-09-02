@@ -81,6 +81,13 @@ export const enFeatures = {
       },
     },
   },
+  form: {
+    upload: {
+      cta: 'click to upload a file',
+      hint: 'Drag and drop or',
+      types: 'JPG, JPEG, PNG less than 1 MB',
+    },
+  },
   auth: {
     start: 'Start',
     onboardingTitleLine1: 'Get ready',
@@ -268,11 +275,6 @@ export const enFeatures = {
       title: 'Authenticated via Absher / Tawakkalna',
       hint: 'The player photographs the passport in Absher or Tawakkalna, then uploads the issued image here. Screenshots and unclear photos are not accepted.',
       types: 'JPG or PNG issued by Absher or Tawakkalna · up to 10 MB',
-    },
-    upload: {
-      cta: 'click to upload a file',
-      hint: 'Drag and drop or',
-      types: 'JPG, JPEG, PNG less than 1 MB',
     },
     options: {
       club: {

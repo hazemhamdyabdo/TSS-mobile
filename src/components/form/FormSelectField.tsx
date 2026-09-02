@@ -3,12 +3,13 @@ import { useRef } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
+import FormField from '@/components/form/FormField';
+import OptionPickerBottomSheet, {
+  type OptionPickerBottomSheetRef,
+} from '@/components/form/OptionPickerBottomSheet';
+import type { SelectOption } from '@/components/form/types';
 import { RTL_CONTAINER_STYLE, RTL_TEXT_STYLE } from '@/localization/direction';
 import { cairo } from '@/theme/typography';
-
-import type { SelectOption } from '../types';
-import FormField from './FormField';
-import OptionPickerBottomSheet, { type OptionPickerBottomSheetRef } from './OptionPickerBottomSheet';
 
 const caretDown = require('@/assets/images/auth/caret-down.png');
 

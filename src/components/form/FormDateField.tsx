@@ -1,20 +1,17 @@
-import DateTimePicker, {
-  type DateTimePickerChangeEvent,
-} from "@react-native-community/datetimepicker";
-import { MaterialDesignIcons } from "@react-native-vector-icons/material-design-icons";
-import { useState, type ReactNode } from "react";
-import { Platform, Pressable, Text, TextInput, View } from "react-native";
+import DateTimePicker, { type DateTimePickerChangeEvent } from '@react-native-community/datetimepicker';
+import { MaterialDesignIcons } from '@react-native-vector-icons/material-design-icons';
+import { useState, type ReactNode } from 'react';
+import { Platform, Pressable, Text, TextInput, View } from 'react-native';
 
+import FormField from '@/components/form/FormField';
 import {
   RTL_CONTAINER_STYLE,
   RTL_TEXT_STYLE,
   TEXT_INPUT_START_ALIGN,
-} from "@/localization/direction";
-import { colors } from "@/theme/colors";
-import { cairo } from "@/theme/typography";
-
-import { parseIsoDate, toDisplayDate, toIsoDate } from "../utils/dates";
-import FormField from "./FormField";
+} from '@/localization/direction';
+import { colors } from '@/theme/colors';
+import { cairo } from '@/theme/typography';
+import { parseIsoDate, toDisplayDate, toIsoDate } from '@/utils/dates';
 
 type FormDateFieldProps = {
   label: string;
@@ -36,15 +33,10 @@ function DateFieldFrame({
 }) {
   return (
     <View
-      className={`h-12 w-full flex-row items-center gap-2 rounded-[10px] border bg-white px-4 ${error ? "border-rejected" : "border-slate-100"}`}
-      style={RTL_CONTAINER_STYLE}
-    >
+      className={`h-12 w-full flex-row items-center gap-2 rounded-[10px] border bg-white px-4 ${error ? 'border-rejected' : 'border-slate-100'}`}
+      style={RTL_CONTAINER_STYLE}>
       {children}
-      <MaterialDesignIcons
-        name="calendar-outline"
-        size={16}
-        color={colors.secText}
-      />
+      <MaterialDesignIcons name="calendar-outline" size={16} color={colors.secText} />
     </View>
   );
 }
@@ -61,10 +53,10 @@ export default function FormDateField({
 }: FormDateFieldProps) {
   const [open, setOpen] = useState(false);
   const selectedDate = value ? parseIsoDate(value) : new Date();
-  const displayValue = value ? toDisplayDate(value) : "";
+  const displayValue = value ? toDisplayDate(value) : '';
 
   const handleValueChange = (_event: DateTimePickerChangeEvent, date: Date) => {
-    if (Platform.OS === "android") {
+    if (Platform.OS === 'android') {
       setOpen(false);
     }
 
@@ -73,7 +65,7 @@ export default function FormDateField({
 
   return (
     <FormField label={label} required={required} error={error} flex={flex}>
-      {Platform.OS === "web" ? (
+      {Platform.OS === 'web' ? (
         <DateFieldFrame error={error}>
           <TextInput
             value={displayValue}
@@ -86,21 +78,17 @@ export default function FormDateField({
               }
             }}
             textAlign={TEXT_INPUT_START_ALIGN}
-            className="min-w-0 flex-1 text-sm leading-4.5 text-label"
+            className="min-w-0 flex-1 text-sm leading-[18px] text-label"
             style={{ fontFamily: cairo.regular }}
           />
         </DateFieldFrame>
       ) : (
         <>
-          <Pressable
-            accessibilityRole="button"
-            onPress={() => setOpen((current) => !current)}
-          >
+          <Pressable accessibilityRole="button" onPress={() => setOpen((current) => !current)}>
             <DateFieldFrame error={error}>
               <Text
-                className={`min-w-0 flex-1 text-sm leading-4.5 ${value ? "text-label" : "text-sec-text"}`}
-                style={{ fontFamily: cairo.regular, ...RTL_TEXT_STYLE }}
-              >
+                className={`min-w-0 flex-1 text-sm leading-[18px] ${value ? 'text-label' : 'text-sec-text'}`}
+                style={{ fontFamily: cairo.regular, ...RTL_TEXT_STYLE }}>
                 {displayValue || placeholder}
               </Text>
             </DateFieldFrame>
@@ -109,7 +97,7 @@ export default function FormDateField({
             <DateTimePicker
               value={selectedDate}
               mode="date"
-              display={Platform.OS === "ios" ? "spinner" : "default"}
+              display={Platform.OS === 'ios' ? 'spinner' : 'default'}
               maximumDate={maximumDate}
               onValueChange={handleValueChange}
               onDismiss={() => setOpen(false)}

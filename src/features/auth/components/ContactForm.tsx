@@ -7,9 +7,9 @@ import { useTranslation } from "react-i18next";
 import { Alert, Pressable, Text, TextInput, View } from "react-native";
 import { SvgXml } from "react-native-svg";
 
-import { CLOUD_UPLOAD_ICON_XML } from "@/components/formIconXml";
-import FieldError from "@/components/ui/FieldError";
-import FormLabel from "@/components/ui/FormLabel";
+import FieldError from "@/components/form/FieldError";
+import FormLabel from "@/components/form/FormLabel";
+import { CLOUD_UPLOAD_ICON_XML } from "@/components/form/formIconXml";
 import OutlineButton from "@/components/ui/OutlineButton";
 import PrimaryButton from "@/components/ui/PrimaryButton";
 import { TEXT_INPUT_START_ALIGN } from "@/localization/direction";

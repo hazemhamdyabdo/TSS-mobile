@@ -1,8 +1,8 @@
 import type { ReactNode } from 'react';
 import { View } from 'react-native';
 
-import FieldError from '@/components/ui/FieldError';
-import FormLabel from '@/components/ui/FormLabel';
+import FieldError from '@/components/form/FieldError';
+import FormLabel from '@/components/form/FormLabel';
 import { RTL_CONTAINER_STYLE } from '@/localization/direction';
 
 type FormFieldProps = {

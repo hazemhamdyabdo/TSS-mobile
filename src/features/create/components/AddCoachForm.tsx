@@ -15,10 +15,10 @@ import {
   WEAPON_OPTIONS,
 } from '../constants/options';
 import { createAddCoachSchema, type AddCoachFormValues } from '../schemas/addCoachSchema';
-import FormRow from './FormRow';
-import FormSelectField from './FormSelectField';
-import FormTextField from './FormTextField';
-import FormUploadField from './FormUploadField';
+import FormRow from '@/components/form/FormRow';
+import FormSelectField from '@/components/form/FormSelectField';
+import FormTextField from '@/components/form/FormTextField';
+import FormUploadField from '@/components/form/FormUploadField';
 
 const EMPTY_VALUES: AddCoachFormValues = {
   name: '',

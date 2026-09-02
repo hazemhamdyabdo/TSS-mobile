@@ -81,6 +81,13 @@ export const arFeatures = {
       },
     },
   },
+  form: {
+    upload: {
+      cta: 'انقر لرفع ملف',
+      hint: 'السحب والإفلات أو',
+      types: 'JPG، JPEG، PNG أقل من 1 ميجابايت',
+    },
+  },
   auth: {
     start: 'ابدأ',
     onboardingTitleLine1: 'استعد',
@@ -268,11 +275,6 @@ export const arFeatures = {
       title: 'موثّق عبر أبشر / توكلنا',
       hint: 'يقوم اللاعب بتصوير جواز السفر عبر تطبيق أبشر أو توكلنا ثم يرفع الصورة الصادرة هنا. لا تُقبل لقطات الشاشة أو الصور غير الواضحة.',
       types: 'JPG أو PNG صادرة من أبشر أو توكلنا · حتى ١٠ ميجابايت',
-    },
-    upload: {
-      cta: 'انقر لرفع ملف',
-      hint: 'السحب والإفلات أو',
-      types: 'JPG، JPEG، PNG أقل من 1 ميجابايت',
     },
     options: {
       club: {

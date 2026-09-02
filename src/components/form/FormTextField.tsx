@@ -1,5 +1,5 @@
-import FormField from './FormField';
-import FormTextInput from './FormTextInput';
+import FormField from '@/components/form/FormField';
+import FormTextInput from '@/components/form/FormTextInput';
 
 type FormTextFieldProps = {
   label: string;

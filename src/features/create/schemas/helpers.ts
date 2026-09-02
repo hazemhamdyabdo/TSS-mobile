@@ -1,7 +1,7 @@
 import type { TFunction } from 'i18next';
 import { z } from 'zod';
 
-import { isIsoDate } from '../utils/dates';
+import { isIsoDate } from '@/utils/dates';
 
 const IMAGE_TYPES = new Set(['image/jpeg', 'image/jpg', 'image/png']);
 

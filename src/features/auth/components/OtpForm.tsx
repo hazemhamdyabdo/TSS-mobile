@@ -5,16 +5,17 @@ import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Pressable, Text, TextInput, View } from 'react-native';
 
-import AuthDivider from './AuthDivider';
-import { requestOtp, verifyOtp } from '../api';
-import { OTP_LENGTH, OTP_RESEND_SECONDS } from '../constants/auth';
-import { createOtpSchema, type OtpFormValues } from '../schemas/otpSchema';
-import FieldError from '@/components/ui/FieldError';
+import FieldError from '@/components/form/FieldError';
 import OutlineButton from '@/components/ui/OutlineButton';
 import PrimaryButton from '@/components/ui/PrimaryButton';
 import { cairo } from '@/theme/typography';
 import { onlyDigits } from '@/utils/digits';
 import { MockApiError } from '@/utils/mockApi';
+
+import { requestOtp, verifyOtp } from '../api';
+import { OTP_LENGTH, OTP_RESEND_SECONDS } from '../constants/auth';
+import { createOtpSchema, type OtpFormValues } from '../schemas/otpSchema';
+import AuthDivider from './AuthDivider';
 
 type OtpFormProps = {
   phone: string;

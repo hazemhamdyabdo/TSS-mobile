@@ -1,3 +1,7 @@
+import type { SelectOption as FormSelectOption } from '@/components/form/types';
+
+export type SelectOption = FormSelectOption;
+
 export type CreateActionId =
   | 'addPlayer'
   | 'addCoach'
@@ -6,11 +10,6 @@ export type CreateActionId =
   | 'addClub'
   | 'addAdministrator'
   | 'addPunishment';
-
-export type SelectOption = {
-  value: string;
-  labelKey: string;
-};
 
 export type FormAttachment = {
   uri?: string;

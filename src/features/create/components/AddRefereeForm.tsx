@@ -15,9 +15,9 @@ import {
   WEAPON_OPTIONS,
 } from '../constants/options';
 import { createAddRefereeSchema, type AddRefereeFormValues } from '../schemas/addRefereeSchema';
-import FormSelectField from './FormSelectField';
-import FormTextField from './FormTextField';
-import FormUploadField from './FormUploadField';
+import FormSelectField from '@/components/form/FormSelectField';
+import FormTextField from '@/components/form/FormTextField';
+import FormUploadField from '@/components/form/FormUploadField';
 
 const EMPTY_VALUES: AddRefereeFormValues = {
   name: '',

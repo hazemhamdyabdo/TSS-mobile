@@ -19,11 +19,11 @@ import {
   createAddCompetitionSchema,
   type AddCompetitionFormValues,
 } from '../schemas/addCompetitionSchema';
-import FormDateField from './FormDateField';
-import FormRow from './FormRow';
-import FormSelectField from './FormSelectField';
-import FormTextField from './FormTextField';
-import FormUploadField from './FormUploadField';
+import FormDateField from '@/components/form/FormDateField';
+import FormRow from '@/components/form/FormRow';
+import FormSelectField from '@/components/form/FormSelectField';
+import FormTextField from '@/components/form/FormTextField';
+import FormUploadField from '@/components/form/FormUploadField';
 
 const EMPTY_VALUES: AddCompetitionFormValues = {
   eventName: '',
