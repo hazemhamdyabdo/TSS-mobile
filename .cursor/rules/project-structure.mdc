@@ -1,0 +1,34 @@
+---
+description: Enforce Mojtama architecture from PROJECT_STRUCTURE.md on every change
+alwaysApply: true
+---
+
+# Follow PROJECT_STRUCTURE.md
+
+Read and follow `PROJECT_STRUCTURE.md` before adding or moving files. Do not invent a different layout, stack, or state library.
+
+## Placement
+
+- App code lives under `src/`. Routes stay in `src/app/` and stay **thin** (params, navigation, role branching). UI and business logic go in `src/features/<domain>/`.
+- Shared UI: `src/components/`. App-wide hooks: `src/hooks/`. Cross-cutting helpers: `src/utils/`. Tokens: `global.css` + `src/theme/colors.ts`. i18n: `src/localization/`.
+- Imports use the `@/` alias. Expo docs: https://docs.expo.dev/versions/v57.0.0/
+
+## Feature module
+
+Data features follow `src/features/requests/`: `api.ts`, `types.ts`, `store/<domain>State.ts`, `hooks/use<Domain>State.ts`, `constants/dummy.ts`, `schemas/`, `components/*Screen.tsx`.
+
+- Screens: `*Screen.tsx`. Routes: kebab-case in `app/`. Sheets: `*BottomSheet.tsx` with `{ open, close }`. Forms: `*Form.tsx` + Zod in `schemas/`.
+- Screen shell: `ScreenSafeAreaView`. Lists: `useXState()` + `useMockListFetch(getX)` + skeletons. Mutations go through `features/*/api.ts` (mockDelay → store), never from components into the store.
+
+## State and stack
+
+Module stores + subscribe hooks only. **No** Zustand, Redux, React Query, or MSW.
+
+Store API: `getXState`, `addXToState` / `updateXInState` / `deleteXFromState`, `subscribeToX`, `resetXState`. Wire new stores into `src/utils/resetMockStores.ts`.
+
+## UI, i18n, tokens
+
+- Prefer semantic NativeWind classes (`text-heading`, `bg-primary`). Use `colors.*` only when `className` cannot style the prop.
+- No hardcoded user-visible strings. Add keys in `locales/features/en.ts` and `ar.ts`.
+- Do not import `constants/dummy.ts` in screens for display. Do not put large JSX or business logic in `src/app/`.
+- New feature checklist: folder → store/hook (if mutable) → api → UI → thin route → Stack.Screen → i18n → reset.

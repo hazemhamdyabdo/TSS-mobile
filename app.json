@@ -28,12 +28,15 @@
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#208AEF",
-          "image": "./assets/images/splash-icon.png",
-          "imageWidth": 76
+          "backgroundColor": "#FAFAFA",
+          "image": "./assets/images/auth/splash-logo.png",
+          "imageWidth": 200
         }
       ]
     ],
+    "extra": {
+      "supportsRTL": true
+    },
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
