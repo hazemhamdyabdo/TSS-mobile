@@ -6,67 +6,109 @@ import type { AddPlayerFormValues } from './schemas/addPlayerSchema';
 import type { AddPunishmentFormValues } from './schemas/addPunishmentSchema';
 import type { AddRefereeFormValues } from './schemas/addRefereeSchema';
 import {
-  addAdministratorToState,
-  addClubToState,
-  addCoachToState,
-  addCompetitionToState,
-  addPlayerToState,
-  addPunishmentToState,
-  addRefereeToState,
-  getCreateState,
-} from './store/createState';
-import { createMockId, mockDelay } from '@/utils/mockApi';
-
-export async function getCreatedRecords() {
-  await mockDelay();
-  return getCreateState();
-}
+  createCompetitionRecord,
+  updateCompetitionRecord,
+} from '@/features/competitions/api';
+import {
+  addClubToFederationState,
+  addPunishmentToFederationState,
+} from '@/features/federation/store/federationState';
+import { addMemberToState } from '@/features/members/store/membersState';
+import {
+  memberFromAdministrator,
+  memberFromCoach,
+  memberFromPlayer,
+  memberFromReferee,
+} from '@/features/members/utils/fromCreate';
+import { createMockId, isFailTrigger, mockDelay, MockApiError } from '@/utils/mockApi';
 
 export async function createPlayer(values: AddPlayerFormValues) {
   await mockDelay();
-  const player = { id: createMockId('player'), ...values };
-  addPlayerToState(player);
-  return player;
+  if (isFailTrigger(values.name)) {
+    throw new MockApiError('create.errors.failed', 400);
+  }
+
+  const id = createMockId('player');
+  addMemberToState(memberFromPlayer(id, values));
+  return { id, ...values };
 }
 
 export async function createCoach(values: AddCoachFormValues) {
   await mockDelay();
-  const coach = { id: createMockId('coach'), ...values };
-  addCoachToState(coach);
-  return coach;
+  if (isFailTrigger(values.name)) {
+    throw new MockApiError('create.errors.failed', 400);
+  }
+
+  const id = createMockId('coach');
+  addMemberToState(memberFromCoach(id, values));
+  return { id, ...values };
 }
 
 export async function createReferee(values: AddRefereeFormValues) {
   await mockDelay();
-  const referee = { id: createMockId('referee'), ...values };
-  addRefereeToState(referee);
-  return referee;
+  if (isFailTrigger(values.name)) {
+    throw new MockApiError('create.errors.failed', 400);
+  }
+
+  const id = createMockId('referee');
+  addMemberToState(memberFromReferee(id, values));
+  return { id, ...values };
 }
 
 export async function createCompetition(values: AddCompetitionFormValues) {
-  await mockDelay();
-  const competition = { id: createMockId('competition'), ...values };
-  addCompetitionToState(competition);
-  return competition;
+  return createCompetitionRecord(values);
+}
+
+export async function updateCompetition(id: string, values: AddCompetitionFormValues) {
+  return updateCompetitionRecord(id, values);
 }
 
 export async function createClub(values: AddClubFormValues) {
   await mockDelay();
-  const club = { id: createMockId('club'), ...values };
-  addClubToState(club);
+  if (isFailTrigger(values.clubName)) {
+    throw new MockApiError('create.errors.failed', 400);
+  }
+
+  const club = {
+    id: createMockId('club'),
+    name: values.clubName,
+    region: values.region,
+    category: values.category,
+    playerCount: values.playerCount,
+    attachmentUri: values.attachmentUri,
+  };
+  addClubToFederationState(club);
   return club;
 }
 
 export async function createAdministrator(values: AddAdministratorFormValues) {
   await mockDelay();
-  const administrator = { id: createMockId('administrator'), ...values };
-  addAdministratorToState(administrator);
-  return administrator;
+  if (isFailTrigger(values.name)) {
+    throw new MockApiError('create.errors.failed', 400);
+  }
+
+  const id = createMockId('administrator');
+  addMemberToState(memberFromAdministrator(id, values));
+  return { id, ...values };
 }
 
 export async function createPunishment(values: AddPunishmentFormValues) {
   await mockDelay();
-  const punishment = { id: createMockId('punishment'), ...values };
-  addPunishmentToState(punishment);
+  if (isFailTrigger(values.name) || isFailTrigger(values.reason)) {
+    throw new MockApiError('create.errors.failed', 400);
+  }
+
+  const punishment = {
+    id: createMockId('punishment'),
+    offenderType: values.offenderType,
+    name: values.name,
+    penaltyType: values.penaltyType,
+    reason: values.reason,
+    startDate: values.startDate,
+    endDate: values.endDate,
+    issuedBy: values.issuedBy,
+    attachmentUri: values.attachmentUri,
+  };
+  addPunishmentToFederationState(punishment);
   return punishment;
 }

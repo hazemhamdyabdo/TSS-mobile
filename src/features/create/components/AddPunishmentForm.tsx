@@ -3,11 +3,12 @@ import { useRouter } from 'expo-router';
 import { useMemo, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Alert, View } from 'react-native';
+import { View } from 'react-native';
 
 import PrimaryButton from '@/components/ui/PrimaryButton';
 
 import { createPunishment } from '../api';
+import { submitCreateForm } from '../utils/submit';
 import { ISSUED_BY_OPTIONS, OFFENDER_TYPE_OPTIONS, PENALTY_TYPE_OPTIONS } from '../constants/options';
 import {
   createAddPunishmentSchema,
@@ -54,10 +55,13 @@ export default function AddPunishmentForm() {
   const onSubmit = async (values: AddPunishmentFormValues) => {
     setIsSubmitting(true);
     try {
-      await createPunishment(values);
-      Alert.alert(t('create.screens.addPunishment'), t('create.success.addPunishment'), [
-        { text: t('common.ok'), onPress: () => router.back() },
-      ]);
+      await submitCreateForm(
+        () => createPunishment(values),
+        t,
+        router,
+        'create.screens.addPunishment',
+        'create.success.addPunishment',
+      );
     } finally {
       setIsSubmitting(false);
     }

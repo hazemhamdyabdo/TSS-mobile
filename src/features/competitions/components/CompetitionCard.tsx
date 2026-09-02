@@ -7,6 +7,12 @@ import { RTL_TEXT_STYLE } from "@/localization/direction";
 import { cairo } from "@/theme/typography";
 
 import type { Competition } from "../types";
+import {
+  getCompetitionDate,
+  getCompetitionEventType,
+  getCompetitionLocation,
+  getCompetitionTitle,
+} from "../utils/labels";
 import CompetitionStatusBadge, {
   CompetitionMetaItem,
 } from "./CompetitionStatusBadge";
@@ -68,7 +74,7 @@ export default function CompetitionCard({ competition }: CompetitionCardProps) {
               numberOfLines={1}
               style={{ fontFamily: cairo.semiBold, ...RTL_TEXT_STYLE }}
             >
-              {t(competition.titleKey)}
+              {getCompetitionTitle(competition, t)}
             </Text>
             <CompetitionStatusBadge status={competition.status} />
           </View>
@@ -76,15 +82,15 @@ export default function CompetitionCard({ competition }: CompetitionCardProps) {
           <View className="flex-row flex-wrap items-center justify-start gap-x-2 gap-y-1.5">
             <CompetitionMetaItem
               icon="map-marker-outline"
-              label={t(competition.locationKey)}
+              label={getCompetitionLocation(competition, t)}
             />
             <CompetitionMetaItem
               icon="fencing"
-              label={t(competition.eventTypeKey)}
+              label={getCompetitionEventType(competition, t)}
             />
             <CompetitionMetaItem
               icon="calendar-month-outline"
-              label={t(competition.dateKey)}
+              label={getCompetitionDate(competition, t)}
             />
             <CompetitionMetaItem
               icon="clock-outline"

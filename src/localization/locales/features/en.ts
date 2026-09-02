@@ -127,6 +127,8 @@ export const enFeatures = {
       phoneInvalid: 'Invalid phone number format!',
       otpRequired: 'Enter the verification code',
       otpInvalid: 'You entered a wrong code!',
+      phoneUnknown: 'This number is not registered. Use the QA test number.',
+      contactFailed: 'Could not send your message. Try again.',
       subjectRequired: 'Subject is required',
       attachmentTooLarge: 'File must be smaller than 1 MB',
       attachmentType: 'Only JPG, JPEG, and PNG files are allowed',
@@ -174,6 +176,7 @@ export const enFeatures = {
       addClub: 'Add club',
       addAdministrator: 'Add administrator',
       addPunishment: 'Add penalty',
+      editCompetition: 'Edit competition',
     },
     submit: {
       addPlayer: 'Add player',
@@ -183,6 +186,7 @@ export const enFeatures = {
       addClub: 'Add club',
       addAdministrator: 'Add administrator',
       addPunishment: 'Add penalty',
+      updateCompetition: 'Save changes',
     },
     success: {
       addPlayer: 'Player added successfully',
@@ -192,6 +196,7 @@ export const enFeatures = {
       addClub: 'Club added successfully',
       addAdministrator: 'Administrator added successfully',
       addPunishment: 'Penalty added successfully',
+      updateCompetition: 'Competition updated successfully',
     },
     optional: '(optional)',
     datePlaceholder: 'mm/dd/yyyy',
@@ -383,6 +388,8 @@ export const enFeatures = {
       passportRequired: 'Passport photo is required',
       attachmentType: 'Only JPG, JPEG, and PNG files are allowed',
       attachmentTooLarge: 'File must be smaller than {{size}} MB',
+      failedTitle: 'Request failed',
+      failed: 'The request could not be completed. Use a different name, or try again.',
     },
   },
   competitions: {
@@ -514,6 +521,15 @@ export const enFeatures = {
         about: 'The Kingdom fencing championship, held at the Federation Hall in Riyadh.',
       },
     },
+    custom: {
+      title: 'Competition',
+      name: 'Competition',
+      location: 'Location',
+      date: 'Date',
+      dateRange: 'Date range',
+      month: 'Month',
+      about: 'Competition details',
+    },
   },
   members: {
     title: 'Members',
@@ -556,12 +572,15 @@ export const enFeatures = {
       player: 'Player details',
       coach: 'Coach details',
       referee: 'Referee details',
+      administrator: 'Administrator details',
     },
     overview: {
       player: 'Player overview',
       coach: 'Coach overview',
       referee: 'Referee overview',
+      administrator: 'Administrator overview',
     },
+    customName: 'Member',
     fields: {
       name: 'Name',
       club: 'Club',
@@ -714,6 +733,7 @@ export const enFeatures = {
       title: 'Profile',
       save: 'Save changes',
       saved: 'Your changes were saved successfully.',
+      saveFailed: 'Could not save profile changes. Try a different email.',
       changePhoto: 'Change photo',
       fields: {
         name: 'Name',
@@ -765,6 +785,57 @@ export const enFeatures = {
       required: 'This field is required',
       invalidEmail: 'Enter a valid email',
       invalidPhone: 'Enter a valid mobile number',
+    },
+  },
+  federation: {
+    loading: 'Loading…',
+    search: {
+      clubs: 'Search clubs',
+      rankings: 'Search rankings',
+      results: 'Search results',
+      punishments: 'Search sanctions',
+      transfers: 'Search transfers',
+    },
+    empty: {
+      clubs: 'No clubs match this search',
+      rankings: 'No rankings match this search',
+      results: 'No results match this search',
+      punishments: 'No sanctions match this search',
+      transfers: 'No transfers match this search',
+    },
+    clubs: {
+      playerCount: '{{count}} players',
+    },
+    rankings: {
+      points: '{{count}} points',
+    },
+    transfers: {
+      status: {
+        pending: 'Pending',
+        approved: 'Approved',
+        rejected: 'Rejected',
+      },
+    },
+  },
+  inbox: {
+    title: 'Notifications',
+    empty: 'No notifications yet',
+    markAllRead: 'Mark all as read',
+    unreadCount: '{{count}} unread',
+    notFound: 'Notification not found',
+    items: {
+      transfer: {
+        title: 'Player transfer request',
+        body: 'A new transfer request is waiting for review.',
+      },
+      competition: {
+        title: 'New competition registration',
+        body: 'A competition was added and needs review.',
+      },
+      member: {
+        title: 'Member update',
+        body: 'A federation member record was updated.',
+      },
     },
   },
 };

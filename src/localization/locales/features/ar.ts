@@ -127,6 +127,8 @@ export const arFeatures = {
       phoneInvalid: 'تنسيق رقم الهاتف غير صالح!',
       otpRequired: 'أدخل رمز التحقق',
       otpInvalid: 'لقد ادخلت كود خاطئ!',
+      phoneUnknown: 'هذا الرقم غير مسجل. استخدم رقم اختبار ضمان الجودة.',
+      contactFailed: 'تعذر إرسال رسالتك. حاول مرة أخرى.',
       subjectRequired: 'الموضوع مطلوب',
       attachmentTooLarge: 'يجب أن يكون الملف أصغر من 1 ميجابايت',
       attachmentType: 'يُسمح بملفات JPG و JPEG و PNG فقط',
@@ -174,6 +176,7 @@ export const arFeatures = {
       addClub: 'اضافة نادي',
       addAdministrator: 'اضافة اداري',
       addPunishment: 'اضافة عقوبة',
+      editCompetition: 'تعديل المسابقة',
     },
     submit: {
       addPlayer: 'اضف لاعب',
@@ -183,6 +186,7 @@ export const arFeatures = {
       addClub: 'اضف نادي',
       addAdministrator: 'اضف اداري',
       addPunishment: 'اضف عقوبة',
+      updateCompetition: 'حفظ التغييرات',
     },
     success: {
       addPlayer: 'تم اضافة اللاعب بنجاح',
@@ -192,6 +196,7 @@ export const arFeatures = {
       addClub: 'تم اضافة النادي بنجاح',
       addAdministrator: 'تم اضافة الاداري بنجاح',
       addPunishment: 'تم اضافة العقوبة بنجاح',
+      updateCompetition: 'تم تحديث المسابقة بنجاح',
     },
     optional: '(اختياري)',
     datePlaceholder: 'mm/dd/yyyy',
@@ -383,6 +388,8 @@ export const arFeatures = {
       passportRequired: 'صورة جواز السفر مطلوبة',
       attachmentType: 'يُسمح بملفات JPG و JPEG و PNG فقط',
       attachmentTooLarge: 'يجب أن يكون الملف أصغر من {{size}} ميجابايت',
+      failedTitle: 'فشل الطلب',
+      failed: 'تعذر إكمال الطلب. استخدم اسماً مختلفاً أو حاول مرة أخرى.',
     },
   },
   competitions: {
@@ -514,6 +521,15 @@ export const arFeatures = {
         about: 'بطولة المملكة للمبارزة وتقام في صالة الاتحاد بالرياض.',
       },
     },
+    custom: {
+      title: 'مسابقة',
+      name: 'مسابقة',
+      location: 'الموقع',
+      date: 'التاريخ',
+      dateRange: 'المدة',
+      month: 'الشهر',
+      about: 'تفاصيل المسابقة',
+    },
   },
   members: {
     title: 'الاعضاء',
@@ -556,12 +572,15 @@ export const arFeatures = {
       player: 'تفاصيل اللاعب',
       coach: 'تفاصيل المدرب',
       referee: 'تفاصيل الحكم',
+      administrator: 'تفاصيل الاداري',
     },
     overview: {
       player: 'نظرة عامة عن الاعب',
       coach: 'نظرة عامة عن المدرب',
       referee: 'نظرة عامة عن الحكم',
+      administrator: 'نظرة عامة عن الاداري',
     },
+    customName: 'عضو',
     fields: {
       name: 'الاسم',
       club: 'النادي',
@@ -714,6 +733,7 @@ export const arFeatures = {
       title: 'الملف الشخصي',
       save: 'حفظ التغيرات',
       saved: 'تم حفظ التغييرات بنجاح.',
+      saveFailed: 'تعذر حفظ تغييرات الملف الشخصي. جرّب بريداً مختلفاً.',
       changePhoto: 'تغيير الصورة',
       fields: {
         name: 'الاسم',
@@ -765,6 +785,57 @@ export const arFeatures = {
       required: 'هذا الحقل مطلوب',
       invalidEmail: 'البريد الإلكتروني غير صالح',
       invalidPhone: 'رقم الجوال غير صالح',
+    },
+  },
+  federation: {
+    loading: 'جاري التحميل…',
+    search: {
+      clubs: 'بحث في الأندية',
+      rankings: 'بحث في التصنيف',
+      results: 'بحث في النتائج',
+      punishments: 'بحث في العقوبات',
+      transfers: 'بحث في الانتقلات',
+    },
+    empty: {
+      clubs: 'لا توجد أندية مطابقة للبحث',
+      rankings: 'لا توجد تصنيفات مطابقة للبحث',
+      results: 'لا توجد نتائج مطابقة للبحث',
+      punishments: 'لا توجد عقوبات مطابقة للبحث',
+      transfers: 'لا توجد انتقلات مطابقة للبحث',
+    },
+    clubs: {
+      playerCount: '{{count}} لاعبين',
+    },
+    rankings: {
+      points: '{{count}} نقطة',
+    },
+    transfers: {
+      status: {
+        pending: 'قيد المراجعة',
+        approved: 'مقبول',
+        rejected: 'مرفوض',
+      },
+    },
+  },
+  inbox: {
+    title: 'الإشعارات',
+    empty: 'لا توجد إشعارات بعد',
+    markAllRead: 'تعيين الكل كمقروء',
+    unreadCount: '{{count}} غير مقروء',
+    notFound: 'الإشعار غير موجود',
+    items: {
+      transfer: {
+        title: 'طلب انتقال لاعب',
+        body: 'يوجد طلب انتقال جديد بانتظار المراجعة.',
+      },
+      competition: {
+        title: 'تسجيل مسابقة جديدة',
+        body: 'تمت إضافة مسابقة وتحتاج إلى مراجعة.',
+      },
+      member: {
+        title: 'تحديث عضو',
+        body: 'تم تحديث بيانات أحد أعضاء الاتحاد.',
+      },
     },
   },
 };

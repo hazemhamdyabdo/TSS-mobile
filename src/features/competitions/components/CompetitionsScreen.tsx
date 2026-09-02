@@ -15,6 +15,11 @@ import { cairo } from "@/theme/typography";
 import { getCompetitions } from "../api";
 import { useCompetitionsState } from "../hooks/useCompetitionsState";
 import type { CompetitionFilter, CompetitionStatus } from "../types";
+import {
+  getCompetitionEventType,
+  getCompetitionLocation,
+  getCompetitionTitle,
+} from "../utils/labels";
 import CompetitionCard from "./CompetitionCard";
 import CompetitionSearchField from "./CompetitionSearchField";
 import CompetitionsEmptyState from "./CompetitionsEmptyState";
@@ -50,7 +55,7 @@ export default function CompetitionsScreen() {
       }
 
       const haystack =
-        `${t(item.titleKey)} ${t(item.locationKey)} ${t(item.eventTypeKey)}`.toLowerCase();
+        `${getCompetitionTitle(item, t)} ${getCompetitionLocation(item, t)} ${getCompetitionEventType(item, t)}`.toLowerCase();
       return haystack.includes(normalized);
     });
   }, [filter, query, state.items, t]);

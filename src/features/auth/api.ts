@@ -1,4 +1,4 @@
-import { MOCK_OTP, SA_DIAL_CODE } from './constants/dummy';
+import { isMockQaPhone, MOCK_OTP, SA_DIAL_CODE } from './constants/dummy';
 import { persistSession, loadStoredSession } from './storage/authStorage';
 import {
   markAuthHydrated,
@@ -14,8 +14,12 @@ export async function hydrateAuthState() {
   markAuthHydrated();
 }
 
-export async function requestOtp(_phone: string) {
+export async function requestOtp(phone: string) {
   await mockDelay();
+
+  if (!isMockQaPhone(phone)) {
+    throw new MockApiError('auth.errors.phoneUnknown', 401);
+  }
 }
 
 export async function verifyOtp(phone: string, otp: string) {

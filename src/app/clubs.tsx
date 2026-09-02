@@ -1,5 +1,5 @@
-import MorePlaceholderScreen from '@/features/more/components/MorePlaceholderScreen';
+import ClubsScreen from '@/features/federation/components/ClubsScreen';
 
 export default function ClubsRoute() {
-  return <MorePlaceholderScreen section="clubs" />;
+  return <ClubsScreen />;
 }

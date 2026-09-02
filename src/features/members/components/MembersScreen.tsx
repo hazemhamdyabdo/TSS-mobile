@@ -19,6 +19,7 @@ import { getMembers } from "../api";
 import { FILTER_ICON_XML, PLUS_ICON_XML } from "../constants/iconXml";
 import { useMembersState } from "../hooks/useMembersState";
 import type { Member, MemberCategory, MemberStatusFilter } from "../types";
+import { getMemberName } from "../utils/labels";
 import AdministratorCard from "./AdministratorCard";
 import CoachCard from "./CoachCard";
 import MemberCategoryChips from "./MemberCategoryChips";
@@ -61,15 +62,11 @@ export default function MembersScreen() {
         return true;
       }
 
-      return t(item.nameKey).toLowerCase().includes(normalized);
+      return getMemberName(item, t).toLowerCase().includes(normalized);
     });
   }, [category, query, state.items, statusFilter, t]);
 
   const openDetails = (member: Member) => {
-    if (member.category === "administrator") {
-      return;
-    }
-
     router.push(`/member/${member.id}` as Href);
   };
 
@@ -206,7 +203,7 @@ function MemberListCard({
     case "referee":
       return <RefereeCard member={member} onPress={onPress} />;
     case "administrator":
-      return <AdministratorCard member={member} />;
+      return <AdministratorCard member={member} onPress={onPress} />;
     default: {
       const exhaustive: never = member;
       throw new Error(`Unhandled member card: ${exhaustive}`);

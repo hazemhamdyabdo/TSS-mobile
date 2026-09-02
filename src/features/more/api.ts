@@ -1,4 +1,5 @@
-import { mockDelay } from '@/utils/mockApi';
+import { MOCK_FAIL_PROFILE_EMAIL } from '@/features/auth/constants/dummy';
+import { mockDelay, MockApiError } from '@/utils/mockApi';
 
 import {
   getMoreState,
@@ -15,6 +16,10 @@ export async function getMoreSettings() {
 
 export async function updateProfile(profile: UserProfile) {
   await mockDelay();
+  if (profile.email.trim().toLowerCase() === MOCK_FAIL_PROFILE_EMAIL) {
+    throw new MockApiError('more.profile.saveFailed', 400);
+  }
+
   updateProfileInState(profile);
   return profile;
 }

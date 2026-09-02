@@ -26,6 +26,7 @@ import { RTL_CONTAINER_STYLE, RTL_TEXT_STYLE } from "@/localization/direction";
 import { colors } from "@/theme/colors";
 import { cairo } from "@/theme/typography";
 
+import { getMockErrorMessage } from "@/utils/formErrors";
 import { updateProfile } from "../api";
 import { useMoreState } from "../hooks/useMoreState";
 import {
@@ -86,6 +87,11 @@ export default function ProfileScreen() {
       Alert.alert(t("more.profile.title"), t("more.profile.saved"), [
         { text: t("common.ok"), onPress: () => router.back() },
       ]);
+    } catch (error) {
+      Alert.alert(
+        t("more.profile.title"),
+        getMockErrorMessage(error, "more.profile.saveFailed", t),
+      );
     } finally {
       setIsSubmitting(false);
     }

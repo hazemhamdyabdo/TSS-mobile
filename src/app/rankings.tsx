@@ -1,5 +1,5 @@
-import MorePlaceholderScreen from '@/features/more/components/MorePlaceholderScreen';
+import RankingsScreen from '@/features/federation/components/RankingsScreen';
 
 export default function RankingsRoute() {
-  return <MorePlaceholderScreen section="rankings" />;
+  return <RankingsScreen />;
 }

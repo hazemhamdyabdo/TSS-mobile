@@ -30,7 +30,7 @@ export default function MemberDetailsScreen() {
     [id, state.items],
   );
 
-  if (!member || member.category === "administrator") {
+  if (!member) {
     return (
       <ScreenSafeAreaView
         className="flex-1 bg-background"
@@ -95,7 +95,7 @@ export default function MemberDetailsScreen() {
   );
 }
 
-function detailsTitleKey(category: Exclude<MemberCategory, "administrator">) {
+function detailsTitleKey(category: MemberCategory) {
   switch (category) {
     case "player":
       return "members.details.player";
@@ -103,6 +103,8 @@ function detailsTitleKey(category: Exclude<MemberCategory, "administrator">) {
       return "members.details.coach";
     case "referee":
       return "members.details.referee";
+    case "administrator":
+      return "members.details.administrator";
     default: {
       const exhaustive: never = category;
       throw new Error(`Unhandled details title: ${exhaustive}`);
@@ -110,7 +112,7 @@ function detailsTitleKey(category: Exclude<MemberCategory, "administrator">) {
   }
 }
 
-function overviewTitleKey(category: Exclude<MemberCategory, "administrator">) {
+function overviewTitleKey(category: MemberCategory) {
   switch (category) {
     case "player":
       return "members.overview.player";
@@ -118,6 +120,8 @@ function overviewTitleKey(category: Exclude<MemberCategory, "administrator">) {
       return "members.overview.coach";
     case "referee":
       return "members.overview.referee";
+    case "administrator":
+      return "members.overview.administrator";
     default: {
       const exhaustive: never = category;
       throw new Error(`Unhandled overview title: ${exhaustive}`);

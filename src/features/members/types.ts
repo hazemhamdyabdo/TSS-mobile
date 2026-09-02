@@ -50,6 +50,7 @@ export type MemberMetaChip = {
 type MemberBase = {
   id: string;
   nameKey: string;
+  displayName?: string;
   photoIndex: MemberPhotoIndex;
   federationId: string;
   overview: MemberOverviewRow[];

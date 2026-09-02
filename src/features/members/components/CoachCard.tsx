@@ -7,6 +7,7 @@ import { cairo } from '@/theme/typography';
 
 import { memberPhotoSource } from '../constants/photos';
 import type { CoachMember } from '../types';
+import { getMemberName } from '../utils/labels';
 import MemberMetaChipRow from './MemberMetaChipRow';
 import MemberStatusBadge from './MemberStatusBadge';
 
@@ -34,7 +35,7 @@ export default function CoachCard({ member, onPress }: CoachCardProps) {
       <View className="min-w-0 flex-1 gap-2">
         <View className="flex-row flex-wrap items-center gap-1.5" style={RTL_CONTAINER_STYLE}>
           <Text className="text-xs text-accent" style={{ fontFamily: cairo.medium, ...RTL_TEXT_STYLE }}>
-            {t(member.nameKey)}
+            {getMemberName(member, t)}
           </Text>
           <MemberStatusBadge status={member.status} />
         </View>

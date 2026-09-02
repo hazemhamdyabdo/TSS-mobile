@@ -1,5 +1,5 @@
-import MorePlaceholderScreen from '@/features/more/components/MorePlaceholderScreen';
+import ResultsScreen from '@/features/federation/components/ResultsScreen';
 
 export default function ResultsRoute() {
-  return <MorePlaceholderScreen section="results" />;
+  return <ResultsScreen />;
 }

@@ -15,6 +15,7 @@ import PrimaryButton from "@/components/ui/PrimaryButton";
 import { TEXT_INPUT_START_ALIGN } from "@/localization/direction";
 import { colors } from "@/theme/colors";
 import { cairo } from "@/theme/typography";
+import { getMockErrorMessage } from "@/utils/formErrors";
 import { submitContactMessage } from "../api";
 import {
   createContactSchema,
@@ -77,6 +78,11 @@ export default function ContactForm() {
           onPress: () => router.replace("/(auth)/login"),
         },
       ]);
+    } catch (error) {
+      Alert.alert(
+        t("auth.contactTitle"),
+        getMockErrorMessage(error, "auth.errors.contactFailed", t),
+      );
     } finally {
       setIsSubmitting(false);
     }

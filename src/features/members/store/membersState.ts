@@ -1,5 +1,5 @@
 import { DUMMY_MEMBERS_STATE } from '../constants/dummy';
-import type { MembersState } from '../types';
+import type { Member, MembersState } from '../types';
 
 let membersState: MembersState = cloneState(DUMMY_MEMBERS_STATE);
 const listeners = new Set<() => void>();
@@ -29,6 +29,19 @@ export function subscribeToMembers(listener: () => void) {
   return () => {
     listeners.delete(listener);
   };
+}
+
+export function addMemberToState(member: Member) {
+  const items = [member, ...membersState.items];
+  membersState = {
+    items,
+    totalCount: membersState.totalCount + 1,
+    suspendedCount:
+      member.status === 'suspended'
+        ? membersState.suspendedCount + 1
+        : membersState.suspendedCount,
+  };
+  notifyListeners();
 }
 
 export function resetMembersState() {

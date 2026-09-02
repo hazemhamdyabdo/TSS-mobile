@@ -3,11 +3,12 @@ import { useRouter } from 'expo-router';
 import { useMemo, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Alert, View } from 'react-native';
+import { View } from 'react-native';
 
 import PrimaryButton from '@/components/ui/PrimaryButton';
 
 import { createCoach } from '../api';
+import { submitCreateForm } from '../utils/submit';
 import {
   CLUB_OPTIONS,
   COACH_LEVEL_OPTIONS,
@@ -55,10 +56,13 @@ export default function AddCoachForm() {
   const onSubmit = async (values: AddCoachFormValues) => {
     setIsSubmitting(true);
     try {
-      await createCoach(values);
-      Alert.alert(t('create.screens.addCoach'), t('create.success.addCoach'), [
-        { text: t('common.ok'), onPress: () => router.back() },
-      ]);
+      await submitCreateForm(
+        () => createCoach(values),
+        t,
+        router,
+        'create.screens.addCoach',
+        'create.success.addCoach',
+      );
     } finally {
       setIsSubmitting(false);
     }

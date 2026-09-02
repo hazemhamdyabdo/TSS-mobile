@@ -10,7 +10,10 @@ import FormLabel from "@/components/form/FormLabel";
 import OutlineButton from "@/components/ui/OutlineButton";
 import PrimaryButton from "@/components/ui/PrimaryButton";
 
+import { getMockErrorMessage } from "@/utils/formErrors";
+
 import { requestOtp } from "../api";
+import { MOCK_QA_PHONE } from "../constants/dummy";
 import {
   createLoginSchema,
   toNationalSaPhone,
@@ -28,10 +31,11 @@ export default function LoginForm() {
   const {
     control,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm<LoginFormValues>({
     resolver: zodResolver(schema),
-    defaultValues: { phone: "" },
+    defaultValues: { phone: MOCK_QA_PHONE },
   });
 
   const onSubmit = async (values: LoginFormValues) => {
@@ -42,6 +46,10 @@ export default function LoginForm() {
       router.push(
         `/(auth)/otp?phone=${encodeURIComponent(phone)}` as unknown as Href,
       );
+    } catch (error) {
+      setError("phone", {
+        message: getMockErrorMessage(error, "auth.errors.phoneUnknown", t),
+      });
     } finally {
       setIsSubmitting(false);
     }

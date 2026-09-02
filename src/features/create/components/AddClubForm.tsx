@@ -3,11 +3,12 @@ import { useRouter } from 'expo-router';
 import { useMemo, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Alert, View } from 'react-native';
+import { View } from 'react-native';
 
 import PrimaryButton from '@/components/ui/PrimaryButton';
 
 import { createClub } from '../api';
+import { submitCreateForm } from '../utils/submit';
 import { CLUB_CATEGORY_OPTIONS, REGION_OPTIONS } from '../constants/options';
 import { createAddClubSchema, type AddClubFormValues } from '../schemas/addClubSchema';
 import FormSelectField from '@/components/form/FormSelectField';
@@ -46,10 +47,13 @@ export default function AddClubForm() {
   const onSubmit = async (values: AddClubFormValues) => {
     setIsSubmitting(true);
     try {
-      await createClub(values);
-      Alert.alert(t('create.screens.addClub'), t('create.success.addClub'), [
-        { text: t('common.ok'), onPress: () => router.back() },
-      ]);
+      await submitCreateForm(
+        () => createClub(values),
+        t,
+        router,
+        'create.screens.addClub',
+        'create.success.addClub',
+      );
     } finally {
       setIsSubmitting(false);
     }

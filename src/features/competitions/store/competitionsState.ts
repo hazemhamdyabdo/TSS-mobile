@@ -1,5 +1,5 @@
 import { DUMMY_COMPETITIONS_STATE } from '../constants/dummy';
-import type { CompetitionsState } from '../types';
+import type { Competition, CompetitionsState } from '../types';
 
 let competitionsState: CompetitionsState = cloneState(DUMMY_COMPETITIONS_STATE);
 const listeners = new Set<() => void>();
@@ -30,6 +30,28 @@ export function subscribeToCompetitions(listener: () => void) {
   return () => {
     listeners.delete(listener);
   };
+}
+
+export function addCompetitionToState(competition: Competition) {
+  competitionsState = {
+    ...competitionsState,
+    items: [competition, ...competitionsState.items],
+  };
+  notifyListeners();
+}
+
+export function updateCompetitionInState(id: string, next: Competition) {
+  const exists = competitionsState.items.some((item) => item.id === id);
+  if (!exists) {
+    return false;
+  }
+
+  competitionsState = {
+    ...competitionsState,
+    items: competitionsState.items.map((item) => (item.id === id ? next : item)),
+  };
+  notifyListeners();
+  return true;
 }
 
 export function deleteCompetitionFromState(id: string) {

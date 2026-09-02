@@ -14,6 +14,7 @@ const refereeIcon = require("@/assets/images/home/icons/task-referee.png");
 
 type RecentTasksSectionProps = {
   tasks: RecentTask[];
+  onViewAll: () => void;
 };
 
 function taskTypeIcon(type: TaskType) {
@@ -46,7 +47,10 @@ function relativeTimeKey(unit: RelativeTimeUnit, count: number) {
   }
 }
 
-export default function RecentTasksSection({ tasks }: RecentTasksSectionProps) {
+export default function RecentTasksSection({
+  tasks,
+  onViewAll,
+}: RecentTasksSectionProps) {
   const { t } = useTranslation();
 
   return (
@@ -58,7 +62,7 @@ export default function RecentTasksSection({ tasks }: RecentTasksSectionProps) {
         >
           {t("home.recentTasks.title")}
         </Text>
-        <Pressable accessibilityRole="button">
+        <Pressable accessibilityRole="button" onPress={onViewAll}>
           <Text
             className="text-[10px] text-primary"
             style={{ fontFamily: cairo.semiBold }}

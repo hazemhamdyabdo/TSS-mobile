@@ -1,12 +1,12 @@
 import { MaterialDesignIcons } from "@react-native-vector-icons/material-design-icons";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter, type Href } from "expo-router";
 import { useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Alert, Pressable, ScrollView, Text, View } from "react-native";
 
 import ScreenSafeAreaView from "@/components/ScreenSafeAreaView";
 import CreateBackButton from "@/features/create/components/CreateBackButton";
-import { CREATE_ROUTES } from "@/features/create/constants/actions";
+import { getMockErrorMessage } from "@/utils/formErrors";
 import { RTL_CONTAINER_STYLE, RTL_TEXT_STYLE } from "@/localization/direction";
 import { colors } from "@/theme/colors";
 import { cairo } from "@/theme/typography";
@@ -60,8 +60,15 @@ export default function CompetitionDetailsScreen() {
           text: t("common.delete"),
           style: "destructive",
           onPress: async () => {
-            await deleteCompetition(competition.id);
-            router.back();
+            try {
+              await deleteCompetition(competition.id);
+              router.back();
+            } catch (error) {
+              Alert.alert(
+                t("competitions.actions.delete"),
+                getMockErrorMessage(error, "competitions.notFound", t),
+              );
+            }
           },
         },
       ],
@@ -148,7 +155,11 @@ export default function CompetitionDetailsScreen() {
 
       <CompetitionOptionsBottomSheet
         ref={optionsRef}
-        onEdit={() => router.push(CREATE_ROUTES.addCompetition)}
+        onEdit={() =>
+          router.push(
+            `/add-competition?id=${competition?.id ?? ""}` as Href,
+          )
+        }
         onDelete={handleDelete}
       />
     </ScreenSafeAreaView>

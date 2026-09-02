@@ -6,6 +6,7 @@ import { RTL_TEXT_STYLE } from '@/localization/direction';
 import { cairo } from '@/theme/typography';
 
 import type { Competition } from '../types';
+import { getCompetitionCategory, getCompetitionMonth, getCompetitionName } from '../utils/labels';
 
 const heroImage = require('@/assets/images/home/banner-fencers.jpg');
 
@@ -23,10 +24,10 @@ export default function CompetitionHero({ competition }: CompetitionHeroProps) {
       <View className="absolute inset-0 items-start justify-between p-4">
         <View className="items-start gap-1">
           <Text className="text-lg text-white" style={{ fontFamily: cairo.bold, ...RTL_TEXT_STYLE }}>
-            {t(competition.nameKey)}
+            {getCompetitionName(competition, t)}
           </Text>
           <Text className="text-sm text-white" style={{ fontFamily: cairo.medium, ...RTL_TEXT_STYLE }}>
-            {t(competition.categoryKey)}
+            {getCompetitionCategory(competition, t)}
           </Text>
         </View>
         <View className="items-center rounded-md bg-primary px-3 py-1.5">
@@ -34,7 +35,7 @@ export default function CompetitionHero({ competition }: CompetitionHeroProps) {
             {competition.dateNumber}
           </Text>
           <Text className="text-[10px] text-white" style={{ fontFamily: cairo.medium }}>
-            {t(competition.dateMonthKey)}
+            {getCompetitionMonth(competition, t)}
           </Text>
         </View>
       </View>

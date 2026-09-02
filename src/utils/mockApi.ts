@@ -23,3 +23,12 @@ export function createMockId(prefix: string) {
 export function resetMockIdCounter() {
   mockIdCounter = 0;
 }
+
+export async function mockApiCall<T>(fn: () => T, minMs = 300, maxMs = 600): Promise<T> {
+  await mockDelay(minMs, maxMs);
+  return fn();
+}
+
+export function isFailTrigger(value: string) {
+  return value.trim().toUpperCase() === 'FAIL';
+}

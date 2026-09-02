@@ -3,11 +3,13 @@ import { useRouter } from 'expo-router';
 import { useMemo, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Alert, View } from 'react-native';
+import { View } from 'react-native';
 
 import PrimaryButton from '@/components/ui/PrimaryButton';
+import { getCompetitionFromState } from '@/features/competitions/store/competitionsState';
+import { competitionToFormValues } from '@/features/competitions/utils/fromCreate';
 
-import { createCompetition } from '../api';
+import { createCompetition, updateCompetition } from '../api';
 import {
   AGE_CATEGORY_OPTIONS,
   COMPETITION_CATEGORY_OPTIONS,
@@ -19,6 +21,7 @@ import {
   createAddCompetitionSchema,
   type AddCompetitionFormValues,
 } from '../schemas/addCompetitionSchema';
+import { submitCreateForm } from '../utils/submit';
 import FormDateField from '@/components/form/FormDateField';
 import FormRow from '@/components/form/FormRow';
 import FormSelectField from '@/components/form/FormSelectField';
@@ -42,11 +45,16 @@ const EMPTY_VALUES: AddCompetitionFormValues = {
   attachmentSize: undefined,
 };
 
-export default function AddCompetitionForm() {
+type AddCompetitionFormProps = {
+  competitionId?: string;
+};
+
+export default function AddCompetitionForm({ competitionId }: AddCompetitionFormProps) {
   const { t } = useTranslation();
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const schema = useMemo(() => createAddCompetitionSchema(t), [t]);
+  const existing = competitionId ? getCompetitionFromState(competitionId) : undefined;
 
   const {
     control,
@@ -56,7 +64,7 @@ export default function AddCompetitionForm() {
     formState: { errors },
   } = useForm<AddCompetitionFormValues>({
     resolver: zodResolver(schema),
-    defaultValues: EMPTY_VALUES,
+    defaultValues: existing ? competitionToFormValues(existing) : EMPTY_VALUES,
   });
 
   const attachmentUri = watch('attachmentUri');
@@ -64,10 +72,16 @@ export default function AddCompetitionForm() {
   const onSubmit = async (values: AddCompetitionFormValues) => {
     setIsSubmitting(true);
     try {
-      await createCompetition(values);
-      Alert.alert(t('create.screens.addCompetition'), t('create.success.addCompetition'), [
-        { text: t('common.ok'), onPress: () => router.back() },
-      ]);
+      await submitCreateForm(
+        () =>
+          existing
+            ? updateCompetition(existing.id, values)
+            : createCompetition(values),
+        t,
+        router,
+        existing ? 'create.screens.editCompetition' : 'create.screens.addCompetition',
+        existing ? 'create.success.updateCompetition' : 'create.success.addCompetition',
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -264,7 +278,7 @@ export default function AddCompetitionForm() {
       />
       <View className="mt-6">
         <PrimaryButton
-          title={t('create.submit.addCompetition')}
+          title={t(existing ? 'create.submit.updateCompetition' : 'create.submit.addCompetition')}
           onPress={handleSubmit(onSubmit)}
           loading={isSubmitting}
         />

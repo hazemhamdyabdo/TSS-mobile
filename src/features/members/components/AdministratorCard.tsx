@@ -1,5 +1,5 @@
 import { Image } from 'expo-image';
-import { Text, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 import { useTranslation } from 'react-i18next';
 
@@ -9,18 +9,22 @@ import { cairo } from '@/theme/typography';
 import { MAIL_ICON_XML, PHONE_ICON_XML } from '../constants/iconXml';
 import { memberPhotoSource } from '../constants/photos';
 import type { AdministratorMember } from '../types';
+import { getMemberName } from '../utils/labels';
 import MemberMetaChipRow from './MemberMetaChipRow';
 import MemberStatusBadge from './MemberStatusBadge';
 
 type AdministratorCardProps = {
   member: AdministratorMember;
+  onPress: () => void;
 };
 
-export default function AdministratorCard({ member }: AdministratorCardProps) {
+export default function AdministratorCard({ member, onPress }: AdministratorCardProps) {
   const { t } = useTranslation();
 
   return (
-    <View
+    <Pressable
+      accessibilityRole="button"
+      onPress={onPress}
       className="w-full flex-row items-start gap-3 overflow-hidden rounded-[8px] border border-slate-100 bg-white px-3 py-4"
       style={RTL_CONTAINER_STYLE}>
       <View className="size-10 overflow-hidden rounded-full bg-slate-100">
@@ -33,7 +37,7 @@ export default function AdministratorCard({ member }: AdministratorCardProps) {
       <View className="min-w-0 flex-1 gap-2">
         <View className="flex-row flex-wrap items-center gap-1.5" style={RTL_CONTAINER_STYLE}>
           <Text className="text-xs text-accent" style={{ fontFamily: cairo.medium, ...RTL_TEXT_STYLE }}>
-            {t(member.nameKey)}
+            {getMemberName(member, t)}
           </Text>
           <MemberStatusBadge status={member.status} />
         </View>
@@ -54,6 +58,6 @@ export default function AdministratorCard({ member }: AdministratorCardProps) {
           </View>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 }

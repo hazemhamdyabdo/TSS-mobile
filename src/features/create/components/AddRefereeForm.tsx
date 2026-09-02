@@ -3,11 +3,12 @@ import { useRouter } from 'expo-router';
 import { useMemo, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Alert, View } from 'react-native';
+import { View } from 'react-native';
 
 import PrimaryButton from '@/components/ui/PrimaryButton';
 
 import { createReferee } from '../api';
+import { submitCreateForm } from '../utils/submit';
 import {
   ENTITY_OPTIONS,
   REFEREE_CATEGORY_OPTIONS,
@@ -52,10 +53,13 @@ export default function AddRefereeForm() {
   const onSubmit = async (values: AddRefereeFormValues) => {
     setIsSubmitting(true);
     try {
-      await createReferee(values);
-      Alert.alert(t('create.screens.addReferee'), t('create.success.addReferee'), [
-        { text: t('common.ok'), onPress: () => router.back() },
-      ]);
+      await submitCreateForm(
+        () => createReferee(values),
+        t,
+        router,
+        'create.screens.addReferee',
+        'create.success.addReferee',
+      );
     } finally {
       setIsSubmitting(false);
     }

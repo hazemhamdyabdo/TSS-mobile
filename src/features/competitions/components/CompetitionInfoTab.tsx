@@ -7,6 +7,14 @@ import { colors } from "@/theme/colors";
 import { cairo } from "@/theme/typography";
 
 import type { Competition } from "../types";
+import {
+  getCompetitionAbout,
+  getCompetitionCategory,
+  getCompetitionDateRange,
+  getCompetitionEventType,
+  getCompetitionLocation,
+  getCompetitionName,
+} from "../utils/labels";
 
 type InfoIcon =
   | "card-account-details-outline"
@@ -68,17 +76,17 @@ export default function CompetitionInfoTab({
     {
       icon: "card-account-details-outline",
       labelKey: "competitions.fields.name",
-      value: t(competition.nameKey),
+      value: getCompetitionName(competition, t),
     },
     {
       icon: "shape-outline",
       labelKey: "competitions.fields.category",
-      value: t(competition.categoryKey),
+      value: getCompetitionCategory(competition, t),
     },
     {
       icon: "fencing",
       labelKey: "competitions.fields.type",
-      value: t(competition.eventTypeKey),
+      value: getCompetitionEventType(competition, t),
     },
     {
       icon: "account-group-outline",
@@ -88,7 +96,7 @@ export default function CompetitionInfoTab({
     {
       icon: "calendar-month-outline",
       labelKey: "competitions.fields.date",
-      value: t(competition.dateRangeKey),
+      value: getCompetitionDateRange(competition, t),
     },
     {
       icon: "clock-outline",
@@ -98,7 +106,7 @@ export default function CompetitionInfoTab({
     {
       icon: "map-marker-outline",
       labelKey: "competitions.fields.location",
-      value: t(competition.locationKey),
+      value: getCompetitionLocation(competition, t),
     },
   ];
 
@@ -115,7 +123,7 @@ export default function CompetitionInfoTab({
           className="text-xs leading-5 text-slate-400"
           style={{ fontFamily: cairo.regular, ...RTL_TEXT_STYLE }}
         >
-          {t(competition.aboutKey)}
+          {getCompetitionAbout(competition, t)}
         </Text>
       </View>
       <View className="gap-2 rounded-lg border border-slate-100 bg-white p-3">

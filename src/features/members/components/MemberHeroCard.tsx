@@ -9,6 +9,7 @@ import { cairo } from '@/theme/typography';
 import { QR_ICON_XML } from '../constants/iconXml';
 import { memberPhotoSource } from '../constants/photos';
 import type { Member } from '../types';
+import { getMemberName } from '../utils/labels';
 import MemberStatusBadge from './MemberStatusBadge';
 
 type MemberHeroCardProps = {
@@ -35,7 +36,7 @@ export default function MemberHeroCard({ member, onQrPress }: MemberHeroCardProp
           <View className="items-start gap-3">
             <View className="flex-row items-center gap-2" style={RTL_CONTAINER_STYLE}>
               <Text className="text-lg text-accent" style={{ fontFamily: cairo.medium, ...RTL_TEXT_STYLE }}>
-                {t(member.nameKey)}
+                {getMemberName(member, t)}
               </Text>
               {member.category === 'administrator' ? null : <MemberStatusBadge status={member.status} size="md" />}
             </View>

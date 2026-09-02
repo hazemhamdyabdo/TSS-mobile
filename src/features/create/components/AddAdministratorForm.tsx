@@ -3,11 +3,12 @@ import { useRouter } from 'expo-router';
 import { useMemo, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Alert, View } from 'react-native';
+import { View } from 'react-native';
 
 import PrimaryButton from '@/components/ui/PrimaryButton';
 
 import { createAdministrator } from '../api';
+import { submitCreateForm } from '../utils/submit';
 import { ADMIN_ROLE_OPTIONS, ADMIN_STATUS_OPTIONS, CLUB_OPTIONS } from '../constants/options';
 import {
   createAddAdministratorSchema,
@@ -51,10 +52,13 @@ export default function AddAdministratorForm() {
   const onSubmit = async (values: AddAdministratorFormValues) => {
     setIsSubmitting(true);
     try {
-      await createAdministrator(values);
-      Alert.alert(t('create.screens.addAdministrator'), t('create.success.addAdministrator'), [
-        { text: t('common.ok'), onPress: () => router.back() },
-      ]);
+      await submitCreateForm(
+        () => createAdministrator(values),
+        t,
+        router,
+        'create.screens.addAdministrator',
+        'create.success.addAdministrator',
+      );
     } finally {
       setIsSubmitting(false);
     }

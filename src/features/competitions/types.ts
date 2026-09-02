@@ -10,6 +10,21 @@ export type NationalityCode = 'sa' | 'qa';
 
 export type CompetitorPhotoId = 1 | 2 | 3 | 4 | 5;
 
+export type CompetitionDraft = {
+  eventName: string;
+  hostLocation: string;
+  registrationDeadline: string;
+  startDate: string;
+  endDate: string;
+  weapon: string;
+  gender: string;
+  ageCategory: string;
+  category: string;
+  capacity: string;
+  status: string;
+  attachmentUri?: string;
+};
+
 export type Competition = {
   id: string;
   titleKey: string;
@@ -25,6 +40,16 @@ export type Competition = {
   aboutKey: string;
   playerCount: number;
   status: CompetitionStatus;
+  title?: string;
+  name?: string;
+  location?: string;
+  dateLabel?: string;
+  dateRangeLabel?: string;
+  dateMonthLabel?: string;
+  about?: string;
+  eventType?: string;
+  category?: string;
+  draft?: CompetitionDraft;
 };
 
 export type Participant = {

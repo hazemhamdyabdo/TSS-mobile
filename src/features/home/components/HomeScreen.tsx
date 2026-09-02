@@ -1,6 +1,9 @@
+import { useRouter, type Href } from "expo-router";
 import { ScrollView } from "react-native";
 
 import ScreenSafeAreaView from "@/components/ScreenSafeAreaView";
+import { useMoreState } from "@/features/more/hooks/useMoreState";
+import { useNotificationsState } from "@/features/notifications/hooks/useNotificationsState";
 import { useMockListFetch } from "@/hooks/useMockListFetch";
 
 import { getHome } from "../api";
@@ -12,12 +15,14 @@ import QuickActionsSection from "./QuickActionsSection";
 import RecentTasksSection from "./RecentTasksSection";
 
 export default function HomeScreen() {
+  const router = useRouter();
   const home = useHomeState();
+  const { profile } = useMoreState();
+  const { unreadCount } = useNotificationsState();
   const isLoading = useMockListFetch(getHome);
 
   return (
     <ScreenSafeAreaView className="flex-1 bg-background" edges={["top"]}>
-      {/* <StatusBar style="auto" /> */}
       <ScrollView
         className="flex-1"
         contentContainerClassName="gap-4 px-5 pb-28 pt-2"
@@ -27,10 +32,22 @@ export default function HomeScreen() {
           <HomeSkeleton />
         ) : (
           <>
-            <HomeHeader profile={home.profile} />
-            <ChampionshipBanner banners={home.banners} />
+            <HomeHeader
+              name={profile.name}
+              roleKey={profile.roleKey}
+              avatarUri={profile.avatarUri}
+              notificationCount={unreadCount}
+              onNotificationsPress={() => router.push("/inbox" as Href)}
+            />
+            <ChampionshipBanner
+              banners={home.banners}
+              onDiscoverPress={() => router.push("/(tabs)/competitions")}
+            />
             <QuickActionsSection actions={home.quickActions} />
-            <RecentTasksSection tasks={home.tasks} />
+            <RecentTasksSection
+              tasks={home.tasks}
+              onViewAll={() => router.push("/transfers" as Href)}
+            />
           </>
         )}
       </ScrollView>

@@ -3,7 +3,7 @@ import { useRouter } from 'expo-router';
 import { useMemo, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Alert, View } from 'react-native';
+import { View } from 'react-native';
 
 import FormDateField from '@/components/form/FormDateField';
 import FormRow from '@/components/form/FormRow';
@@ -13,6 +13,7 @@ import FormUploadField from '@/components/form/FormUploadField';
 import PrimaryButton from '@/components/ui/PrimaryButton';
 
 import { createPlayer } from '../api';
+import { submitCreateForm } from '../utils/submit';
 import {
   AGE_CATEGORY_OPTIONS,
   CLUB_OPTIONS,
@@ -62,10 +63,13 @@ export default function AddPlayerForm() {
   const onSubmit = async (values: AddPlayerFormValues) => {
     setIsSubmitting(true);
     try {
-      await createPlayer(values);
-      Alert.alert(t('create.screens.addPlayer'), t('create.success.addPlayer'), [
-        { text: t('common.ok'), onPress: () => router.back() },
-      ]);
+      await submitCreateForm(
+        () => createPlayer(values),
+        t,
+        router,
+        'create.screens.addPlayer',
+        'create.success.addPlayer',
+      );
     } finally {
       setIsSubmitting(false);
     }

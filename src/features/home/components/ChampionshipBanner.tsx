@@ -28,6 +28,7 @@ const SCREEN_GUTTER = 40;
 
 type ChampionshipBannerProps = {
   banners: ChampionshipBannerType[];
+  onDiscoverPress: () => void;
 };
 
 function BannerGradient({
@@ -59,6 +60,7 @@ function BannerGradient({
 
 export default function ChampionshipBanner({
   banners,
+  onDiscoverPress,
 }: ChampionshipBannerProps) {
   const { t } = useTranslation();
   const { width: windowWidth } = useWindowDimensions();
@@ -179,6 +181,7 @@ export default function ChampionshipBanner({
 
             <Pressable
               accessibilityRole="button"
+              onPress={onDiscoverPress}
               className="absolute bottom-3 left-3 flex-row items-center gap-1 rounded-full bg-primary px-2.5 py-2"
               style={{ direction: "ltr" }}
             >
