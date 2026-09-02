@@ -186,7 +186,7 @@ export default function CompetitionsScreen() {
                     key={item}
                     accessibilityRole="button"
                     onPress={() => setFilter(item)}
-                    className={`h-[41px] min-w-0 flex-1 flex-row items-center justify-center gap-1.5 rounded-lg px-1 ${
+                    className={` h-[38px]  min-w-0 flex-1 flex-row items-center justify-center gap-1.5 rounded-2xl ${
                       selected ? "bg-primary/10" : "bg-slate-50"
                     }`}
                     style={RTL_CONTAINER_STYLE}
