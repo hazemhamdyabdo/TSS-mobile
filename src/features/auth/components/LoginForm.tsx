@@ -43,7 +43,7 @@ export default function LoginForm() {
   return (
     <View className="w-full gap-8">
       <View className="w-full gap-8">
-        <View className="w-full items-end gap-1.5">
+        <View className="w-full items-start gap-1.5">
           <FormLabel>{t('auth.phoneLabel')}</FormLabel>
           <Controller
             control={control}

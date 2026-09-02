@@ -11,7 +11,7 @@ export default function IndexRoute() {
   }
 
   if (session) {
-    return <Redirect href="/(tabs)/index" />;
+    return <Redirect href="/(tabs)" />;
   }
 
   return <Redirect href="/(auth)/splash" />;

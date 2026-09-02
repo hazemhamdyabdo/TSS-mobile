@@ -62,7 +62,7 @@ export default function OtpForm({ phone }: OtpFormProps) {
     setIsSubmitting(true);
     try {
       await verifyOtp(phone, onlyDigits(values.otp));
-      router.replace('/(tabs)/index');
+      router.replace('/(tabs)');
     } catch (error) {
       const message =
         error instanceof MockApiError ? t('auth.errors.otpInvalid') : t('auth.errors.otpInvalid');
@@ -83,7 +83,7 @@ export default function OtpForm({ phone }: OtpFormProps) {
 
   return (
     <View className="w-full gap-8">
-      <View className="w-full items-end gap-6">
+      <View className="w-full items-start gap-6">
         <Pressable onPress={() => inputRef.current?.focus()} className="w-full">
           <Controller
             control={control}

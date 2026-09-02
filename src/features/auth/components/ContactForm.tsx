@@ -16,6 +16,7 @@ import FieldError from '@/components/ui/FieldError';
 import FormLabel from '@/components/ui/FormLabel';
 import OutlineButton from '@/components/ui/OutlineButton';
 import PrimaryButton from '@/components/ui/PrimaryButton';
+import { useTextStartAlign } from '@/localization/direction';
 import { colors } from '@/theme/colors';
 import { cairo } from '@/theme/typography';
 
@@ -24,6 +25,7 @@ const cloudUpload = require('@/assets/images/auth/cloud-upload.png');
 export default function ContactForm() {
   const { t } = useTranslation();
   const router = useRouter();
+  const textAlign = useTextStartAlign();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const schema = useMemo(() => createContactSchema(t), [t]);
 
@@ -79,7 +81,7 @@ export default function ContactForm() {
   return (
     <View className="w-full gap-8">
       <View className="w-full gap-4">
-        <View className="w-full items-end gap-2">
+        <View className="w-full items-start gap-2">
           <FormLabel>{t('auth.phoneLabel')}</FormLabel>
           <Controller
             control={control}
@@ -97,7 +99,7 @@ export default function ContactForm() {
           {errors.phone?.message ? <FieldError message={errors.phone.message} /> : null}
         </View>
 
-        <View className="w-full items-end gap-2">
+        <View className="w-full items-start gap-2">
           <FormLabel>{t('auth.subjectLabel')}</FormLabel>
           <Controller
             control={control}
@@ -109,7 +111,7 @@ export default function ContactForm() {
                 placeholder={t('auth.subjectPlaceholder')}
                 placeholderTextColor={colors.secText}
                 multiline
-                textAlign="right"
+                textAlign={textAlign}
                 className="h-[125px] w-full rounded-[10px] border border-slate-100 bg-white px-4 py-3 text-sm leading-[18px] text-label"
                 style={{ fontFamily: cairo.regular, textAlignVertical: 'top' }}
               />
@@ -118,7 +120,7 @@ export default function ContactForm() {
           {errors.subject?.message ? <FieldError message={errors.subject.message} /> : null}
         </View>
 
-        <View className="w-full items-end gap-2">
+        <View className="w-full items-start gap-2">
           <FormLabel>{t('auth.attachmentLabel')}</FormLabel>
           <Pressable
             onPress={pickAttachment}

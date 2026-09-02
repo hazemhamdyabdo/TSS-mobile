@@ -1,7 +1,85 @@
 export const enFeatures = {
   tabs: {
     home: 'Home',
-    explore: 'Explore',
+    competitions: 'Competitions',
+    members: 'Members',
+    more: 'More',
+    add: 'Add',
+  },
+  home: {
+    logoLabel: 'Saudi Fencing Federation',
+    notifications: 'Notifications',
+    userName: 'Abdullah',
+    welcome: 'Welcome, {{name}}',
+    welcomeSubtitle: 'Ready for a new day of achievements!',
+    viewAll: 'View all',
+    role: {
+      federationOfficial: 'Federation official',
+    },
+    banner: {
+      category: 'Championships',
+      discoverMore: 'Discover more',
+      kingdom: {
+        title: 'Kingdom Championship',
+        eventType: 'Individual — Foil',
+        date: '25 August 2026',
+        time: '10:00 AM',
+        location: 'Riyadh — Federation Hall',
+      },
+      youth: {
+        title: 'Youth Championship',
+        eventType: 'Individual — Sabre',
+        date: '12 September 2026',
+        time: '09:00 AM',
+        location: 'Jeddah — Federation Hall',
+      },
+      clubs: {
+        title: 'Clubs Championship',
+        eventType: 'Teams — Foil',
+        date: '3 October 2026',
+        time: '04:00 PM',
+        location: 'Dammam — Federation Hall',
+      },
+    },
+    quickActions: {
+      title: 'Quick admin',
+      addPlayer: 'Add player',
+      addCoach: 'Add coach',
+      addReferee: 'Add referee',
+      addCompetition: 'Add competition',
+    },
+    recentTasks: {
+      title: 'Recent tasks',
+    },
+    taskStatus: {
+      new: 'New',
+      pendingReview: 'Awaiting review',
+      completed: 'Completed',
+    },
+    relative: {
+      minutesAgo: '{{count}} minutes ago',
+      hourAgo: '{{count}} hour ago',
+      hoursAgo: '{{count}} hours ago',
+    },
+    tasks: {
+      transfer: {
+        title: 'Player transfer request',
+        subtitle: 'New player transfer request from Al Hilal Club',
+      },
+      newCompetition: {
+        title: 'New competition registration',
+        subtitle: 'Kingdom Championship U20',
+      },
+      updateCoach: {
+        title: 'Update coach data',
+        subtitle: 'Coach data was updated successfully',
+      },
+      addReferee: {
+        title: 'Add a new referee',
+        subtitle: 'Add a referee for the Kingdom Championship U15',
+        completedSubtitle: 'Referee added successfully',
+      },
+    },
   },
   auth: {
     start: 'Start',

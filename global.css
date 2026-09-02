@@ -85,6 +85,13 @@
   --color-approved-900: #114633;
   --color-approved-950: #082319;
 
+  /* Info (completed badges) */
+  --color-info: #419ffd;
+  --color-info-50: #e8f3fe;
+
+  /* Tab bar */
+  --color-tab-indicator: #ffc92c;
+
   /* Rejected */
   --color-rejected: #f87171;
   --color-rejected-50: #ffe6e6; /* badges BG */

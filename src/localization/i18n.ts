@@ -41,8 +41,24 @@ function resolveLanguage(storedLanguage: string | null): AppLanguage {
   return deviceLanguage();
 }
 
+function applyDocumentDirection(language: AppLanguage) {
+  if (Platform.OS !== 'web' || typeof document === 'undefined') {
+    return;
+  }
+
+  const shouldBeRtl = language === 'ar';
+  document.documentElement.dir = shouldBeRtl ? 'rtl' : 'ltr';
+  document.documentElement.lang = language;
+}
+
 async function applyRtl(language: AppLanguage) {
   const shouldBeRtl = language === 'ar';
+
+  applyDocumentDirection(language);
+  // Keep NativeWind physical left/right utilities (text-right, items-end)
+  // from being inverted when the layout engine is RTL.
+  I18nManager.swapLeftAndRightInRTL(false);
+
   if (I18nManager.isRTL === shouldBeRtl) {
     return;
   }

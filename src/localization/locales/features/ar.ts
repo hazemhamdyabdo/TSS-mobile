@@ -1,7 +1,85 @@
 export const arFeatures = {
   tabs: {
     home: 'الرئيسية',
-    explore: 'استكشف',
+    competitions: 'المسابقات',
+    members: 'الاعضاء',
+    more: 'المزيد',
+    add: 'اضافة',
+  },
+  home: {
+    logoLabel: 'الاتحاد السعودي للمبارزة',
+    notifications: 'الإشعارات',
+    userName: 'عبدالله',
+    welcome: 'مرحبا بك, {{name}}',
+    welcomeSubtitle: 'جاهز ليوم جديد من الانجازات!',
+    viewAll: 'عرض الكل',
+    role: {
+      federationOfficial: 'مسؤول الاتحاد',
+    },
+    banner: {
+      category: 'البطولات',
+      discoverMore: 'اكتشف المزيد',
+      kingdom: {
+        title: 'بطولة المملكة',
+        eventType: 'فردي - سلاح الشيش',
+        date: '25 اغسطس 2026',
+        time: '10:00 صباحا',
+        location: 'الرياض - صالة الاتحاد',
+      },
+      youth: {
+        title: 'بطولة الناشئين',
+        eventType: 'فردي - سلاح السيف',
+        date: '12 سبتمبر 2026',
+        time: '09:00 صباحا',
+        location: 'جدة - صالة الاتحاد',
+      },
+      clubs: {
+        title: 'بطولة الأندية',
+        eventType: 'فرق - سلاح الشيش',
+        date: '3 اكتوبر 2026',
+        time: '04:00 مساء',
+        location: 'الدمام - صالة الاتحاد',
+      },
+    },
+    quickActions: {
+      title: 'ادارة سريعة',
+      addPlayer: 'اضافة لاعب',
+      addCoach: 'اضافة مدرب',
+      addReferee: 'اضافة حكم',
+      addCompetition: 'اضافة مسابقة',
+    },
+    recentTasks: {
+      title: 'المهام الاخيرة',
+    },
+    taskStatus: {
+      new: 'جديد',
+      pendingReview: 'بأنتظار المراجعة',
+      completed: 'مكتمل',
+    },
+    relative: {
+      minutesAgo: 'منذ {{count}} دقيقة',
+      hourAgo: 'منذ {{count}} ساعة',
+      hoursAgo: 'منذ {{count}} ساعات',
+    },
+    tasks: {
+      transfer: {
+        title: 'طلب انتقال لاعب',
+        subtitle: 'طلب انتقال لاعب جديد من نادي الهلال',
+      },
+      newCompetition: {
+        title: 'تسجيل مسابقة جديدة',
+        subtitle: 'بطولة المملكة تحت 20 عام',
+      },
+      updateCoach: {
+        title: 'تحديث بيانات مدرب',
+        subtitle: 'تم تحديث بيانات المدرب بنجاح',
+      },
+      addReferee: {
+        title: 'اضافة حكم جديد',
+        subtitle: 'اضافة حكم لبطولة المملكة تحت 15 عام',
+        completedSubtitle: 'تم اضافة حكم بنجاح',
+      },
+    },
   },
   auth: {
     start: 'ابدأ',

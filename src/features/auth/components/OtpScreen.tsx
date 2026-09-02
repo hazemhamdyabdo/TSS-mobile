@@ -6,6 +6,7 @@ import AuthBackButton from './AuthBackButton';
 import AuthHeroBackground from './AuthHeroBackground';
 import AuthSheet from './AuthSheet';
 import OtpForm from './OtpForm';
+import { useTextStartAlign, useWritingDirection } from '@/localization/direction';
 import { cairo } from '@/theme/typography';
 import { toArabicIndicDigits } from '@/utils/digits';
 
@@ -23,28 +24,32 @@ function formatDisplayPhone(phone: string, language: string) {
 export default function OtpScreen({ phone }: OtpScreenProps) {
   const { t, i18n } = useTranslation();
   const router = useRouter();
+  const textAlign = useTextStartAlign();
+  const writingDirection = useWritingDirection();
 
   return (
     <AuthHeroBackground>
       <AuthSheet>
         <View className="w-full items-center gap-8 py-2">
-          <View className="w-full items-end gap-2">
-            <View className="w-full flex-row justify-end" style={{ direction: 'ltr' }}>
+          <View className="w-full items-start gap-2">
+            <View className="w-full flex-row justify-start">
               <AuthBackButton onPress={() => router.back()} />
             </View>
-            <View className="w-full items-end gap-1.5">
+            <View className="w-full items-start gap-1.5">
               <Text
-                className="text-right text-xl leading-[26px] text-accent"
-                style={{ fontFamily: cairo.bold }}>
+                className="w-full text-xl leading-[26px] text-accent"
+                style={{ fontFamily: cairo.bold, textAlign, writingDirection }}>
                 {t('auth.otpTitle')}
               </Text>
               <Text
-                className="text-right text-sm text-sec-text"
-                style={{ fontFamily: cairo.regular }}>
+                className="w-full text-sm text-sec-text"
+                style={{ fontFamily: cairo.regular, textAlign, writingDirection }}>
                 {t('auth.otpSubtitle', { phone: formatDisplayPhone(phone, i18n.language) })}
               </Text>
-              <Pressable onPress={() => router.back()}>
-                <Text className="text-right text-sm text-primary" style={{ fontFamily: cairo.regular }}>
+              <Pressable onPress={() => router.back()} className="w-full">
+                <Text
+                  className="w-full text-sm text-primary"
+                  style={{ fontFamily: cairo.regular, textAlign, writingDirection }}>
                   {t('auth.changeNumber')}
                 </Text>
               </Pressable>
