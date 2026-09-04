@@ -12,6 +12,7 @@ import { useTranslation } from 'react-i18next';
 import { RTL_CONTAINER_STYLE, RTL_TEXT_STYLE, TEXT_INPUT_START_ALIGN } from '@/localization/direction';
 import { colors } from '@/theme/colors';
 import { cairo } from '@/theme/typography';
+import { presentBottomSheet } from '@/utils/presentBottomSheet';
 
 import PhoneCountryFlag from './PhoneCountryFlag';
 
@@ -42,7 +43,7 @@ const CountryPickerBottomSheet = forwardRef<
   const [query, setQuery] = useState('');
 
   useImperativeHandle(ref, () => ({
-    open: () => bottomSheetRef.current?.present(),
+    open: () => presentBottomSheet(() => bottomSheetRef.current?.present()),
     close: () => bottomSheetRef.current?.dismiss(),
   }));
 

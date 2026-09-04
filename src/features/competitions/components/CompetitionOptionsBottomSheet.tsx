@@ -18,6 +18,7 @@ import { Pressable, Text, View } from "react-native";
 import { RTL_CONTAINER_STYLE, RTL_TEXT_STYLE } from "@/localization/direction";
 import { colors } from "@/theme/colors";
 import { cairo } from "@/theme/typography";
+import { presentBottomSheet } from "@/utils/presentBottomSheet";
 
 export type CompetitionOptionsBottomSheetRef = {
   open: () => void;
@@ -38,7 +39,7 @@ const CompetitionOptionsBottomSheet = forwardRef<
   const snapPoints = useMemo(() => ["28%"], []);
 
   useImperativeHandle(ref, () => ({
-    open: () => bottomSheetRef.current?.present(),
+    open: () => presentBottomSheet(() => bottomSheetRef.current?.present()),
     close: () => bottomSheetRef.current?.dismiss(),
   }));
 

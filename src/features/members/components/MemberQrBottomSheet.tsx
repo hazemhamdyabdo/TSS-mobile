@@ -10,6 +10,7 @@ import { SvgXml } from 'react-native-svg';
 import { useTranslation } from 'react-i18next';
 
 import { cairo } from '@/theme/typography';
+import { presentBottomSheet } from '@/utils/presentBottomSheet';
 
 import { QR_BADGE_ICON_XML, QR_GRAPHIC_ICON_XML } from '../constants/iconXml';
 import type { MemberCategory } from '../types';
@@ -33,7 +34,7 @@ export default forwardRef<MemberQrBottomSheetRef, MemberQrBottomSheetProps>(func
   const snapPoints = useMemo(() => ['58%'], []);
 
   useImperativeHandle(ref, () => ({
-    open: () => bottomSheetRef.current?.present(),
+    open: () => presentBottomSheet(() => bottomSheetRef.current?.present()),
     close: () => bottomSheetRef.current?.dismiss(),
   }));
 

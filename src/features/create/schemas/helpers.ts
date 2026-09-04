@@ -2,6 +2,7 @@ import type { TFunction } from 'i18next';
 import { z } from 'zod';
 
 import { isIsoDate } from '@/utils/dates';
+import { toWesternDigits } from '@/utils/digits';
 
 const IMAGE_TYPES = new Set(['image/jpeg', 'image/jpg', 'image/png']);
 
@@ -29,6 +30,7 @@ export function requiredNumber(t: TFunction) {
     .string()
     .trim()
     .min(1, t('create.errors.required'))
+    .transform(toWesternDigits)
     .refine((value) => Number.isFinite(Number(value)) && Number(value) >= 0, t('create.errors.invalidNumber'));
 }
 

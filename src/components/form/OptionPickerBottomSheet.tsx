@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import type { SelectOption } from '@/components/form/types';
 import { RTL_TEXT_STYLE } from '@/localization/direction';
 import { cairo } from '@/theme/typography';
+import { presentBottomSheet } from '@/utils/presentBottomSheet';
 
 export type OptionPickerBottomSheetRef = {
   open: () => void;
@@ -30,7 +31,7 @@ const OptionPickerBottomSheet = forwardRef<OptionPickerBottomSheetRef, OptionPic
     const snapPoints = useMemo(() => ['40%', '70%'], []);
 
     useImperativeHandle(ref, () => ({
-      open: () => bottomSheetRef.current?.present(),
+      open: () => presentBottomSheet(() => bottomSheetRef.current?.present()),
       close: () => bottomSheetRef.current?.dismiss(),
     }));
 

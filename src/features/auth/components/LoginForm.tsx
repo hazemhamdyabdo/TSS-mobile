@@ -22,7 +22,12 @@ import {
 import AuthDivider from "./AuthDivider";
 import PhoneNumberField from "./PhoneNumberField";
 
-export default function LoginForm() {
+type LoginFormProps = {
+  onOtpRequested?: (phone: string) => void;
+  onContactPress?: () => void;
+};
+
+export default function LoginForm({ onOtpRequested, onContactPress }: LoginFormProps) {
   const { t } = useTranslation();
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -43,9 +48,13 @@ export default function LoginForm() {
     try {
       const phone = toNationalSaPhone(values.phone);
       await requestOtp(phone);
-      router.push(
-        `/(auth)/otp?phone=${encodeURIComponent(phone)}` as unknown as Href,
-      );
+      if (onOtpRequested) {
+        onOtpRequested(phone);
+      } else {
+        router.push(
+          `/(auth)/otp?phone=${encodeURIComponent(phone)}` as unknown as Href,
+        );
+      }
     } catch (error) {
       setError("phone", {
         message: getMockErrorMessage(error, "auth.errors.phoneUnknown", t),
@@ -88,7 +97,7 @@ export default function LoginForm() {
         <AuthDivider label={t("auth.noAccount")} />
         <OutlineButton
           title={t("auth.contactFederation")}
-          onPress={() => router.push("/(auth)/contact")}
+          onPress={onContactPress ?? (() => router.push("/(auth)/contact"))}
         />
       </View>
     </View>

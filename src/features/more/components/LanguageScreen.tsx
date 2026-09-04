@@ -72,14 +72,14 @@ export default function LanguageScreen() {
                   className="flex-row items-center gap-3"
                   style={RTL_CONTAINER_STYLE}
                 >
-                  <View className="size-6 overflow-hidden rounded-full">
-                    <SvgXml
+                  <View className="size-fit overflow-hidden rounded-xl">
+                      <SvgXml
                       xml={flagXmlForLanguage(optionId)}
-                      width={24}
-                      height={24}
+                      width={30}
+                      height={30}
                     />
                   </View>
-                  <View className="items-start gap-2">
+                  <View className="items-start gap-1">
                     <Text
                       className="text-base capitalize text-accent"
                       style={{ fontFamily: cairo.medium, ...RTL_TEXT_STYLE }}

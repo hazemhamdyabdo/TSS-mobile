@@ -3,6 +3,7 @@ import { TextInput } from 'react-native';
 import { APP_DIRECTION, TEXT_INPUT_START_ALIGN } from '@/localization/direction';
 import { colors } from '@/theme/colors';
 import { cairo } from '@/theme/typography';
+import { toWesternDigits } from '@/utils/digits';
 
 type FormTextInputProps = {
   value: string;
@@ -11,6 +12,17 @@ type FormTextInputProps = {
   hasError?: boolean;
   keyboardType?: 'default' | 'numeric' | 'email-address' | 'phone-pad';
 };
+
+function normalizeByKeyboard(
+  value: string,
+  keyboardType: FormTextInputProps['keyboardType'],
+) {
+  if (keyboardType === 'numeric' || keyboardType === 'phone-pad') {
+    return toWesternDigits(value);
+  }
+
+  return value;
+}
 
 export default function FormTextInput({
   value,
@@ -22,7 +34,7 @@ export default function FormTextInput({
   return (
     <TextInput
       value={value}
-      onChangeText={onChangeText}
+      onChangeText={(text) => onChangeText(normalizeByKeyboard(text, keyboardType))}
       placeholder={placeholder}
       placeholderTextColor={colors.secText}
       keyboardType={keyboardType}
