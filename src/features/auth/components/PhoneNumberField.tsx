@@ -54,6 +54,20 @@ export default function PhoneNumberField({
         }`}
         style={{ direction: "ltr" }}
       >
+        <Pressable
+          accessibilityRole="button"
+          onPress={() => countrySheetRef.current?.open()}
+          className="shrink-0 flex-row items-center gap-2"
+        >
+          <PhoneCountryFlag iso2={iso2} />
+          <Text
+            className="text-sm text-label"
+            style={{ fontFamily: cairo.regular, writingDirection: "ltr" }}
+          >
+            {dialCode}
+          </Text>
+        </Pressable>
+
         <View className="min-w-0 flex-1 self-stretch justify-center">
           <TextInput
             value={national}
@@ -79,20 +93,6 @@ export default function PhoneNumberField({
             }}
           />
         </View>
-
-        <Pressable
-          accessibilityRole="button"
-          onPress={() => countrySheetRef.current?.open()}
-          className="shrink-0 flex-row items-center gap-2"
-        >
-          <Text
-            className="text-sm text-label"
-            style={{ fontFamily: cairo.regular, writingDirection: "ltr" }}
-          >
-            {dialCode}
-          </Text>
-          <PhoneCountryFlag iso2={iso2} />
-        </Pressable>
       </View>
 
       <CountryPickerBottomSheet

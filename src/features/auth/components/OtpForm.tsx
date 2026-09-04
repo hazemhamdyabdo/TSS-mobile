@@ -117,8 +117,11 @@ export default function OtpForm({ phone }: OtpFormProps) {
                   autoComplete="sms-otp"
                   textContentType="oneTimeCode"
                   className="absolute h-px w-px opacity-0"
+                  style={{ writingDirection: 'ltr' }}
                 />
-                <View className="w-full flex-row justify-between">
+                <View
+                  className="w-full flex-row justify-between"
+                  style={{ direction: 'ltr' }}>
                   {Array.from({ length: OTP_LENGTH }).map((_, index) => {
                     const digit = digits[index] ?? '';
                     const borderClass = otpCellBorderClass({
@@ -132,7 +135,7 @@ export default function OtpForm({ phone }: OtpFormProps) {
                         className={`size-16 items-center justify-center rounded-[10px] border bg-white ${borderClass}`}>
                         <Text
                           className="text-xl text-sec-text"
-                          style={{ fontFamily: cairo.regular }}>
+                          style={{ fontFamily: cairo.regular, writingDirection: 'ltr' }}>
                           {digit}
                         </Text>
                       </View>

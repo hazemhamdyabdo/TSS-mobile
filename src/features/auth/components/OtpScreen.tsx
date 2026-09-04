@@ -17,8 +17,11 @@ type OtpScreenProps = {
 function formatDisplayPhone(phone: string, language: string) {
   const grouped = phone.replace(/(\d{2})(\d{3})(\d{4})/, '$1 $2 $3');
   const national = language === 'ar' ? toArabicIndicDigits(grouped) : grouped;
-  const code = language === 'ar' ? '٩٦٦+' : '+966';
-  return `${national} ${code}`;
+  const code = language === 'ar' ? '+٩٦٦' : '+966';
+
+  // Isolate the phone number from the surrounding Arabic sentence so the
+  // Unicode bidi algorithm cannot move the dial code to the right edge.
+  return `\u2066${code} ${national}\u2069`;
 }
 
 export default function OtpScreen({ phone }: OtpScreenProps) {
