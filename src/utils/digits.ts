@@ -1,7 +1,10 @@
 const ARABIC_INDIC = '٠١٢٣٤٥٦٧٨٩';
+const PERSIAN_INDIC = '۰۱۲۳۴۵۶۷۸۹';
 
 export function toWesternDigits(value: string) {
-  return value.replace(/[٠-٩]/g, (digit) => String(ARABIC_INDIC.indexOf(digit)));
+  return value
+    .replace(/[٠-٩]/g, (digit) => String(ARABIC_INDIC.indexOf(digit)))
+    .replace(/[۰-۹]/g, (digit) => String(PERSIAN_INDIC.indexOf(digit)));
 }
 
 export function toArabicIndicDigits(value: string) {

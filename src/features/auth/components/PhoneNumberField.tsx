@@ -1,10 +1,6 @@
 import { useRef, useState } from "react";
 import { Pressable, Text, TextInput, View } from "react-native";
 
-import {
-  RTL_CONTAINER_STYLE,
-  TEXT_INPUT_START_ALIGN,
-} from "@/localization/direction";
 import { colors } from "@/theme/colors";
 import { cairo } from "@/theme/typography";
 import { onlyDigits } from "@/utils/digits";
@@ -56,42 +52,47 @@ export default function PhoneNumberField({
         className={`h-12 w-full flex-row items-center gap-2 rounded-[10px] border bg-white px-3 ${
           hasError ? "border-rejected" : "border-slate-100"
         }`}
-        style={RTL_CONTAINER_STYLE}
+        style={{ direction: "ltr" }}
       >
+        <View className="min-w-0 flex-1 self-stretch justify-center">
+          <TextInput
+            value={national}
+            onChangeText={(text) => {
+              const digits = onlyDigits(text);
+              onChangeText(digits ? `${dialCode}${digits}` : "");
+            }}
+            placeholder={placeholder}
+            placeholderTextColor={colors.secText}
+            keyboardType="number-pad"
+            textContentType="telephoneNumber"
+            autoComplete="tel"
+            autoCorrect={false}
+            autoCapitalize="none"
+            textAlign="left"
+            className="h-full w-full text-sm leading-[18px] text-label"
+            style={{
+              fontFamily: cairo.regular,
+              writingDirection: "ltr",
+              includeFontPadding: false,
+              textAlignVertical: "center",
+              paddingVertical: 0,
+            }}
+          />
+        </View>
+
         <Pressable
           accessibilityRole="button"
           onPress={() => countrySheetRef.current?.open()}
-          className="flex-row items-center gap-2"
-          style={RTL_CONTAINER_STYLE}
+          className="shrink-0 flex-row items-center gap-2"
         >
-          <PhoneCountryFlag iso2={iso2} />
           <Text
             className="text-sm text-label"
             style={{ fontFamily: cairo.regular, writingDirection: "ltr" }}
           >
             {dialCode}
           </Text>
+          <PhoneCountryFlag iso2={iso2} />
         </Pressable>
-
-        <TextInput
-          value={national}
-          onChangeText={(text) => {
-            const digits = onlyDigits(text);
-            onChangeText(digits ? `${dialCode}${digits}` : "");
-          }}
-          placeholder={placeholder}
-          placeholderTextColor={colors.secText}
-          placeholderClassName="phone-number-field-placeholder"
-          keyboardType="phone-pad"
-          textAlign={TEXT_INPUT_START_ALIGN}
-          className="min-w-0 flex-1 text-sm text-label  placeholder:py-8 placeholder:pb-2 "
-          style={{
-            fontFamily: cairo.regular,
-            writingDirection: "ltr",
-            includeFontPadding: false,
-            textAlignVertical: "center",
-          }}
-        />
       </View>
 
       <CountryPickerBottomSheet
