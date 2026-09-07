@@ -29,7 +29,7 @@ export default function OtpScreen({ phone }: OtpScreenProps) {
   const router = useRouter();
   return (
     <AuthHeroBackground>
-      <AuthSheet maxHeight="72%">
+      <AuthSheet maxHeight="62%">
         <View className="w-full items-center gap-2 py-2">
           <View className="w-full items-start gap-2">
             <View className="w-full flex-row justify-start">

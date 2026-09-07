@@ -20,10 +20,15 @@ export default function AuthSheet({
   return (
     <View
       collapsable={false}
-      className={`mt-auto w-full overflow-hidden rounded-t-[32px] px-5 pt-4 ${className}`}
+      className={`mt-auto w-full ${className} overflow-hidden rounded-t-[32px] px-5 pt-4`}
       style={{
         maxHeight,
-        backgroundColor: colors.white,
+        // Keep fill + radii in the same style object so Android clips the
+        // sheet against the hero (NativeWind radius alone often fails there).
+        backgroundColor: colors.background,
+        borderTopLeftRadius: 32,
+        borderTopRightRadius: 32,
+        overflow: "hidden",
       }}
     >
       <ScrollView
