@@ -438,10 +438,42 @@ export const enFeatures = {
       searchCompetitors: 'Search competitors',
       searchResults: 'Search my results',
       youLabel: '{{name}} (You)',
+      youSuffix: '(You)',
       tabs: {
         info: 'General info',
         participants: 'My competitors',
         results: 'My results',
+      },
+    },
+    matchDetails: {
+      title: 'Match details',
+      notFound: 'Match not found',
+      weaponFoil: 'Foil',
+      durationMinutes: '{{count}} min',
+      sections: {
+        details: 'Match details',
+        periods: 'Round details',
+        stats: 'Match statistics',
+      },
+      fields: {
+        weapon: 'Weapon type',
+        round: 'Round',
+        duration: 'Duration',
+      },
+      periods: {
+        name: 'Name',
+        round: 'Round {{number}}',
+        result: 'Result',
+      },
+      status: {
+        ended: 'Finished',
+      },
+      stats: {
+        touches: 'Touches',
+        successRate: 'Success rate',
+        highestStreak: 'Highest streak',
+        successfulAttacks: 'Successful attacks',
+        failedAttacks: 'Failed attacks',
       },
     },
     stats: {

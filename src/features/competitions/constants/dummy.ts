@@ -1,4 +1,10 @@
-import type { Competition, CompetitionsState, MatchResult, Participant } from '../types';
+import type {
+  Competition,
+  CompetitionsState,
+  MatchDetails,
+  MatchResult,
+  Participant,
+} from '../types';
 
 const BASE_PARTICIPANTS: Omit<Participant, 'id' | 'competitionId'>[] = [
   {
@@ -209,9 +215,59 @@ export const DUMMY_RESULTS: MatchResult[] = DUMMY_COMPETITIONS.flatMap((competit
   resultsFor(competition.id),
 );
 
+const DEFAULT_MATCH_STATS = [
+  {
+    id: 'touches' as const,
+    labelKey: 'competitions.matchDetails.stats.touches',
+    startValue: 12,
+    endValue: 8,
+  },
+  {
+    id: 'successRate' as const,
+    labelKey: 'competitions.matchDetails.stats.successRate',
+    startValue: 48,
+    endValue: 32,
+  },
+  {
+    id: 'highestStreak' as const,
+    labelKey: 'competitions.matchDetails.stats.highestStreak',
+    startValue: 5,
+    endValue: 3,
+  },
+  {
+    id: 'successfulAttacks' as const,
+    labelKey: 'competitions.matchDetails.stats.successfulAttacks',
+    startValue: 16,
+    endValue: 10,
+  },
+  {
+    id: 'failedAttacks' as const,
+    labelKey: 'competitions.matchDetails.stats.failedAttacks',
+    startValue: 6,
+    endValue: 8,
+  },
+];
+
+function detailsFor(matchId: string): MatchDetails {
+  return {
+    matchId,
+    weaponKey: 'competitions.matchDetails.weaponFoil',
+    durationMinutes: 26,
+    boutStatus: 'ended',
+    startPeriods: [5, 7, 3, 3],
+    endPeriods: [1, 2, 4, 4],
+    stats: DEFAULT_MATCH_STATS,
+  };
+}
+
+export const DUMMY_MATCH_DETAILS: MatchDetails[] = DUMMY_RESULTS.map((result) =>
+  detailsFor(result.id),
+);
+
 export const DUMMY_COMPETITIONS_STATE: CompetitionsState = {
   items: DUMMY_COMPETITIONS,
   participants: DUMMY_PARTICIPANTS,
   results: DUMMY_RESULTS,
+  matchDetails: DUMMY_MATCH_DETAILS,
   monthlyParticipantCount: 120,
 };

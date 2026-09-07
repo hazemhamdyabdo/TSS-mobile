@@ -438,10 +438,42 @@ export const arFeatures = {
       searchCompetitors: 'بحث في المنافسين',
       searchResults: 'بحث في نتائجي',
       youLabel: '{{name}} (انت)',
+      youSuffix: '(انت)',
       tabs: {
         info: 'معلومات عامة',
         participants: 'منافسيني',
         results: 'نتائجي',
+      },
+    },
+    matchDetails: {
+      title: 'تفاصيل المباراة',
+      notFound: 'المباراة غير موجودة',
+      weaponFoil: 'سلاح الشيش',
+      durationMinutes: '{{count}} دقيقة',
+      sections: {
+        details: 'تفاصيل المباراة',
+        periods: 'تفاصيل الجولات',
+        stats: 'احصائيات المباراة',
+      },
+      fields: {
+        weapon: 'نوع السلاح',
+        round: 'الدور',
+        duration: 'الوقت',
+      },
+      periods: {
+        name: 'الاسم',
+        round: 'الجولة {{number}}',
+        result: 'النتيجة',
+      },
+      status: {
+        ended: 'انتهت',
+      },
+      stats: {
+        touches: 'عدد اللمسات',
+        successRate: 'نسبة النجاح',
+        highestStreak: 'اعلى سلسلة نقاط',
+        successfulAttacks: 'الهجمات الناجحة',
+        failedAttacks: 'الهجمات الفاشلة',
       },
     },
     stats: {

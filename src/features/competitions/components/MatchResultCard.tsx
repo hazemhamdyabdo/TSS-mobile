@@ -1,74 +1,26 @@
 import { MaterialDesignIcons } from "@react-native-vector-icons/material-design-icons";
-import { Image } from "expo-image";
+import { useRouter, type Href } from "expo-router";
 import { useTranslation } from "react-i18next";
-import { Text, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
 
 import { useAuthState } from "@/features/auth/hooks/useAuthState";
 import { RTL_CONTAINER_STYLE, RTL_TEXT_STYLE } from "@/localization/direction";
 import { colors } from "@/theme/colors";
 import { cairo } from "@/theme/typography";
 
-import type { MatchResult, MatchSide, NationalityCode } from "../types";
+import type { MatchResult, MatchSide } from "../types";
+import { CornerFlag, ScoreBox } from "./matchResultShared";
 
-const saFlag = require("@/assets/images/ksa-rotate-flag.png");
-const qaFlag = require("@/assets/images/qatr-flag.png");
 const GUEST_SELF_NAME_KEY = "competitions.people.ahmedKhaldi";
-
-const FLAG_WIDTH = 41;
-const FLAG_HEIGHT = 65;
 
 type MatchResultCardProps = {
   result: MatchResult;
 };
 
-function flagFor(code: NationalityCode) {
-  switch (code) {
-    case "sa":
-      return saFlag;
-    case "qa":
-      return qaFlag;
-    default: {
-      const exhaustive: never = code;
-      throw new Error(`Unhandled nationality: ${exhaustive}`);
-    }
-  }
-}
-
-function CornerFlag({
-  nationality,
-  edge,
-}: {
-  nationality: NationalityCode;
-  edge: "left" | "right";
-}) {
-  const isLeft = edge === "left";
-  const designedForLeft = nationality === "qa";
-  const shouldFlip = designedForLeft !== isLeft;
-
-  return (
-    <Image
-      pointerEvents="none"
-      source={flagFor(nationality)}
-      contentFit="contain"
-      style={{
-        position: "absolute",
-        top: isLeft ? -7 : -4,
-        left: isLeft ? -13 : undefined,
-        right: isLeft ? undefined : -8,
-        width: FLAG_WIDTH,
-        height: FLAG_HEIGHT,
-        transform: shouldFlip ? [{ scaleX: -1 }] : undefined,
-      }}
-    />
-  );
-}
-
 function NameBlock({ side, isGuest }: { side: MatchSide; isGuest: boolean }) {
   const { t } = useTranslation();
-  const name =
-    isGuest && side.nameKey === GUEST_SELF_NAME_KEY
-      ? t("competitions.guest.youLabel", { name: t(side.nameKey) })
-      : t(side.nameKey);
+  const name = t(side.nameKey);
+  const showYou = isGuest && side.nameKey === GUEST_SELF_NAME_KEY;
 
   return (
     <View className="max-w-[110px] items-center gap-2">
@@ -78,6 +30,14 @@ function NameBlock({ side, isGuest }: { side: MatchSide; isGuest: boolean }) {
         style={{ fontFamily: cairo.medium, ...RTL_TEXT_STYLE }}
       >
         {name}
+        {showYou ? (
+          <Text
+            className="text-[10px] text-primary"
+            style={{ fontFamily: cairo.medium }}
+          >
+            {` ${t("competitions.guest.youSuffix")}`}
+          </Text>
+        ) : null}
       </Text>
       <Text
         className="text-xs text-slate-400"
@@ -90,32 +50,16 @@ function NameBlock({ side, isGuest }: { side: MatchSide; isGuest: boolean }) {
   );
 }
 
-function ScoreBox({ score, winner }: { score: number; winner: boolean }) {
-  return (
-    <View
-      className={`h-8 w-8 items-center justify-center rounded-md ${
-        winner ? "bg-primary/10" : "bg-slate-100"
-      }`}
-    >
-      <Text
-        className={`text-sm ${winner ? "text-primary" : "text-slate-500"}`}
-        style={{ fontFamily: cairo.medium }}
-      >
-        {score}
-      </Text>
-    </View>
-  );
-}
-
 export default function MatchResultCard({ result }: MatchResultCardProps) {
   const { t } = useTranslation();
+  const router = useRouter();
   const { session } = useAuthState();
   const isGuest = Boolean(session?.isGuest);
   const startWins = result.startSide.score > result.endSide.score;
   const endWins = result.endSide.score > result.startSide.score;
 
-  return (
-    <View className="overflow-hidden rounded-lg border border-slate-100 bg-white pb-2">
+  const content = (
+    <>
       <CornerFlag nationality={result.startSide.nationality} edge="right" />
       <CornerFlag nationality={result.endSide.nationality} edge="left" />
 
@@ -181,6 +125,24 @@ export default function MatchResultCard({ result }: MatchResultCardProps) {
           </Text>
         </View>
       </View>
-    </View>
+    </>
+  );
+
+  if (!isGuest) {
+    return (
+      <View className="overflow-hidden rounded-lg border border-slate-100 bg-white pb-2">
+        {content}
+      </View>
+    );
+  }
+
+  return (
+    <Pressable
+      accessibilityRole="button"
+      onPress={() => router.push(`/match/${result.id}` as Href)}
+      className="overflow-hidden rounded-lg border border-slate-100 bg-white pb-2"
+    >
+      {content}
+    </Pressable>
   );
 }

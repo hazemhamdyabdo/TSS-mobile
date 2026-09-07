@@ -7,6 +7,7 @@ export const colors = {
   secText: '#90a1b9',
   inputText: '#cad5e2',
   primary: '#018a43',
+  opponent: '#8d1b3d',
   cardBorder: '#e2e8f0',
   slate50: '#f8fafc',
   slate100: '#f1f5f9',

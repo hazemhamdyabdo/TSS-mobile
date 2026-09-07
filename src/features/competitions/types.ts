@@ -81,9 +81,36 @@ export type MatchResult = {
   timeKey: string;
 };
 
+export type MatchBoutStatus = 'ended';
+
+export type MatchStatId =
+  | 'touches'
+  | 'successRate'
+  | 'highestStreak'
+  | 'successfulAttacks'
+  | 'failedAttacks';
+
+export type MatchStat = {
+  id: MatchStatId;
+  labelKey: string;
+  startValue: number;
+  endValue: number;
+};
+
+export type MatchDetails = {
+  matchId: string;
+  weaponKey: string;
+  durationMinutes: number;
+  boutStatus: MatchBoutStatus;
+  startPeriods: number[];
+  endPeriods: number[];
+  stats: MatchStat[];
+};
+
 export type CompetitionsState = {
   items: Competition[];
   participants: Participant[];
   results: MatchResult[];
+  matchDetails: MatchDetails[];
   monthlyParticipantCount: number;
 };
