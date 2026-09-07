@@ -15,6 +15,7 @@ export const enFeatures = {
     viewAll: 'View all',
     role: {
       federationOfficial: 'Federation official',
+      player: 'Player',
     },
     banner: {
       category: 'Championships',
@@ -47,6 +48,28 @@ export const enFeatures = {
       addCoach: 'Add coach',
       addReferee: 'Add referee',
       addCompetition: 'Add competition',
+    },
+    guest: {
+      userName: 'Ahmed',
+      welcome: 'Hello {{name}}',
+      quickActions: {
+        title: 'Quick access',
+        myCompetitions: 'My competitions',
+        rankings: 'Ranking',
+        penalties: 'Penalties',
+        profile: 'My profile',
+      },
+      upcoming: {
+        title: 'My upcoming competitions',
+      },
+      ranking: {
+        title: 'Ranking',
+        points: '{{count}} points',
+        youName: 'Ahmed Al-Ghamdi',
+        youLabel: '{{name}} (You)',
+        leaderName: 'Abdullah Faisal',
+        runnerName: 'Mohammed Rashed',
+      },
     },
     recentTasks: {
       title: 'Recent tasks',
@@ -103,6 +126,7 @@ export const enFeatures = {
     verify: 'Verify',
     noAccount: "Don't have an account?",
     contactFederation: 'Contact the federation',
+    enterAsGuest: 'Enter as guest',
     contactTitle: 'Contact the federation',
     contactSubtitle: 'Contact us if you want to join the federation',
     subjectLabel: 'Subject',
@@ -703,6 +727,14 @@ export const enFeatures = {
         settings: {
           title: 'Settings',
           subtitle: 'View your personal settings and other options',
+        },
+        policies: {
+          title: 'Federation policies',
+          subtitle: 'View policies to learn more about the federation',
+        },
+        contact: {
+          title: 'Contact us',
+          subtitle: 'Get in touch with us to resolve any issues',
         },
       },
     },

@@ -15,6 +15,7 @@ export const arFeatures = {
     viewAll: 'عرض الكل',
     role: {
       federationOfficial: 'مسؤول الاتحاد',
+      player: 'لاعب',
     },
     banner: {
       category: 'البطولات',
@@ -47,6 +48,28 @@ export const arFeatures = {
       addCoach: 'اضافة مدرب',
       addReferee: 'اضافة حكم',
       addCompetition: 'اضافة مسابقة',
+    },
+    guest: {
+      userName: 'احمد',
+      welcome: 'مرحبا {{name}}',
+      quickActions: {
+        title: 'الوصول السريع',
+        myCompetitions: 'مسابقاتي',
+        rankings: 'التصنيف',
+        penalties: 'العقوبات',
+        profile: 'ملفي الشخصي',
+      },
+      upcoming: {
+        title: 'مسابقاتي القادمة',
+      },
+      ranking: {
+        title: 'التصنيف',
+        points: '{{count}} نقطة',
+        youName: 'احمد الخامدي',
+        youLabel: '{{name}} (انت)',
+        leaderName: 'عبدالله فيصل',
+        runnerName: 'محمد راشد',
+      },
     },
     recentTasks: {
       title: 'المهام الاخيرة',
@@ -103,6 +126,7 @@ export const arFeatures = {
     verify: 'تحقق',
     noAccount: 'ليس لديك حساب؟',
     contactFederation: 'تواصل مع الاتحاد',
+    enterAsGuest: 'الدخول كزائر',
     contactTitle: 'تواصل مع الاتحاد',
     contactSubtitle: 'تواصل معنا ان كنت تريد الانضمام الى الاتحاد',
     subjectLabel: 'الموضوع',
@@ -703,6 +727,14 @@ export const arFeatures = {
         settings: {
           title: 'الاعدادات',
           subtitle: 'يمكنك رؤية اعداداتك الشخصية و بعض الاعدادات الاخرى',
+        },
+        policies: {
+          title: 'سياسات الاتحاد',
+          subtitle: 'قم برؤية السياسات لمعرفة المزيد عن الاتحاد',
+        },
+        contact: {
+          title: 'تواصل معنا',
+          subtitle: 'قم بالتواصل معنا لحل جميع مشاكلك',
         },
       },
     },

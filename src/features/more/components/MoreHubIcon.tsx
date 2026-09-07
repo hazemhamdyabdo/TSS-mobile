@@ -2,6 +2,8 @@ import { SvgXml } from 'react-native-svg';
 
 import {
   CLUBS_ICON_XML,
+  CONTACT_ICON_XML,
+  POLICIES_ICON_XML,
   PUNISHMENTS_ICON_XML,
   RANKINGS_ICON_XML,
   RESULTS_ICON_XML,
@@ -28,6 +30,10 @@ export default function MoreHubIcon({ actionId }: MoreHubIconProps) {
       return <SvgXml xml={TRANSFERS_ICON_XML} width={20} height={20} />;
     case 'settings':
       return <SvgXml xml={SETTINGS_ICON_XML} width={20} height={20} />;
+    case 'policies':
+      return <SvgXml xml={POLICIES_ICON_XML} width={24} height={24} />;
+    case 'contact':
+      return <SvgXml xml={CONTACT_ICON_XML} width={20} height={20} />;
     default: {
       const exhaustive: never = actionId;
       throw new Error(`Unhandled more hub action: ${exhaustive}`);

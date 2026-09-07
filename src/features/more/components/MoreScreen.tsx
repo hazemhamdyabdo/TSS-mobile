@@ -4,16 +4,23 @@ import { useTranslation } from "react-i18next";
 import { Pressable, ScrollView, Text, View } from "react-native";
 
 import ScreenSafeAreaView from "@/components/ScreenSafeAreaView";
+import { useAuthState } from "@/features/auth/hooks/useAuthState";
 import CreateScreenHeader from "@/features/create/components/CreateScreenHeader";
 import { RTL_CONTAINER_STYLE, RTL_TEXT_STYLE } from "@/localization/direction";
 import { cairo } from "@/theme/typography";
 
-import { MORE_HUB_ACTIONS } from "../constants/actions";
+import {
+  GUEST_MORE_HUB_ACTIONS,
+  MORE_HUB_ACTIONS,
+} from "../constants/actions";
 import MoreHubIcon from "./MoreHubIcon";
 
 export default function MoreScreen() {
   const { t } = useTranslation();
   const router = useRouter();
+  const { session } = useAuthState();
+  const isGuest = Boolean(session?.isGuest);
+  const actions = isGuest ? GUEST_MORE_HUB_ACTIONS : MORE_HUB_ACTIONS;
 
   return (
     <ScreenSafeAreaView
@@ -31,7 +38,7 @@ export default function MoreScreen() {
         contentContainerClassName="gap-2 px-5 pb-8 pt-4"
         showsVerticalScrollIndicator={false}
       >
-        {MORE_HUB_ACTIONS.map((action) => (
+        {actions.map((action) => (
           <Pressable
             key={action.id}
             accessibilityRole="button"

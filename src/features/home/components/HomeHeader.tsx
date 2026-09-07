@@ -14,6 +14,7 @@ type HomeHeaderProps = {
   avatarUri?: string;
   notificationCount: number;
   onNotificationsPress: () => void;
+  welcomeKey?: string;
 };
 
 export default function HomeHeader({
@@ -22,6 +23,7 @@ export default function HomeHeader({
   avatarUri,
   notificationCount,
   onNotificationsPress,
+  welcomeKey = 'home.welcome',
 }: HomeHeaderProps) {
   const { t } = useTranslation();
   const avatarSource = avatarUri ? { uri: avatarUri } : avatarImage;
@@ -64,7 +66,7 @@ export default function HomeHeader({
         <View className="items-start gap-2">
           <View className="flex-row items-center gap-1">
             <Text className="text-base text-label" style={{ fontFamily: cairo.regular }}>
-              {t('home.welcome', { name })}
+              {t(welcomeKey, { name })}
             </Text>
             <Text className="text-base">👋</Text>
           </View>

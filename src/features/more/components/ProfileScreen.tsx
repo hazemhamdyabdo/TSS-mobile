@@ -21,6 +21,7 @@ import FormField from "@/components/form/FormField";
 import ScreenSafeAreaView from "@/components/ScreenSafeAreaView";
 import PrimaryButton from "@/components/ui/PrimaryButton";
 import PhoneNumberField from "@/features/auth/components/PhoneNumberField";
+import { useAuthState } from "@/features/auth/hooks/useAuthState";
 import CreateScreenHeader from "@/features/create/components/CreateScreenHeader";
 import { RTL_CONTAINER_STYLE, RTL_TEXT_STYLE } from "@/localization/direction";
 import { colors } from "@/theme/colors";
@@ -28,6 +29,7 @@ import { cairo } from "@/theme/typography";
 
 import { getMockErrorMessage } from "@/utils/formErrors";
 import { updateProfile } from "../api";
+import { DUMMY_GUEST_PROFILE } from "../constants/dummy";
 import { useMoreState } from "../hooks/useMoreState";
 import {
   createProfileSchema,
@@ -41,7 +43,9 @@ const defaultAvatar = require("@/assets/images/home/avatar.png");
 export default function ProfileScreen() {
   const { t } = useTranslation();
   const router = useRouter();
-  const { profile } = useMoreState();
+  const { session } = useAuthState();
+  const { profile: storeProfile } = useMoreState();
+  const profile = session?.isGuest ? DUMMY_GUEST_PROFILE : storeProfile;
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [avatarUri, setAvatarUri] = useState(profile.avatarUri);
   const schema = useMemo(() => createProfileSchema(t), [t]);

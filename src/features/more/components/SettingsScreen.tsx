@@ -5,12 +5,14 @@ import { Alert, ScrollView, Text, View } from "react-native";
 
 import ScreenSafeAreaView from "@/components/ScreenSafeAreaView";
 import { signOut } from "@/features/auth/api";
+import { useAuthState } from "@/features/auth/hooks/useAuthState";
 import CreateScreenHeader from "@/features/create/components/CreateScreenHeader";
 import { RTL_CONTAINER_STYLE, RTL_TEXT_STYLE } from "@/localization/direction";
 import { cairo } from "@/theme/typography";
 
 import { setDarkMode } from "../api";
 import { APP_COPYRIGHT_YEAR, APP_VERSION_LABEL } from "../constants/app";
+import { DUMMY_GUEST_PROFILE } from "../constants/dummy";
 import { useMoreState } from "../hooks/useMoreState";
 import SettingsProfileCard from "./SettingsProfileCard";
 import SettingsRow from "./SettingsRow";
@@ -18,7 +20,9 @@ import SettingsRow from "./SettingsRow";
 export default function SettingsScreen() {
   const { t } = useTranslation();
   const router = useRouter();
-  const { profile, darkMode } = useMoreState();
+  const { session } = useAuthState();
+  const { profile: storeProfile, darkMode } = useMoreState();
+  const profile = session?.isGuest ? DUMMY_GUEST_PROFILE : storeProfile;
 
   const handleLogout = () => {
     Alert.alert(t("more.settings.logout"), t("more.settings.logoutConfirm"), [

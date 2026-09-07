@@ -12,7 +12,7 @@ import PrimaryButton from "@/components/ui/PrimaryButton";
 
 import { getMockErrorMessage } from "@/utils/formErrors";
 
-import { requestOtp } from "../api";
+import { requestOtp, signInAsGuest } from "../api";
 import { MOCK_QA_PHONE } from "../constants/dummy";
 import {
   createLoginSchema,
@@ -25,12 +25,18 @@ import PhoneNumberField from "./PhoneNumberField";
 type LoginFormProps = {
   onOtpRequested?: (phone: string) => void;
   onContactPress?: () => void;
+  onGuestPress?: () => void;
 };
 
-export default function LoginForm({ onOtpRequested, onContactPress }: LoginFormProps) {
+export default function LoginForm({
+  onOtpRequested,
+  onContactPress,
+  onGuestPress,
+}: LoginFormProps) {
   const { t } = useTranslation();
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isGuestSubmitting, setIsGuestSubmitting] = useState(false);
   const schema = useMemo(() => createLoginSchema(t), [t]);
 
   const {
@@ -64,9 +70,23 @@ export default function LoginForm({ onOtpRequested, onContactPress }: LoginFormP
     }
   };
 
+  const handleGuestPress = async () => {
+    setIsGuestSubmitting(true);
+    try {
+      await signInAsGuest();
+      if (onGuestPress) {
+        onGuestPress();
+      } else {
+        router.replace("/(tabs)");
+      }
+    } finally {
+      setIsGuestSubmitting(false);
+    }
+  };
+
   return (
-    <View className="w-full gap-8">
-      <View className="w-full gap-8">
+    <View className="w-full gap-8 ">
+      <View className="w-full gap-8 px-5">
         <View className="w-full items-start gap-1.5">
           <FormLabel>{t("auth.phoneLabel")}</FormLabel>
           <Controller
@@ -90,15 +110,26 @@ export default function LoginForm({ onOtpRequested, onContactPress }: LoginFormP
           title={t("auth.verify")}
           onPress={handleSubmit(onSubmit)}
           loading={isSubmitting}
+          disabled={isGuestSubmitting}
         />
       </View>
 
-      <View className="w-full gap-8">
+      <View className="w-full gap-8 px-5">
         <AuthDivider label={t("auth.noAccount")} />
-        <OutlineButton
-          title={t("auth.contactFederation")}
-          onPress={onContactPress ?? (() => router.push("/(auth)/contact"))}
-        />
+        <View className="w-full gap-3">
+          <OutlineButton
+            title={t("auth.contactFederation")}
+            onPress={onContactPress ?? (() => router.push("/(auth)/contact"))}
+            disabled={isGuestSubmitting || isSubmitting}
+          />
+          <OutlineButton
+            title={t("auth.enterAsGuest")}
+            variant="muted"
+            onPress={handleGuestPress}
+            loading={isGuestSubmitting}
+            disabled={isSubmitting}
+          />
+        </View>
       </View>
     </View>
   );

@@ -39,6 +39,20 @@ export async function verifyOtp(phone: string, otp: string) {
   return session;
 }
 
+export async function signInAsGuest() {
+  await mockDelay();
+
+  const session = {
+    phone: 'guest',
+    token: createMockId('guest-token'),
+    isGuest: true,
+  };
+
+  setAuthSessionInState(session);
+  await persistSession(session);
+  return session;
+}
+
 export async function submitContactMessage(input: Omit<ContactMessage, 'id'>) {
   await mockDelay();
   return {

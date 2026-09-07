@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { View } from 'react-native';
+import { ScrollView } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 type AuthSheetProps = {
@@ -11,10 +11,16 @@ export default function AuthSheet({ children, className = '' }: AuthSheetProps) 
   const insets = useSafeAreaInsets();
 
   return (
-    <View
-      className={`mt-auto w-full rounded-t-[32px] bg-background px-5 pt-4 ${className}`}
-      style={{ paddingBottom: Math.max(insets.bottom, 24) }}>
+    <ScrollView
+      className={`mt-auto w-full rounded-t-[32px] bg-background ${className}`}
+      style={{ maxHeight: '92%' }}
+      contentContainerClassName="px-5 pt-4"
+      contentContainerStyle={{ paddingBottom: Math.max(insets.bottom, 24) }}
+      keyboardShouldPersistTaps="handled"
+      keyboardDismissMode="interactive"
+      bounces={false}
+      showsVerticalScrollIndicator={false}>
       {children}
-    </View>
+    </ScrollView>
   );
 }

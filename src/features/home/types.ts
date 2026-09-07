@@ -4,11 +4,17 @@ export type TaskType = 'transfer' | 'competition' | 'coach' | 'referee';
 
 export type QuickActionId = 'addPlayer' | 'addCoach' | 'addReferee' | 'addCompetition';
 
+export type GuestQuickActionId =
+  | 'myCompetitions'
+  | 'rankings'
+  | 'penalties'
+  | 'profile';
+
 export type RelativeTimeUnit = 'minutes' | 'hours';
 
 export type HomeProfile = {
-  nameKey: 'home.userName';
-  roleKey: 'home.role.federationOfficial';
+  nameKey: 'home.userName' | 'home.guest.userName';
+  roleKey: 'home.role.federationOfficial' | 'home.role.player';
   notificationCount: number;
 };
 
@@ -27,6 +33,11 @@ export type QuickAction = {
   labelKey: string;
 };
 
+export type GuestQuickAction = {
+  id: GuestQuickActionId;
+  labelKey: string;
+};
+
 export type RecentTask = {
   id: string;
   type: TaskType;
@@ -37,9 +48,42 @@ export type RecentTask = {
   relativeTimeCount: number;
 };
 
+export type UpcomingCompetition = {
+  id: string;
+  titleKey: string;
+  eventTypeKey: string;
+  locationKey: string;
+  dateKey: string;
+  timeKey: string;
+};
+
+export type HomeRankingEntry = {
+  id: string;
+  rank: number;
+  nameKey: string;
+  points: number;
+  isCurrentUser?: boolean;
+};
+
+export type HomeRankingsPreview = {
+  currentUser: HomeRankingEntry;
+  leaders: HomeRankingEntry[];
+};
+
+export type GuestLeaderboard = {
+  podium: [HomeRankingEntry, HomeRankingEntry, HomeRankingEntry];
+  currentUser: HomeRankingEntry;
+  list: HomeRankingEntry[];
+};
+
 export type HomeDashboard = {
   profile: HomeProfile;
   banners: ChampionshipBanner[];
   quickActions: QuickAction[];
   tasks: RecentTask[];
+  guestProfile: HomeProfile;
+  guestQuickActions: GuestQuickAction[];
+  upcomingCompetitions: UpcomingCompetition[];
+  rankingsPreview: HomeRankingsPreview;
+  leaderboard: GuestLeaderboard;
 };

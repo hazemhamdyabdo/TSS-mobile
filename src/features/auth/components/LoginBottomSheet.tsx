@@ -1,7 +1,7 @@
 import {
   BottomSheetBackdrop,
   BottomSheetModal,
-  BottomSheetView,
+  BottomSheetScrollView,
   type BottomSheetBackdropProps,
 } from '@gorhom/bottom-sheet';
 import { useRouter, type Href } from 'expo-router';
@@ -18,9 +18,14 @@ export type LoginBottomSheetRef = {
   close: () => void;
 };
 
+type PendingNavigation = {
+  href: Href;
+  replace?: boolean;
+};
+
 const LoginBottomSheet = forwardRef<LoginBottomSheetRef>(function LoginBottomSheet(_, ref) {
   const bottomSheetRef = useRef<BottomSheetModal>(null);
-  const pendingRouteRef = useRef<Href | null>(null);
+  const pendingRouteRef = useRef<PendingNavigation | null>(null);
   const insets = useSafeAreaInsets();
   const router = useRouter();
 
@@ -41,8 +46,8 @@ const LoginBottomSheet = forwardRef<LoginBottomSheetRef>(function LoginBottomShe
     [],
   );
 
-  const navigateAfterDismiss = useCallback((href: Href) => {
-    pendingRouteRef.current = href;
+  const navigateAfterDismiss = useCallback((href: Href, options?: { replace?: boolean }) => {
+    pendingRouteRef.current = { href, replace: options?.replace };
     bottomSheetRef.current?.dismiss();
   }, []);
 
@@ -50,9 +55,16 @@ const LoginBottomSheet = forwardRef<LoginBottomSheetRef>(function LoginBottomShe
     const pendingRoute = pendingRouteRef.current;
     pendingRouteRef.current = null;
 
-    if (pendingRoute) {
-      router.push(pendingRoute);
+    if (!pendingRoute) {
+      return;
     }
+
+    if (pendingRoute.replace) {
+      router.replace(pendingRoute.href);
+      return;
+    }
+
+    router.push(pendingRoute.href);
   }, [router]);
 
   return (
@@ -67,9 +79,12 @@ const LoginBottomSheet = forwardRef<LoginBottomSheetRef>(function LoginBottomShe
       onDismiss={handleDismiss}
       backgroundStyle={{ backgroundColor: colors.background, borderRadius: 32 }}
       handleIndicatorStyle={{ backgroundColor: colors.slate300 }}>
-      <BottomSheetView
-        className="w-full px-5 pt-1"
-        style={{ paddingBottom: Math.max(insets.bottom, 24) }}>
+      <BottomSheetScrollView
+        className="w-full"
+        contentContainerClassName="px-5 pt-1"
+        contentContainerStyle={{ paddingBottom: Math.max(insets.bottom, 24) }}
+        keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}>
         <LoginContent
           onOtpRequested={(phone) =>
             navigateAfterDismiss(
@@ -77,8 +92,9 @@ const LoginBottomSheet = forwardRef<LoginBottomSheetRef>(function LoginBottomShe
             )
           }
           onContactPress={() => navigateAfterDismiss('/(auth)/contact')}
+          onGuestPress={() => navigateAfterDismiss('/(tabs)', { replace: true })}
         />
-      </BottomSheetView>
+      </BottomSheetScrollView>
     </BottomSheetModal>
   );
 });

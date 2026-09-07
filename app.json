@@ -20,9 +20,11 @@
       }
     },
     "android": {
+      "softwareKeyboardLayoutMode": "resize",
       "adaptiveIcon": {
-        "backgroundColor": "#018A43",
-        "foregroundImage": "./assets/images/fencing-logo.png"
+        "backgroundColor": "#FFFFFF",
+        "foregroundImage": "./assets/images/fencing-logo.png",
+        "monochromeImage": "./assets/images/fencing-logo.png"
       },
       "package": "sa.fencing.app",
       "predictiveBackGestureEnabled": false

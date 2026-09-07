@@ -1,6 +1,7 @@
 export type AuthSession = {
   phone: string;
   token: string;
+  isGuest?: boolean;
 };
 
 export type ContactMessage = {

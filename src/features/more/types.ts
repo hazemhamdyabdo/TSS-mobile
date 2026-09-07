@@ -4,7 +4,9 @@ export type MoreHubId =
   | 'results'
   | 'punishments'
   | 'transfers'
-  | 'settings';
+  | 'settings'
+  | 'policies'
+  | 'contact';
 
 export type MoreHubHref =
   | '/clubs'
@@ -12,7 +14,9 @@ export type MoreHubHref =
   | '/results'
   | '/punishments'
   | '/transfers'
-  | '/settings';
+  | '/settings'
+  | '/privacy'
+  | '/help';
 
 export type MoreHubAction = {
   id: MoreHubId;
@@ -34,7 +38,7 @@ export type UserProfile = {
   name: string;
   email: string;
   phone: string;
-  roleKey: 'home.role.federationOfficial';
+  roleKey: 'home.role.federationOfficial' | 'home.role.player';
   avatarUri?: string;
 };
 

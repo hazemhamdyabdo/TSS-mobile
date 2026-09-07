@@ -21,7 +21,7 @@ export default function AuthHeroBackground({
       />
       <View className="absolute inset-0 bg-black/25" />
       <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : undefined}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
         className="flex-1"
       >
         {children}
