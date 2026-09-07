@@ -96,7 +96,7 @@ export default function OtpForm({ phone }: OtpFormProps) {
   };
 
   return (
-    <View className="w-full gap-8">
+    <View className="w-full gap-5">
       <View className="w-full items-start gap-6">
         <Pressable onPress={() => inputRef.current?.focus()} className="w-full">
           <Controller
@@ -132,7 +132,7 @@ export default function OtpForm({ phone }: OtpFormProps) {
                     return (
                       <View
                         key={index}
-                        className={`size-16 items-center justify-center rounded-[10px] border bg-white ${borderClass}`}>
+                        className={`size-[60px] items-center justify-center rounded-[10px] border bg-white ${borderClass}`}>
                         <Text
                           className="text-xl text-sec-text"
                           style={{ fontFamily: cairo.regular, writingDirection: 'ltr' }}>
@@ -173,7 +173,7 @@ export default function OtpForm({ phone }: OtpFormProps) {
         loading={isSubmitting}
       />
 
-      <View className="w-full gap-8">
+      <View className="w-full gap-6">
         <AuthDivider label={t('auth.noAccount')} />
         <OutlineButton
           title={t('auth.contactFederation')}

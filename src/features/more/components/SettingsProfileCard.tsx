@@ -2,6 +2,8 @@ import { Image } from "expo-image";
 import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
 
+import { useAuthState } from "@/features/auth/hooks/useAuthState";
+import { rankPlayerImageFor } from "@/features/home/constants/rankPlayerAvatars";
 import { RTL_CONTAINER_STYLE, RTL_TEXT_STYLE } from "@/localization/direction";
 import { cairo } from "@/theme/typography";
 
@@ -18,9 +20,13 @@ export default function SettingsProfileCard({
   profile,
 }: SettingsProfileCardProps) {
   const { t } = useTranslation();
+  const { session } = useAuthState();
+  const isGuest = Boolean(session?.isGuest);
   const avatarSource = profile.avatarUri
     ? { uri: profile.avatarUri }
-    : defaultAvatar;
+    : isGuest
+      ? rankPlayerImageFor(profile.email || profile.name)
+      : defaultAvatar;
 
   return (
     <View className="mt-6 w-full">
