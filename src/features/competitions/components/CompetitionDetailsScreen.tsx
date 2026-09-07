@@ -5,11 +5,12 @@ import { useTranslation } from "react-i18next";
 import { Alert, Pressable, ScrollView, Text, View } from "react-native";
 
 import ScreenSafeAreaView from "@/components/ScreenSafeAreaView";
+import { useAuthState } from "@/features/auth/hooks/useAuthState";
 import CreateBackButton from "@/features/create/components/CreateBackButton";
-import { getMockErrorMessage } from "@/utils/formErrors";
 import { RTL_CONTAINER_STYLE, RTL_TEXT_STYLE } from "@/localization/direction";
 import { colors } from "@/theme/colors";
 import { cairo } from "@/theme/typography";
+import { getMockErrorMessage } from "@/utils/formErrors";
 
 import { StatusBar } from "expo-status-bar";
 import { deleteCompetition } from "../api";
@@ -27,6 +28,8 @@ import CompetitionSegmentedTabs from "./CompetitionSegmentedTabs";
 export default function CompetitionDetailsScreen() {
   const { t } = useTranslation();
   const router = useRouter();
+  const { session } = useAuthState();
+  const isGuest = Boolean(session?.isGuest);
   const rawId = useLocalSearchParams<{ id: string | string[] }>().id;
   const id = Array.isArray(rawId) ? rawId[0] : rawId;
   const state = useCompetitionsState();
@@ -84,9 +87,27 @@ export default function CompetitionDetailsScreen() {
       case "info":
         return <CompetitionInfoTab competition={competition} />;
       case "participants":
-        return <CompetitionParticipantsTab participants={participants} />;
+        return (
+          <CompetitionParticipantsTab
+            participants={participants}
+            searchPlaceholderKey={
+              isGuest
+                ? "competitions.guest.searchCompetitors"
+                : "competitions.searchParticipants"
+            }
+          />
+        );
       case "results":
-        return <CompetitionResultsTab results={results} />;
+        return (
+          <CompetitionResultsTab
+            results={results}
+            searchPlaceholderKey={
+              isGuest
+                ? "competitions.guest.searchResults"
+                : "competitions.searchResults"
+            }
+          />
+        );
       default: {
         const exhaustive: never = tab;
         throw new Error(`Unhandled competition tab: ${exhaustive}`);
@@ -117,18 +138,20 @@ export default function CompetitionDetailsScreen() {
             {t("competitions.detailsTitle")}
           </Text>
         </View>
-        <Pressable
-          accessibilityRole="button"
-          accessibilityLabel={t("competitions.actions.more")}
-          onPress={() => optionsRef.current?.open()}
-          className="size-8 items-center justify-center"
-        >
-          <MaterialDesignIcons
-            name="dots-vertical"
-            size={24}
-            color={colors.accent}
-          />
-        </Pressable>
+        {isGuest ? null : (
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel={t("competitions.actions.more")}
+            onPress={() => optionsRef.current?.open()}
+            className="size-8 items-center justify-center"
+          >
+            <MaterialDesignIcons
+              name="dots-vertical"
+              size={24}
+              color={colors.accent}
+            />
+          </Pressable>
+        )}
       </View>
 
       {competition ? (
@@ -139,7 +162,11 @@ export default function CompetitionDetailsScreen() {
           showsVerticalScrollIndicator={false}
         >
           <CompetitionHero competition={competition} />
-          <CompetitionSegmentedTabs value={tab} onChange={setTab} />
+          <CompetitionSegmentedTabs
+            value={tab}
+            onChange={setTab}
+            guest={isGuest}
+          />
           {renderTab()}
         </ScrollView>
       ) : (
@@ -153,15 +180,15 @@ export default function CompetitionDetailsScreen() {
         </View>
       )}
 
-      <CompetitionOptionsBottomSheet
-        ref={optionsRef}
-        onEdit={() =>
-          router.push(
-            `/add-competition?id=${competition?.id ?? ""}` as Href,
-          )
-        }
-        onDelete={handleDelete}
-      />
+      {isGuest ? null : (
+        <CompetitionOptionsBottomSheet
+          ref={optionsRef}
+          onEdit={() =>
+            router.push(`/add-competition?id=${competition?.id ?? ""}` as Href)
+          }
+          onDelete={handleDelete}
+        />
+      )}
     </ScreenSafeAreaView>
   );
 }

@@ -5,6 +5,8 @@ export const arFeatures = {
     members: 'الاعضاء',
     more: 'المزيد',
     add: 'اضافة',
+    rankings: 'التصنيف',
+    penalties: 'عقوباتي',
   },
   home: {
     logoLabel: 'الاتحاد السعودي للمبارزة',
@@ -429,6 +431,19 @@ export const arFeatures = {
     notFound: 'المسابقة غير موجودة',
     nationalTeam: 'المنتخب الوطني',
     playerCount: '{{count}} لاعب',
+    guest: {
+      title: 'مسابقاتي',
+      search: 'بحث في مسابقاتي',
+      latest: 'احدث مسابقاتي',
+      searchCompetitors: 'بحث في المنافسين',
+      searchResults: 'بحث في نتائجي',
+      youLabel: '{{name}} (انت)',
+      tabs: {
+        info: 'معلومات عامة',
+        participants: 'منافسيني',
+        results: 'نتائجي',
+      },
+    },
     stats: {
       ongoing: 'المسابقات الجارية',
       monthlyParticipants: 'المشاركين هذا الشهر',

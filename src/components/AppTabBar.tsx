@@ -1,11 +1,19 @@
+import { MaterialDesignIcons } from "@react-native-vector-icons/material-design-icons";
 import { Image } from "expo-image";
-import { useRouter } from "expo-router";
+import { usePathname, useRouter } from "expo-router";
 import type { BottomTabBarProps } from "expo-router/js-tabs";
+import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { Pressable, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { SvgXml } from "react-native-svg";
 
 import TabIcon, { type TabName } from "@/components/TabIcon";
+import { useAuthState } from "@/features/auth/hooks/useAuthState";
+import {
+  GUEST_PENALTIES_ICON_XML,
+  GUEST_RANKINGS_ICON_XML,
+} from "@/features/home/constants/guestIcons";
 import { colors } from "@/theme/colors";
 import { cairo } from "@/theme/typography";
 
@@ -21,13 +29,13 @@ function isTabName(name: string): name is TabName {
 }
 
 type TabItemProps = {
-  name: TabName;
   label: string;
   focused: boolean;
   onPress: () => void;
+  children: ReactNode;
 };
 
-function TabItem({ name, label, focused, onPress }: TabItemProps) {
+function TabItem({ label, focused, onPress, children }: TabItemProps) {
   const color = focused ? colors.primary : colors.slate400;
 
   return (
@@ -35,12 +43,12 @@ function TabItem({ name, label, focused, onPress }: TabItemProps) {
       accessibilityRole="button"
       accessibilityState={{ selected: focused }}
       onPress={onPress}
-      className="h-full  items-center justify-center gap-1"
+      className="h-full items-center justify-center gap-1"
     >
       {focused ? (
         <View className="absolute top-0 h-1 w-9 rounded-b-sm bg-tab-indicator" />
       ) : null}
-      <TabIcon name={name} color={color} />
+      {children}
       <Text
         className="text-[12px]"
         ellipsizeMode="tail"
@@ -53,10 +61,40 @@ function TabItem({ name, label, focused, onPress }: TabItemProps) {
   );
 }
 
+type GuestSideItemProps = {
+  label: string;
+  focused: boolean;
+  onPress: () => void;
+  iconXml: string;
+  size?: number;
+};
+
+function GuestSideItem({
+  label,
+  focused,
+  onPress,
+  iconXml,
+  size = 24,
+}: GuestSideItemProps) {
+  const color = focused ? colors.primary : colors.slate400;
+  const xml = iconXml
+    .replaceAll("#018A43", color)
+    .replaceAll('stroke="#018A43"', `stroke="${color}"`);
+
+  return (
+    <TabItem label={label} focused={focused} onPress={onPress}>
+      <SvgXml xml={xml} width={size} height={size} />
+    </TabItem>
+  );
+}
+
 export default function AppTabBar({ state, navigation }: BottomTabBarProps) {
   const { t } = useTranslation();
   const router = useRouter();
+  const pathname = usePathname();
   const insets = useSafeAreaInsets();
+  const { session } = useAuthState();
+  const isGuest = Boolean(session?.isGuest);
   const focusedName = state.routes[state.index]?.name;
   const focusedTab = isTabName(focusedName ?? "") ? focusedName : null;
 
@@ -84,6 +122,106 @@ export default function AppTabBar({ state, navigation }: BottomTabBarProps) {
     }
   }
 
+  if (isGuest) {
+    const rankingsFocused = pathname.startsWith("/rankings");
+    const punishmentsFocused = pathname.startsWith("/punishments");
+    const competitionsFocused = focusedTab === "competitions";
+
+    return (
+      <View
+        className="overflow-visible bg-white"
+        style={{ paddingBottom: Math.max(insets.bottom, 8) }}
+      >
+        <View className="h-[70px] flex-row items-center px-5">
+          <View className="h-full flex-1 flex-row items-center justify-evenly">
+            <TabItem
+              label={labels.index}
+              focused={focusedTab === "index"}
+              onPress={() => navigateTo("index")}
+            >
+              <TabIcon
+                name="index"
+                color={
+                  focusedTab === "index" ? colors.primary : colors.slate400
+                }
+              />
+            </TabItem>
+            <GuestSideItem
+              label={t("tabs.rankings")}
+              focused={rankingsFocused}
+              onPress={() => router.push("/rankings")}
+              iconXml={GUEST_RANKINGS_ICON_XML}
+            />
+          </View>
+
+          <View className="w-[72px]" />
+
+          <View className="h-full flex-1 flex-row items-center justify-evenly">
+            <GuestSideItem
+              label={t("tabs.penalties")}
+              focused={punishmentsFocused}
+              onPress={() => router.push("/punishments")}
+              iconXml={GUEST_PENALTIES_ICON_XML}
+              size={22}
+            />
+            <TabItem
+              label={labels.more}
+              focused={focusedTab === "more"}
+              onPress={() => navigateTo("more")}
+            >
+              <TabIcon
+                name="more"
+                color={focusedTab === "more" ? colors.primary : colors.slate400}
+              />
+            </TabItem>
+          </View>
+        </View>
+
+        <View
+          pointerEvents="box-none"
+          className="absolute left-0 right-0 items-center"
+          style={{ top: -22 }}
+        >
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel={labels.competitions}
+            accessibilityState={{ selected: competitionsFocused }}
+            onPress={() => navigateTo("competitions")}
+            className="items-center gap-1"
+          >
+            <View
+              className="size-[60px] items-center justify-center rounded-full bg-primary/20"
+              style={{
+                shadowColor: "#000",
+                shadowOffset: { width: 0, height: 1 },
+                shadowOpacity: 0.15,
+                shadowRadius: 4,
+                elevation: 3,
+              }}
+            >
+              <View className="size-[45px] items-center justify-center rounded-full bg-primary">
+                <MaterialDesignIcons
+                  name="fencing"
+                  size={24}
+                  color={colors.pending}
+                />
+              </View>
+            </View>
+            <Text
+              className="text-[12px]"
+              style={{
+                fontFamily: cairo.regular,
+                color: competitionsFocused ? colors.primary : colors.slate400,
+              }}
+            >
+              {labels.competitions}
+            </Text>
+          </Pressable>
+        </View>
+      </View>
+    );
+  }
+
   return (
     <View
       className="overflow-visible bg-white"
@@ -92,34 +230,54 @@ export default function AppTabBar({ state, navigation }: BottomTabBarProps) {
       <View className="h-[70px] flex-row items-center px-5">
         <View className="h-full flex-1 flex-row items-center justify-evenly">
           <TabItem
-            name="index"
             label={labels.index}
             focused={focusedTab === "index"}
             onPress={() => navigateTo("index")}
-          />
+          >
+            <TabIcon
+              name="index"
+              color={focusedTab === "index" ? colors.primary : colors.slate400}
+            />
+          </TabItem>
           <TabItem
-            name="competitions"
             label={labels.competitions}
             focused={focusedTab === "competitions"}
             onPress={() => navigateTo("competitions")}
-          />
+          >
+            <TabIcon
+              name="competitions"
+              color={
+                focusedTab === "competitions" ? colors.primary : colors.slate400
+              }
+            />
+          </TabItem>
         </View>
 
         <View className="w-[72px]" />
 
         <View className="h-full flex-1 flex-row items-center justify-evenly">
           <TabItem
-            name="members"
             label={labels.members}
             focused={focusedTab === "members"}
             onPress={() => navigateTo("members")}
-          />
+          >
+            <TabIcon
+              name="members"
+              color={
+                focusedTab === "members" ? colors.primary : colors.slate400
+              }
+            />
+          </TabItem>
           <TabItem
-            name="more"
             label={labels.more}
             focused={focusedTab === "more"}
             onPress={() => navigateTo("more")}
-          />
+          >
+            <TabIcon
+              name="more"
+              color={focusedTab === "more" ? colors.primary : colors.slate400}
+            />
+          </TabItem>
         </View>
       </View>
 

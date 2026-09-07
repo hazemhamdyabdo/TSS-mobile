@@ -22,25 +22,30 @@ const FILTER_OPTIONS = [
 
 type CompetitionResultsTabProps = {
   results: MatchResult[];
+  searchPlaceholderKey?: string;
 };
 
-export default function CompetitionResultsTab({ results }: CompetitionResultsTabProps) {
+export default function CompetitionResultsTab({
+  results,
+  searchPlaceholderKey = "competitions.searchResults",
+}: CompetitionResultsTabProps) {
   const { t } = useTranslation();
   const filterSheetRef = useRef<OptionPickerBottomSheetRef>(null);
-  const [query, setQuery] = useState('');
-  const [roundKey, setRoundKey] = useState('all');
+  const [query, setQuery] = useState("");
+  const [roundKey, setRoundKey] = useState("all");
 
   const filtered = useMemo(() => {
     const normalized = query.trim().toLowerCase();
 
     return results.filter((result) => {
-      if (roundKey !== 'all' && result.roundKey !== roundKey) {
+      if (roundKey !== "all" && result.roundKey !== roundKey) {
         return false;
       }
       if (!normalized) {
         return true;
       }
-      const haystack = `${t(result.startSide.nameKey)} ${t(result.endSide.nameKey)} ${t(result.roundKey)}`.toLowerCase();
+      const haystack =
+        `${t(result.startSide.nameKey)} ${t(result.endSide.nameKey)} ${t(result.roundKey)}`.toLowerCase();
       return haystack.includes(normalized);
     });
   }, [query, results, roundKey, t]);
@@ -50,7 +55,7 @@ export default function CompetitionResultsTab({ results }: CompetitionResultsTab
       <View className="flex-row items-center gap-2" style={RTL_CONTAINER_STYLE}>
         <CompetitionSearchField
           value={query}
-          placeholder={t('competitions.searchResults')}
+          placeholder={t(searchPlaceholderKey)}
           onChangeText={setQuery}
         />
         <Pressable

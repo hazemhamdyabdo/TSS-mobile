@@ -5,6 +5,8 @@ export const enFeatures = {
     members: 'Members',
     more: 'More',
     add: 'Add',
+    rankings: 'Ranking',
+    penalties: 'My penalties',
   },
   home: {
     logoLabel: 'Saudi Fencing Federation',
@@ -429,6 +431,19 @@ export const enFeatures = {
     notFound: 'Competition not found',
     nationalTeam: 'National team',
     playerCount: '{{count}} players',
+    guest: {
+      title: 'My competitions',
+      search: 'Search my competitions',
+      latest: 'Latest of my competitions',
+      searchCompetitors: 'Search competitors',
+      searchResults: 'Search my results',
+      youLabel: '{{name}} (You)',
+      tabs: {
+        info: 'General info',
+        participants: 'My competitors',
+        results: 'My results',
+      },
+    },
     stats: {
       ongoing: 'Ongoing competitions',
       monthlyParticipants: 'Participants this month',

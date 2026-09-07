@@ -24,25 +24,29 @@ const FILTER_OPTIONS = [
 
 type CompetitionParticipantsTabProps = {
   participants: Participant[];
+  searchPlaceholderKey?: string;
 };
 
-export default function CompetitionParticipantsTab({ participants }: CompetitionParticipantsTabProps) {
+export default function CompetitionParticipantsTab({
+  participants,
+  searchPlaceholderKey = "competitions.searchParticipants",
+}: CompetitionParticipantsTabProps) {
   const { t } = useTranslation();
   const filterSheetRef = useRef<OptionPickerBottomSheetRef>(null);
-  const [query, setQuery] = useState('');
-  const [filter, setFilter] = useState<ParticipantFilter>('all');
+  const [query, setQuery] = useState("");
+  const [filter, setFilter] = useState<ParticipantFilter>("all");
 
   const filtered = useMemo(() => {
     const normalized = query.trim().toLowerCase();
 
     return participants.filter((participant) => {
-      if (filter === 'active' && participant.status !== 'active') {
+      if (filter === "active" && participant.status !== "active") {
         return false;
       }
-      if (filter === 'suspended' && participant.status !== 'suspended') {
+      if (filter === "suspended" && participant.status !== "suspended") {
         return false;
       }
-      if (filter === 'nationalTeam' && !participant.nationalTeam) {
+      if (filter === "nationalTeam" && !participant.nationalTeam) {
         return false;
       }
       if (!normalized) {
@@ -57,7 +61,7 @@ export default function CompetitionParticipantsTab({ participants }: Competition
       <View className="flex-row items-center gap-2" style={RTL_CONTAINER_STYLE}>
         <CompetitionSearchField
           value={query}
-          placeholder={t('competitions.searchParticipants')}
+          placeholder={t(searchPlaceholderKey)}
           onChangeText={setQuery}
         />
         <Pressable

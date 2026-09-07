@@ -1,6 +1,12 @@
-import { View } from 'react-native';
+import { View } from "react-native";
 
-export default function CompetitionsSkeleton() {
+type CompetitionsSkeletonProps = {
+  guest?: boolean;
+};
+
+export default function CompetitionsSkeleton({
+  guest = false,
+}: CompetitionsSkeletonProps) {
   return (
     <View className="gap-4">
       <View className="h-8 flex-row items-center gap-4">
@@ -9,12 +15,16 @@ export default function CompetitionsSkeleton() {
       </View>
       <View className="h-[42px] flex-row gap-2">
         <View className="h-full flex-1 rounded-[10px] bg-slate-100" />
-        <View className="h-full w-[135px] rounded-[10px] bg-slate-100" />
+        {guest ? null : (
+          <View className="h-full w-[135px] rounded-[10px] bg-slate-100" />
+        )}
       </View>
-      <View className="h-[72px] flex-row gap-2">
-        <View className="h-full flex-1 rounded-lg bg-slate-100" />
-        <View className="h-full flex-1 rounded-lg bg-slate-100" />
-      </View>
+      {guest ? null : (
+        <View className="h-[72px] flex-row gap-2">
+          <View className="h-full flex-1 rounded-lg bg-slate-100" />
+          <View className="h-full flex-1 rounded-lg bg-slate-100" />
+        </View>
+      )}
       <View className="h-10 flex-row gap-2">
         <View className="h-full flex-1 rounded-lg bg-slate-100" />
         <View className="h-full flex-1 rounded-lg bg-slate-100" />

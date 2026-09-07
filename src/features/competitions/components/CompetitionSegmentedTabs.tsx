@@ -11,11 +11,13 @@ const TABS: CompetitionDetailTab[] = ["info", "participants", "results"];
 type CompetitionSegmentedTabsProps = {
   value: CompetitionDetailTab;
   onChange: (tab: CompetitionDetailTab) => void;
+  guest?: boolean;
 };
 
 export default function CompetitionSegmentedTabs({
   value,
   onChange,
+  guest = false,
 }: CompetitionSegmentedTabsProps) {
   const { t } = useTranslation();
 
@@ -26,6 +28,9 @@ export default function CompetitionSegmentedTabs({
     >
       {TABS.map((tab) => {
         const selected = tab === value;
+        const labelKey = guest
+          ? `competitions.guest.tabs.${tab}`
+          : `competitions.tabs.${tab}`;
 
         return (
           <Pressable
@@ -41,7 +46,7 @@ export default function CompetitionSegmentedTabs({
                 ...RTL_TEXT_STYLE,
               }}
             >
-              {t(`competitions.tabs.${tab}`)}
+              {t(labelKey)}
             </Text>
           </Pressable>
         );
