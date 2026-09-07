@@ -747,6 +747,31 @@ export const arFeatures = {
       identifier: 'الرقم التعريفي',
     },
   },
+  punishments: {
+    title: 'عقوباتي',
+    kind: {
+      warning: 'انذار',
+      suspension: 'ايقاف',
+    },
+    relative: {
+      minutesAgo: 'منذ {{count}} دقيقة',
+      hourAgo: 'منذ {{count}} ساعة',
+    },
+    empty: {
+      title: 'رائع! لا يوجد عقوبات',
+      subtitle: 'لا توجد حاليًا أي عقوبات لعرضها.',
+    },
+    items: {
+      lateArrival: {
+        title: 'تأخير في الحضور',
+        reason: 'تأخير اللاعب في حضور المباراه',
+      },
+      fairPlay: {
+        title: 'عدم اتباع قواعد اللعب النظيف',
+        reason: 'تحدث مع الحكم بطريقه غير لائقه',
+      },
+    },
+  },
   more: {
     hub: {
       title: 'المزيد',

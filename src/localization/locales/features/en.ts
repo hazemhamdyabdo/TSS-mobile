@@ -747,6 +747,31 @@ export const enFeatures = {
       identifier: 'Identifier',
     },
   },
+  punishments: {
+    title: 'My penalties',
+    kind: {
+      warning: 'Warning',
+      suspension: 'Suspension',
+    },
+    relative: {
+      minutesAgo: '{{count}} minutes ago',
+      hourAgo: '{{count}} hour ago',
+    },
+    empty: {
+      title: 'Great! No penalties',
+      subtitle: 'There are currently no penalties to display.',
+    },
+    items: {
+      lateArrival: {
+        title: 'Late arrival',
+        reason: 'The player arrived late to the bout',
+      },
+      fairPlay: {
+        title: 'Fair play violation',
+        reason: 'Spoke to the referee inappropriately',
+      },
+    },
+  },
   more: {
     hub: {
       title: 'More',

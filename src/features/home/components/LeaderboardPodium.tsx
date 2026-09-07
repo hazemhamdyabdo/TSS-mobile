@@ -5,9 +5,8 @@ import { Text, View } from "react-native";
 import { RTL_TEXT_STYLE } from "@/localization/direction";
 import { cairo } from "@/theme/typography";
 
+import { rankPlayerImageFor } from "../constants/rankPlayerAvatars";
 import type { HomeRankingEntry } from "../types";
-
-const avatarImage = require("@/assets/images/home/avatar.png");
 
 type PodiumPlaceProps = {
   entry: HomeRankingEntry;
@@ -37,7 +36,7 @@ function PodiumPlace({
           }}
         >
           <Image
-            source={avatarImage}
+            source={rankPlayerImageFor(entry.id)}
             style={{ width: size, height: size }}
             contentFit="cover"
           />

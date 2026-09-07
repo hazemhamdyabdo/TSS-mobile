@@ -5,9 +5,8 @@ import { Text, View } from "react-native";
 import { RTL_CONTAINER_STYLE, RTL_TEXT_STYLE } from "@/localization/direction";
 import { cairo } from "@/theme/typography";
 
+import { rankPlayerImageFor } from "../constants/rankPlayerAvatars";
 import type { HomeRankingEntry } from "../types";
-
-const avatarImage = require("@/assets/images/home/avatar.png");
 
 type HomeRankingRowProps = {
   entry: HomeRankingEntry;
@@ -86,7 +85,7 @@ export default function HomeRankingRow({
           )}
           <View className="size-8 overflow-hidden rounded-full">
             <Image
-              source={avatarImage}
+              source={rankPlayerImageFor(entry.id)}
               style={{ width: 32, height: 32 }}
               contentFit="cover"
             />
