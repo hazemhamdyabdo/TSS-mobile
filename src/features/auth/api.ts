@@ -1,4 +1,9 @@
-import { isMockQaPhone, MOCK_OTP, SA_DIAL_CODE } from './constants/dummy';
+import {
+  isMockQaPhone,
+  isMockUserPhone,
+  MOCK_OTP,
+  SA_DIAL_CODE,
+} from './constants/dummy';
 import { persistSession, loadStoredSession } from './storage/authStorage';
 import {
   markAuthHydrated,
@@ -32,20 +37,7 @@ export async function verifyOtp(phone: string, otp: string) {
   const session = {
     phone: `+${SA_DIAL_CODE}${phone}`,
     token: createMockId('token'),
-  };
-
-  setAuthSessionInState(session);
-  await persistSession(session);
-  return session;
-}
-
-export async function signInAsGuest() {
-  await mockDelay();
-
-  const session = {
-    phone: 'guest',
-    token: createMockId('guest-token'),
-    isGuest: true,
+    ...(isMockUserPhone(phone) ? { isGuest: true as const } : {}),
   };
 
   setAuthSessionInState(session);

@@ -12,7 +12,7 @@ import PrimaryButton from "@/components/ui/PrimaryButton";
 
 import { getMockErrorMessage } from "@/utils/formErrors";
 
-import { requestOtp, signInAsGuest } from "../api";
+import { requestOtp } from "../api";
 import { MOCK_QA_PHONE } from "../constants/dummy";
 import {
   createLoginSchema,
@@ -25,18 +25,15 @@ import PhoneNumberField from "./PhoneNumberField";
 type LoginFormProps = {
   onOtpRequested?: (phone: string) => void;
   onContactPress?: () => void;
-  onGuestPress?: () => void;
 };
 
 export default function LoginForm({
   onOtpRequested,
   onContactPress,
-  onGuestPress,
 }: LoginFormProps) {
   const { t } = useTranslation();
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isGuestSubmitting, setIsGuestSubmitting] = useState(false);
   const schema = useMemo(() => createLoginSchema(t), [t]);
 
   const {
@@ -70,20 +67,6 @@ export default function LoginForm({
     }
   };
 
-  const handleGuestPress = async () => {
-    setIsGuestSubmitting(true);
-    try {
-      await signInAsGuest();
-      if (onGuestPress) {
-        onGuestPress();
-      } else {
-        router.replace("/(tabs)");
-      }
-    } finally {
-      setIsGuestSubmitting(false);
-    }
-  };
-
   return (
     <View className="w-full gap-8 ">
       <View className="w-full gap-8 px-5">
@@ -110,7 +93,6 @@ export default function LoginForm({
           title={t("auth.verify")}
           onPress={handleSubmit(onSubmit)}
           loading={isSubmitting}
-          disabled={isGuestSubmitting}
         />
       </View>
 
@@ -120,13 +102,6 @@ export default function LoginForm({
           <OutlineButton
             title={t("auth.contactFederation")}
             onPress={onContactPress ?? (() => router.push("/(auth)/contact"))}
-            disabled={isGuestSubmitting || isSubmitting}
-          />
-          <OutlineButton
-            title={t("auth.enterAsGuest")}
-            variant="muted"
-            onPress={handleGuestPress}
-            loading={isGuestSubmitting}
             disabled={isSubmitting}
           />
         </View>

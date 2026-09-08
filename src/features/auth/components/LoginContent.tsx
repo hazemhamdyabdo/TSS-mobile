@@ -9,13 +9,11 @@ import LoginForm from "./LoginForm";
 type LoginContentProps = {
   onOtpRequested?: (phone: string) => void;
   onContactPress?: () => void;
-  onGuestPress?: () => void;
 };
 
 export default function LoginContent({
   onOtpRequested,
   onContactPress,
-  onGuestPress,
 }: LoginContentProps) {
   const { t } = useTranslation();
 
@@ -38,7 +36,6 @@ export default function LoginContent({
       <LoginForm
         onOtpRequested={onOtpRequested}
         onContactPress={onContactPress}
-        onGuestPress={onGuestPress}
       />
     </View>
   );
