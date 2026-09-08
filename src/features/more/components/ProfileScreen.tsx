@@ -36,16 +36,16 @@ import {
   type ProfileSchemaValues,
 } from "../schemas/profileSchema";
 import { toPhoneFieldValue } from "../utils/phone";
+import { resolveProfileAvatarSource } from "../utils/profileAvatar";
 import ProfileTextField from "./ProfileTextField";
-
-const defaultAvatar = require("@/assets/images/home/avatar.png");
 
 export default function ProfileScreen() {
   const { t } = useTranslation();
   const router = useRouter();
   const { session } = useAuthState();
   const { profile: storeProfile } = useMoreState();
-  const profile = session?.isGuest ? DUMMY_GUEST_PROFILE : storeProfile;
+  const isGuest = Boolean(session?.isGuest);
+  const profile = isGuest ? DUMMY_GUEST_PROFILE : storeProfile;
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [avatarUri, setAvatarUri] = useState(profile.avatarUri);
   const schema = useMemo(() => createProfileSchema(t), [t]);
@@ -63,7 +63,10 @@ export default function ProfileScreen() {
     },
   });
 
-  const avatarSource = avatarUri ? { uri: avatarUri } : defaultAvatar;
+  const avatarSource = resolveProfileAvatarSource(
+    { ...profile, avatarUri },
+    isGuest,
+  );
 
   const pickAvatar = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({

@@ -3,14 +3,12 @@ import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
 
 import { useAuthState } from "@/features/auth/hooks/useAuthState";
-import { rankPlayerImageFor } from "@/features/home/constants/rankPlayerAvatars";
 import { RTL_CONTAINER_STYLE, RTL_TEXT_STYLE } from "@/localization/direction";
 import { cairo } from "@/theme/typography";
 
 import type { UserProfile } from "../types";
 import { formatSaPhoneDisplay } from "../utils/phone";
-
-const defaultAvatar = require("@/assets/images/home/avatar.png");
+import { resolveProfileAvatarSource } from "../utils/profileAvatar";
 
 type SettingsProfileCardProps = {
   profile: UserProfile;
@@ -22,11 +20,7 @@ export default function SettingsProfileCard({
   const { t } = useTranslation();
   const { session } = useAuthState();
   const isGuest = Boolean(session?.isGuest);
-  const avatarSource = profile.avatarUri
-    ? { uri: profile.avatarUri }
-    : isGuest
-      ? rankPlayerImageFor(profile.email || profile.name)
-      : defaultAvatar;
+  const avatarSource = resolveProfileAvatarSource(profile, isGuest);
 
   return (
     <View className="mt-6 w-full">

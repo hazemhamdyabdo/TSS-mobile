@@ -4,7 +4,9 @@ import { useTranslation } from 'react-i18next';
 
 import ScreenSafeAreaView from '@/components/ScreenSafeAreaView';
 import { useAuthState } from '@/features/auth/hooks/useAuthState';
+import { DUMMY_GUEST_PROFILE } from '@/features/more/constants/dummy';
 import { useMoreState } from '@/features/more/hooks/useMoreState';
+import { resolveProfileAvatarSource } from '@/features/more/utils/profileAvatar';
 import { useNotificationsState } from '@/features/notifications/hooks/useNotificationsState';
 import { useMockListFetch } from '@/hooks/useMockListFetch';
 
@@ -31,6 +33,10 @@ export default function HomeScreen() {
 
   const headerName = isGuest ? t(home.guestProfile.nameKey) : profile.name;
   const headerRoleKey = isGuest ? home.guestProfile.roleKey : profile.roleKey;
+  const headerAvatarSource = resolveProfileAvatarSource(
+    isGuest ? DUMMY_GUEST_PROFILE : profile,
+    isGuest,
+  );
 
   return (
     <ScreenSafeAreaView className="flex-1 bg-background" edges={['top']}>
@@ -45,7 +51,7 @@ export default function HomeScreen() {
             <HomeHeader
               name={headerName}
               roleKey={headerRoleKey}
-              avatarUri={profile.avatarUri}
+              avatarSource={headerAvatarSource}
               notificationCount={unreadCount}
               welcomeKey="home.guest.welcome"
               onNotificationsPress={() => router.push('/inbox' as Href)}
@@ -64,7 +70,7 @@ export default function HomeScreen() {
             <HomeHeader
               name={headerName}
               roleKey={headerRoleKey}
-              avatarUri={profile.avatarUri}
+              avatarSource={headerAvatarSource}
               notificationCount={unreadCount}
               onNotificationsPress={() => router.push('/inbox' as Href)}
               onAvatarPress={() => router.push('/profile' as Href)}

@@ -1,4 +1,4 @@
-import { Image } from 'expo-image';
+import { Image, type ImageSource } from 'expo-image';
 import { Pressable, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
@@ -11,7 +11,7 @@ const bellIcon = require('@/assets/images/home/icons/bell.png');
 type HomeHeaderProps = {
   name: string;
   roleKey: string;
-  avatarUri?: string;
+  avatarSource?: ImageSource;
   notificationCount: number;
   onNotificationsPress: () => void;
   onAvatarPress?: () => void;
@@ -21,14 +21,14 @@ type HomeHeaderProps = {
 export default function HomeHeader({
   name,
   roleKey,
-  avatarUri,
+  avatarSource,
   notificationCount,
   onNotificationsPress,
   onAvatarPress,
   welcomeKey = 'home.welcome',
 }: HomeHeaderProps) {
   const { t } = useTranslation();
-  const avatarSource = avatarUri ? { uri: avatarUri } : avatarImage;
+  const resolvedAvatar = avatarSource ?? avatarImage;
 
   return (
     <View className="gap-4">
@@ -40,7 +40,7 @@ export default function HomeHeader({
           disabled={!onAvatarPress}
           className="relative size-8 items-center justify-center overflow-hidden rounded-full"
         >
-          <Image source={avatarSource} style={{ width: 32, height: 32 }} contentFit="cover" />
+          <Image source={resolvedAvatar} style={{ width: 32, height: 32 }} contentFit="cover" />
         </Pressable>
 
         <Image

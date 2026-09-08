@@ -1,3 +1,5 @@
+import { DUMMY_GUEST_PROFILE as MORE_GUEST_PROFILE } from '@/features/more/constants/dummy';
+
 import type {
   ChampionshipBanner,
   GuestLeaderboard,
@@ -9,6 +11,9 @@ import type {
   RecentTask,
   UpcomingCompetition,
 } from '../types';
+
+/** Same seed as more guest profile so ranking "you" avatar matches home/settings/profile. */
+const GUEST_AVATAR_SEED = MORE_GUEST_PROFILE.email;
 
 export const DUMMY_PROFILE: HomeProfile = {
   nameKey: 'home.userName',
@@ -135,7 +140,7 @@ export const DUMMY_UPCOMING_COMPETITIONS: UpcomingCompetition[] = [
 
 export const DUMMY_RANKINGS_PREVIEW: HomeRankingsPreview = {
   currentUser: {
-    id: 'rank-you',
+    id: GUEST_AVATAR_SEED,
     rank: 6,
     nameKey: 'home.guest.ranking.youName',
     points: 1955,
@@ -211,7 +216,7 @@ export const DUMMY_LEADERBOARD: GuestLeaderboard = {
       points: 1966,
     },
     {
-      id: 'list-6',
+      id: GUEST_AVATAR_SEED,
       rank: 6,
       nameKey: 'home.guest.ranking.youName',
       points: 1955,
