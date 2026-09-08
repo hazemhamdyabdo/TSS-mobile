@@ -125,7 +125,7 @@ export default function ChampionshipBanner({
             />
 
             <View
-              className="absolute inset-0 items-start gap-3 p-3"
+              className="absolute inset-0 items-start gap-3 p-3 pb-10"
               style={RTL_CONTAINER_STYLE}
             >
               <View className="rounded-3xl bg-primary/50 px-3 py-1.5">
@@ -170,7 +170,8 @@ export default function ChampionshipBanner({
                     </Text>
                   </View>
                   <Text
-                    className="text-[10px] text-slate-200"
+                    className="max-w-[70%] text-[10px] text-slate-200"
+                    numberOfLines={1}
                     style={{ fontFamily: cairo.medium, ...RTL_TEXT_STYLE }}
                   >
                     {t(banner.locationKey)}

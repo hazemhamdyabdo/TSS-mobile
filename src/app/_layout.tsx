@@ -94,9 +94,7 @@ export default function RootLayout() {
               <Stack.Screen name="privacy" />
               <Stack.Screen name="help" />
               <Stack.Screen name="clubs" />
-              <Stack.Screen name="rankings" />
               <Stack.Screen name="results" />
-              <Stack.Screen name="punishments" />
               <Stack.Screen name="transfers" />
             </Stack>
           </ThemeProvider>

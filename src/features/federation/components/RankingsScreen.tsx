@@ -26,6 +26,7 @@ export default function RankingsScreen() {
       searchKey="federation.search.rankings"
       emptyKey="federation.empty.rankings"
       rows={rows}
+      embeddedInTabs
     />
   );
 }

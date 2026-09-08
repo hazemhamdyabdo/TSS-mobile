@@ -21,13 +21,13 @@ export default function GuestLeaderboardScreen() {
   return (
     <ScreenSafeAreaView
       className="flex-1 bg-background"
-      edges={['top', 'bottom']}
+      edges={['top']}
       style={RTL_CONTAINER_STYLE}>
       <StatusBar style="auto" />
-      <CreateScreenHeader title={t('home.guest.ranking.title')} />
+      <CreateScreenHeader title={t('home.guest.ranking.title')} showBack={false} />
 
       {isLoading ? (
-        <View className="flex-1 gap-4 px-5 pt-4">
+        <View className="flex-1 gap-4 px-5 pt-4 pb-28">
           <View className="h-[199px] w-[299px] self-center rounded-full bg-slate-100" />
           <View className="h-12 w-full rounded-lg bg-slate-100" />
           <View className="flex-1 rounded-t-[32px] bg-white p-5">
@@ -41,7 +41,7 @@ export default function GuestLeaderboardScreen() {
       ) : (
         <ScrollView
           className="flex-1"
-          contentContainerClassName="gap-4 pb-8"
+          contentContainerClassName="gap-4 pb-28"
           showsVerticalScrollIndicator={false}>
           <LeaderboardPodium podium={podium} />
 

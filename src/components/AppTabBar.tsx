@@ -1,6 +1,6 @@
 import { MaterialDesignIcons } from "@react-native-vector-icons/material-design-icons";
 import { Image } from "expo-image";
-import { usePathname, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import type { BottomTabBarProps } from "expo-router/js-tabs";
 import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
@@ -26,6 +26,28 @@ function isTabName(name: string): name is TabName {
     name === "members" ||
     name === "more"
   );
+}
+
+function navigateInTabs(
+  navigation: BottomTabBarProps["navigation"],
+  state: BottomTabBarProps["state"],
+  name: string,
+  focusedName: string | undefined,
+) {
+  const route = state.routes.find((item) => item.name === name);
+  if (!route) {
+    return;
+  }
+
+  const event = navigation.emit({
+    type: "tabPress",
+    target: route.key,
+    canPreventDefault: true,
+  });
+
+  if (focusedName !== name && !event.defaultPrevented) {
+    navigation.navigate(name);
+  }
 }
 
 type TabItemProps = {
@@ -91,7 +113,6 @@ function GuestSideItem({
 export default function AppTabBar({ state, navigation }: BottomTabBarProps) {
   const { t } = useTranslation();
   const router = useRouter();
-  const pathname = usePathname();
   const insets = useSafeAreaInsets();
   const { session } = useAuthState();
   const isGuest = Boolean(session?.isGuest);
@@ -106,25 +127,12 @@ export default function AppTabBar({ state, navigation }: BottomTabBarProps) {
   };
 
   function navigateTo(name: TabName) {
-    const route = state.routes.find((item) => item.name === name);
-    if (!route) {
-      return;
-    }
-
-    const event = navigation.emit({
-      type: "tabPress",
-      target: route.key,
-      canPreventDefault: true,
-    });
-
-    if (focusedTab !== name && !event.defaultPrevented) {
-      navigation.navigate(name);
-    }
+    navigateInTabs(navigation, state, name, focusedTab ?? undefined);
   }
 
   if (isGuest) {
-    const rankingsFocused = pathname.startsWith("/rankings");
-    const punishmentsFocused = pathname.startsWith("/punishments");
+    const rankingsFocused = focusedName === "rankings";
+    const punishmentsFocused = focusedName === "punishments";
     const competitionsFocused = focusedTab === "competitions";
 
     return (
@@ -149,7 +157,9 @@ export default function AppTabBar({ state, navigation }: BottomTabBarProps) {
             <GuestSideItem
               label={t("tabs.rankings")}
               focused={rankingsFocused}
-              onPress={() => router.push("/rankings")}
+              onPress={() =>
+                navigateInTabs(navigation, state, "rankings", focusedName)
+              }
               iconXml={GUEST_RANKINGS_ICON_XML}
             />
           </View>
@@ -160,7 +170,9 @@ export default function AppTabBar({ state, navigation }: BottomTabBarProps) {
             <GuestSideItem
               label={t("tabs.penalties")}
               focused={punishmentsFocused}
-              onPress={() => router.push("/punishments")}
+              onPress={() =>
+                navigateInTabs(navigation, state, "punishments", focusedName)
+              }
               iconXml={GUEST_PENALTIES_ICON_XML}
               size={22}
             />

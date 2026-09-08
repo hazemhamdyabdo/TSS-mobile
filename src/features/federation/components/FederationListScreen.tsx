@@ -28,6 +28,7 @@ type FederationListScreenProps = {
   addHref?: Href;
   addLabelKey?: string;
   rows: FederationListRow[];
+  embeddedInTabs?: boolean;
 };
 
 export default function FederationListScreen({
@@ -37,6 +38,7 @@ export default function FederationListScreen({
   addHref,
   addLabelKey,
   rows,
+  embeddedInTabs = false,
 }: FederationListScreenProps) {
   const { t } = useTranslation();
   const router = useRouter();
@@ -57,13 +59,13 @@ export default function FederationListScreen({
   return (
     <ScreenSafeAreaView
       className="flex-1 bg-background"
-      edges={['top', 'bottom']}
+      edges={embeddedInTabs ? ['top'] : ['top', 'bottom']}
       style={RTL_CONTAINER_STYLE}>
       <StatusBar style="auto" />
-      <CreateScreenHeader title={t(titleKey)} />
+      <CreateScreenHeader title={t(titleKey)} showBack={!embeddedInTabs} />
       <ScrollView
         className="flex-1"
-        contentContainerClassName="gap-3 px-5 pb-8 pt-2"
+        contentContainerClassName={`gap-3 px-5 pt-2 ${embeddedInTabs ? 'pb-28' : 'pb-8'}`}
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}>
         {isLoading ? (

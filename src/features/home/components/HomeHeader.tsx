@@ -14,6 +14,7 @@ type HomeHeaderProps = {
   avatarUri?: string;
   notificationCount: number;
   onNotificationsPress: () => void;
+  onAvatarPress?: () => void;
   welcomeKey?: string;
 };
 
@@ -23,6 +24,7 @@ export default function HomeHeader({
   avatarUri,
   notificationCount,
   onNotificationsPress,
+  onAvatarPress,
   welcomeKey = 'home.welcome',
 }: HomeHeaderProps) {
   const { t } = useTranslation();
@@ -31,11 +33,15 @@ export default function HomeHeader({
   return (
     <View className="gap-4">
       <View className="flex-row items-center justify-between">
-        <View className="relative size-8 items-center justify-center">
-          <View className="overflow-hidden rounded-full">
-            <Image source={avatarSource} style={{ width: 32, height: 32 }} contentFit="cover" />
-          </View>
-        </View>
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel={t('more.profile.title')}
+          onPress={onAvatarPress}
+          disabled={!onAvatarPress}
+          className="relative size-8 items-center justify-center overflow-hidden rounded-full"
+        >
+          <Image source={avatarSource} style={{ width: 32, height: 32 }} contentFit="cover" />
+        </Pressable>
 
         <Image
           source={headerLogo}

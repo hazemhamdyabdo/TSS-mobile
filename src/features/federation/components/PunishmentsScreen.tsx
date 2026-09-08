@@ -31,6 +31,7 @@ export default function PunishmentsScreen() {
       addHref={CREATE_ROUTES.addPunishment}
       addLabelKey="create.submit.addPunishment"
       rows={rows}
+      embeddedInTabs
     />
   );
 }

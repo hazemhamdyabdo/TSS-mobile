@@ -49,6 +49,7 @@ export default function HomeScreen() {
               notificationCount={unreadCount}
               welcomeKey="home.guest.welcome"
               onNotificationsPress={() => router.push('/inbox' as Href)}
+              onAvatarPress={() => router.push('/profile' as Href)}
             />
             <ChampionshipBanner
               banners={home.banners}
@@ -66,6 +67,7 @@ export default function HomeScreen() {
               avatarUri={profile.avatarUri}
               notificationCount={unreadCount}
               onNotificationsPress={() => router.push('/inbox' as Href)}
+              onAvatarPress={() => router.push('/profile' as Href)}
             />
             <ChampionshipBanner
               banners={home.banners}

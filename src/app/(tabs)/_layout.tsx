@@ -13,6 +13,8 @@ export default function TabsLayout() {
       <Tabs.Screen name="competitions" />
       <Tabs.Screen name="members" />
       <Tabs.Screen name="more" />
+      <Tabs.Screen name="rankings" options={{ href: null }} />
+      <Tabs.Screen name="punishments" options={{ href: null }} />
     </Tabs>
   );
 }

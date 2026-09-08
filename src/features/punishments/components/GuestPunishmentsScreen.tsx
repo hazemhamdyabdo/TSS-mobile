@@ -17,18 +17,18 @@ export default function GuestPunishmentsScreen() {
   return (
     <ScreenSafeAreaView
       className="flex-1 bg-background"
-      edges={['top', 'bottom']}
+      edges={['top']}
       style={RTL_CONTAINER_STYLE}
     >
       <StatusBar style="auto" />
-      <CreateScreenHeader title={t('punishments.title')} />
+      <CreateScreenHeader title={t('punishments.title')} showBack={false} />
 
       {punishments.length === 0 ? (
         <GuestPunishmentsEmptyState />
       ) : (
         <ScrollView
           className="flex-1"
-          contentContainerClassName="gap-2 px-5 pb-8 pt-2"
+          contentContainerClassName="gap-2 px-5 pb-28 pt-2"
           showsVerticalScrollIndicator={false}
         >
           {punishments.map((punishment) => (

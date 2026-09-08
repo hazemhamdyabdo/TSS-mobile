@@ -10,9 +10,9 @@ export type MoreHubId =
 
 export type MoreHubHref =
   | '/clubs'
-  | '/rankings'
+  | '/(tabs)/rankings'
   | '/results'
-  | '/punishments'
+  | '/(tabs)/punishments'
   | '/transfers'
   | '/settings'
   | '/privacy'

@@ -11,15 +11,20 @@ import CreateBackButton from "./CreateBackButton";
 type CreateScreenHeaderProps = {
   title: string;
   onBack?: () => void;
+  showBack?: boolean;
 };
 
-export default function CreateScreenHeader({ title, onBack }: CreateScreenHeaderProps) {
+export default function CreateScreenHeader({
+  title,
+  onBack,
+  showBack = true,
+}: CreateScreenHeaderProps) {
   return (
     <View
       className="w-full flex-row items-center gap-4 px-5 py-3"
       style={RTL_CONTAINER_STYLE}
     >
-      <CreateBackButton onPress={onBack} />
+      {showBack ? <CreateBackButton onPress={onBack} /> : null}
       <Text
         className="min-w-0 flex-1 capitalize leading-[1.6] text-accent"
         style={{ fontFamily: cairo.semiBold, ...RTL_TEXT_STYLE }}

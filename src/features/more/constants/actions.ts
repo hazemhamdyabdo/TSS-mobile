@@ -2,9 +2,9 @@ import type { MoreHubAction, MoreHubHref, MoreHubId } from '../types';
 
 export const MORE_HUB_ROUTES: Record<MoreHubId, MoreHubHref> = {
   clubs: '/clubs',
-  rankings: '/rankings',
+  rankings: '/(tabs)/rankings',
   results: '/results',
-  punishments: '/punishments',
+  punishments: '/(tabs)/punishments',
   transfers: '/transfers',
   settings: '/settings',
   policies: '/privacy',

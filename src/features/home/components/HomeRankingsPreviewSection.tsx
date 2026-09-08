@@ -28,7 +28,7 @@ export default function HomeRankingsPreviewSection({
         </Text>
         <Pressable
           accessibilityRole="button"
-          onPress={() => router.push('/rankings' as Href)}>
+          onPress={() => router.push('/(tabs)/rankings' as Href)}>
           <Text
             className="text-[10px] capitalize text-primary"
             style={{ fontFamily: cairo.semiBold }}>

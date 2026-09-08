@@ -10,8 +10,8 @@ import GuestQuickActionIcon from './GuestQuickActionIcon';
 
 const GUEST_QUICK_ACTION_ROUTES: Record<GuestQuickActionId, Href> = {
   myCompetitions: '/(tabs)/competitions',
-  rankings: '/rankings',
-  penalties: '/punishments',
+  rankings: '/(tabs)/rankings',
+  penalties: '/(tabs)/punishments',
   profile: '/profile',
 };
 
@@ -39,14 +39,14 @@ export default function GuestQuickActionsSection({
             key={action.id}
             accessibilityRole="button"
             onPress={() => router.push(GUEST_QUICK_ACTION_ROUTES[action.id])}
-            className="h-[60px] flex-1 items-center justify-center gap-1 overflow-hidden rounded-lg border border-slate-100 bg-white p-2">
+            className="min-h-[68px] flex-1 items-center justify-center gap-1 overflow-hidden rounded-lg border border-slate-100 bg-white px-1 py-2">
             <View className="size-6 items-center justify-center">
               <GuestQuickActionIcon actionId={action.id} />
             </View>
             <Text
-              className="text-center text-[10px] leading-3 tracking-[0.086px] text-slate-500"
-              style={{ fontFamily: cairo.regular }}
-              numberOfLines={1}>
+              className="w-full text-center text-[10px] leading-[12px] text-slate-500"
+              style={{ fontFamily: cairo.regular, ...RTL_TEXT_STYLE }}
+              numberOfLines={2}>
               {t(action.labelKey)}
             </Text>
           </Pressable>
