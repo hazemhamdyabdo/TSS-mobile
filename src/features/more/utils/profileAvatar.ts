@@ -1,14 +1,13 @@
 import type { ImageSource } from 'expo-image';
 
-import { rankPlayerImageFor } from '@/features/home/constants/rankPlayerAvatars';
-
 import type { UserProfile } from '../types';
 
 const defaultAvatar = require('@/assets/images/home/avatar.png');
+const playerAvatar = require('@/assets/images/rank-player-5.jpg');
 
-/** Stable default avatar for the guest/user profile across home, settings, and rankings. */
-export function guestProfileAvatarSource(profile: Pick<UserProfile, 'email' | 'name'>) {
-  return rankPlayerImageFor(profile.email || profile.name);
+/** Figma player avatar shared by the guest home, settings, and profile screens. */
+export function guestProfileAvatarSource(_profile: Pick<UserProfile, 'email' | 'name'>) {
+  return playerAvatar;
 }
 
 export function resolveProfileAvatarSource(

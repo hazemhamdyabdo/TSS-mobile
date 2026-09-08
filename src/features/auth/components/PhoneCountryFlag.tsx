@@ -6,15 +6,16 @@ const ksaFlag = require('@/assets/images/ksa-flag.png');
 
 type PhoneCountryFlagProps = {
   iso2: string;
+  size?: number;
 };
 
-export default function PhoneCountryFlag({ iso2 }: PhoneCountryFlagProps) {
+export default function PhoneCountryFlag({ iso2, size = 24 }: PhoneCountryFlagProps) {
   return (
-    <View className="size-6 overflow-hidden rounded-full">
+    <View className="overflow-hidden rounded-full" style={{ width: size, height: size }}>
       {iso2 === 'sa' ? (
-        <Image source={ksaFlag} style={{ width: 24, height: 24 }} contentFit="cover" />
+        <Image source={ksaFlag} style={{ width: size, height: size }} contentFit="cover" />
       ) : (
-        <CountryFlag isoCode={iso2} size={15} />
+        <CountryFlag isoCode={iso2} size={Math.round(size * 0.625)} />
       )}
     </View>
   );

@@ -39,6 +39,27 @@ import { toPhoneFieldValue } from "../utils/phone";
 import { resolveProfileAvatarSource } from "../utils/profileAvatar";
 import ProfileTextField from "./ProfileTextField";
 
+type ReadOnlyFieldProps = {
+  label: string;
+  value: string;
+};
+
+function ReadOnlyField({ label, value }: ReadOnlyFieldProps) {
+  return (
+    <FormField label={label} flex>
+      <View className="h-12 w-full items-end justify-center rounded-[10px] border border-slate-100 bg-white px-4">
+        <Text
+          className="w-full text-sm leading-[18px] text-slate-400"
+          style={{ fontFamily: cairo.regular, ...RTL_TEXT_STYLE }}
+          numberOfLines={1}
+        >
+          {value}
+        </Text>
+      </View>
+    </FormField>
+  );
+}
+
 export default function ProfileScreen() {
   const { t } = useTranslation();
   const router = useRouter();
@@ -123,11 +144,11 @@ export default function ProfileScreen() {
           showsVerticalScrollIndicator={false}
         >
           <View className="w-full items-center gap-2">
-            <View className="size-[95px] items-center justify-center">
-              <View className="size-[95px] overflow-hidden rounded-full border-2 border-white">
+            <View className="size-[100px] items-center justify-center">
+              <View className="size-[100px] overflow-hidden rounded-full border-2 border-white">
                 <Image
                   source={avatarSource}
-                  style={{ width: 95, height: 95 }}
+                  style={{ width: 100, height: 100 }}
                   contentFit="cover"
                 />
               </View>
@@ -191,6 +212,7 @@ export default function ProfileScreen() {
                     onChangeText={onChange}
                     placeholder={t("auth.phonePlaceholder")}
                     hasError={Boolean(errors.phone)}
+                    variant="profile"
                   />
                 </FormField>
               )}
@@ -209,14 +231,60 @@ export default function ProfileScreen() {
                 />
               )}
             />
-            <ProfileTextField
-              label={t("more.profile.fields.role")}
-              value={t(profile.roleKey)}
-              onChangeText={() => undefined}
-              placeholder={t("more.profile.fields.role")}
-              editable={false}
-              showPencil={false}
-            />
+            {profile.playerDetails ? (
+              <>
+                <View className="w-full flex-row gap-2" style={RTL_CONTAINER_STYLE}>
+                  <ReadOnlyField
+                    label={t("more.profile.fields.club")}
+                    value={profile.playerDetails.club}
+                  />
+                  <ReadOnlyField
+                    label={t("more.profile.fields.birthDate")}
+                    value={profile.playerDetails.birthDate}
+                  />
+                </View>
+                <View className="w-full flex-row gap-2" style={RTL_CONTAINER_STYLE}>
+                  <ReadOnlyField
+                    label={t("more.profile.fields.weapon")}
+                    value={profile.playerDetails.weapon}
+                  />
+                  <ReadOnlyField
+                    label={t("more.profile.fields.gender")}
+                    value={profile.playerDetails.gender}
+                  />
+                </View>
+                <View className="w-full flex-row gap-2" style={RTL_CONTAINER_STYLE}>
+                  <ReadOnlyField
+                    label={t("more.profile.fields.ageCategory")}
+                    value={profile.playerDetails.ageCategory}
+                  />
+                  <ReadOnlyField
+                    label={t("more.profile.fields.rating")}
+                    value={profile.playerDetails.rating}
+                  />
+                </View>
+                <View className="w-full flex-row gap-2" style={RTL_CONTAINER_STYLE}>
+                  <ReadOnlyField
+                    label={t("more.profile.fields.nationality")}
+                    value={profile.playerDetails.nationality}
+                  />
+                  <ReadOnlyField
+                    label={t("more.profile.fields.nationalTeam")}
+                    value={profile.playerDetails.nationalTeam}
+                  />
+                </View>
+                <View className="w-full flex-row gap-2" style={RTL_CONTAINER_STYLE}>
+                  <ReadOnlyField
+                    label={t("more.profile.fields.contractStart")}
+                    value={profile.playerDetails.contractStart}
+                  />
+                  <ReadOnlyField
+                    label={t("more.profile.fields.contractEnd")}
+                    value={profile.playerDetails.contractEnd}
+                  />
+                </View>
+              </>
+            ) : null}
           </View>
 
           <PrimaryButton

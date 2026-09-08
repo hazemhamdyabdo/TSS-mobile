@@ -12,6 +12,18 @@ export const DUMMY_GUEST_PROFILE: UserProfile = {
   email: 'Ahmed@fencing_sa',
   phone: '123456789',
   roleKey: 'home.role.player',
+  playerDetails: {
+    club: 'نادي الاتحاد',
+    birthDate: '14-06-2007',
+    weapon: 'سيف مبارزة',
+    gender: 'ذكر',
+    ageCategory: 'تحت 21 عام',
+    rating: '1500',
+    nationality: 'سعودي',
+    nationalTeam: 'مستدعي',
+    contractStart: '29-06-2026',
+    contractEnd: '29-06-2027',
+  },
 };
 
 export const EMPTY_MORE_STATE: MoreState = {

@@ -40,6 +40,20 @@ export type UserProfile = {
   phone: string;
   roleKey: 'home.role.federationOfficial' | 'home.role.player';
   avatarUri?: string;
+  playerDetails?: PlayerProfileDetails;
+};
+
+export type PlayerProfileDetails = {
+  club: string;
+  birthDate: string;
+  weapon: string;
+  gender: string;
+  ageCategory: string;
+  rating: string;
+  nationality: string;
+  nationalTeam: string;
+  contractStart: string;
+  contractEnd: string;
 };
 
 export type NotificationPrefs = {

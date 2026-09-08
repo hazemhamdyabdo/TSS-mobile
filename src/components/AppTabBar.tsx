@@ -1,4 +1,3 @@
-import { MaterialDesignIcons } from "@react-native-vector-icons/material-design-icons";
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
 import type { BottomTabBarProps } from "expo-router/js-tabs";
@@ -11,6 +10,7 @@ import { SvgXml } from "react-native-svg";
 import TabIcon, { type TabName } from "@/components/TabIcon";
 import { useAuthState } from "@/features/auth/hooks/useAuthState";
 import {
+  GUEST_COMPETITIONS_ICON_XML,
   GUEST_PENALTIES_ICON_XML,
   GUEST_RANKINGS_ICON_XML,
 } from "@/features/home/constants/guestIcons";
@@ -75,6 +75,8 @@ function TabItem({ label, focused, onPress, children }: TabItemProps) {
         className="text-[12px]"
         ellipsizeMode="tail"
         numberOfLines={1}
+        adjustsFontSizeToFit
+        minimumFontScale={0.75}
         style={{ fontFamily: cairo.regular, color }}
       >
         {label}
@@ -212,15 +214,21 @@ export default function AppTabBar({ state, navigation }: BottomTabBarProps) {
               }}
             >
               <View className="size-[45px] items-center justify-center rounded-full bg-primary">
-                <MaterialDesignIcons
-                  name="fencing"
-                  size={24}
-                  color={colors.pending}
+                <SvgXml
+                  xml={GUEST_COMPETITIONS_ICON_XML.replaceAll(
+                    "#018A43",
+                    colors.white,
+                  )}
+                  width={24}
+                  height={24}
                 />
               </View>
             </View>
             <Text
               className="text-[12px]"
+              numberOfLines={1}
+              adjustsFontSizeToFit
+              minimumFontScale={0.75}
               style={{
                 fontFamily: cairo.regular,
                 color: competitionsFocused ? colors.primary : colors.slate400,

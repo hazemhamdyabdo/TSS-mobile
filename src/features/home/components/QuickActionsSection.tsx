@@ -46,15 +46,17 @@ export default function QuickActionsSection({
             key={action.id}
             accessibilityRole="button"
             onPress={() => router.push(CREATE_ROUTES[action.id])}
-            className="h-20  flex-1 items-center justify-center gap-1 overflow-hidden rounded-lg border border-slate-100 bg-white p-4 "
+            className="h-20 flex-1 items-center justify-center gap-1 overflow-hidden rounded-lg border border-slate-100 bg-white px-1 py-2"
           >
             <View className="size-6 items-center justify-center">
               <QuickActionIcon actionId={action.id} />
             </View>
             <Text
-              className="text-center text-[10px] leading-[12px] text-slate-500"
+              className="w-full text-center text-[10px] leading-[12px] text-slate-500"
               style={{ fontFamily: cairo.regular }}
               numberOfLines={1}
+              adjustsFontSizeToFit
+              minimumFontScale={0.7}
             >
               {t(action.labelKey)}
             </Text>
