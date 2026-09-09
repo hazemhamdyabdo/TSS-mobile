@@ -1,7 +1,5 @@
-/**
- * TODO: Create the news screen and navigate here.
- * Banner taps and the guest "Latest news" quick action should open it.
- */
+import { router, type Href } from 'expo-router';
+
 export function navigateToNews() {
-  // News screen is not implemented yet.
+  router.push('/news' as Href);
 }

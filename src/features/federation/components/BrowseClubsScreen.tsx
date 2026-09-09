@@ -12,7 +12,7 @@ import type { SelectOption } from '@/components/form/types';
 import ScreenSafeAreaView from '@/components/ScreenSafeAreaView';
 import CreateScreenHeader from '@/features/create/components/CreateScreenHeader';
 import MemberSearchField from '@/features/members/components/MemberSearchField';
-import { FILTER_ICON_XML } from '@/features/members/constants/iconXml';
+import { FILTER_WHITE_ICON_XML } from '@/features/news/constants/iconXml';
 import { RTL_CONTAINER_STYLE, RTL_TEXT_STYLE } from '@/localization/direction';
 import { cairo } from '@/theme/typography';
 
@@ -85,16 +85,16 @@ export default function BrowseClubsScreen() {
           <Pressable
             accessibilityRole="button"
             onPress={() => filterSheetRef.current?.open()}
-            className="h-[42px] flex-row items-center gap-2 rounded-[10px] border border-slate-100 bg-white px-3"
+            className="h-10 flex-row items-center gap-1 rounded-lg bg-primary px-3"
             style={RTL_CONTAINER_STYLE}
           >
             <Text
-              className="text-xs text-primary"
-              style={{ fontFamily: cairo.semiBold }}
+              className="text-sm text-background"
+              style={{ fontFamily: cairo.regular }}
             >
               {t('federation.browse.filter')}
             </Text>
-            <SvgXml xml={FILTER_ICON_XML} width={16} height={16} />
+            <SvgXml xml={FILTER_WHITE_ICON_XML} width={16} height={16} />
           </Pressable>
         </View>
 

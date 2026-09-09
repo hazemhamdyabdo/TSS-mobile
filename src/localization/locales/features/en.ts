@@ -1137,6 +1137,139 @@ export const enFeatures = {
       invalidPhone: 'Enter a valid mobile number',
     },
   },
+  news: {
+    title: 'Latest news',
+    search: 'Search news',
+    filter: 'Filter',
+    viewAll: 'View all',
+    empty: 'No matching news',
+    notFound: 'News not found',
+    categories: {
+      tournaments: 'Tournaments',
+      nationalTeam: 'Saudi national team',
+    },
+    filters: {
+      all: 'All news',
+    },
+    sections: {
+      tournaments: 'Tournament news',
+      nationalTeam: 'Saudi national team',
+    },
+    status: {
+      ended: 'Ended',
+      ongoing: 'Ongoing',
+    },
+    meta: {
+      individualFoil: 'Individual - Foil',
+      trainingCamp: 'Training camp',
+      time1000: '10:00 AM',
+      time0900: '09:00 AM',
+      date18Aug: '18 August 2026',
+      newDelhi: 'New Delhi',
+    },
+    hero: {
+      kingdom: {
+        title: 'Kingdom Championship',
+        date: '25 August 2026',
+        location: 'Riyadh - Federation Hall',
+      },
+      youth: {
+        title: 'Youth Championship',
+        date: '20 August 2026',
+        location: 'Jeddah - Fencing Hall',
+      },
+      national: {
+        date: '12 August 2026',
+        location: 'Riyadh - National Team Camp',
+      },
+    },
+    items: {
+      saudiGrand: {
+        title: 'Saudi Grand Fencing Championship',
+        summary:
+          'The Saudi Grand Fencing Championship kicks off with wide participation from fencers.',
+      },
+      nationalPrep: {
+        title: 'Saudi fencing team prepares for international events',
+        summary:
+          'Follow participation news, camps, results, and top national team achievements.',
+      },
+      nationalCamp: {
+        title: 'National team camp ahead of continental events',
+        summary: 'An intensive program focused on technical and physical readiness.',
+      },
+    },
+    details: {
+      stats: {
+        countries: 'Participating countries',
+        players: 'Number of players',
+        duration: 'Tournament duration',
+        weapons: 'Weapons',
+      },
+      saudiGrand: {
+        subtitle:
+          'Open competitions bringing together elite fencers from Saudi Arabia and participating countries across all three weapons',
+        dateRange: '13–15 August 2026',
+        venue:
+          'Fencing Hall at Prince Saud bin Jalawi Sports City – Al Rakah, Al Khobar',
+        duration: '3 days',
+        weapons: 'All weapons',
+        body: 'The Saudi Grand Fencing Championship is an open event that brings together athletes of different nationalities and gives Saudi fencers valuable competitive experience. The 2026 edition featured 163 fencers representing 9 countries:',
+      },
+      nationalPrep: {
+        subtitle: 'Technical and physical preparation ahead of upcoming international events',
+        dateRange: '10–16 August 2026',
+        venue: 'National Team Camp – Riyadh',
+        duration: '7 days',
+        body: 'The Saudi fencing team continues preparation through domestic camps and international participation, focusing on technical readiness and athlete performance tracking.',
+      },
+    },
+    countries: {
+      saudi: 'Saudi Arabia',
+      bahrain: 'Bahrain',
+      qatar: 'Qatar',
+      kuwait: 'Kuwait',
+      uae: 'UAE',
+      egypt: 'Egypt',
+      oman: 'Oman',
+      chad: 'Chad',
+      algeria: 'Algeria',
+    },
+    program: {
+      title: 'Tournament program',
+      day1: 'Day one',
+      day2: 'Day two',
+      day3: 'Day three',
+      dates: {
+        day1: '13 August',
+        day2: '14 August',
+        day3: '15 August',
+        camp1: '10 August',
+        camp2: '12 August',
+        camp3: '14 August',
+      },
+      items: {
+        registration: 'Registration',
+        poules: 'Poules',
+        preliminary: 'Preliminary rounds',
+        semiFinal: 'Semi-finals',
+        knockout: 'Knockout matches',
+        mainRounds: 'Main rounds',
+        finals: 'Finals',
+        awards: 'Awards',
+        closing: 'Closing',
+        training: 'Technical training',
+        fitness: 'Fitness',
+        tactics: 'Tactics',
+        sparring: 'Sparring',
+        videoReview: 'Video review',
+        recovery: 'Recovery',
+        selection: 'Squad selection',
+        briefing: 'Technical briefing',
+        travelPrep: 'Travel prep',
+      },
+    },
+  },
   federation: {
     loading: 'Loading…',
     search: {
