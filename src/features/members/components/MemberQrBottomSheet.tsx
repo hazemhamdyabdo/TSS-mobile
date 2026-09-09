@@ -4,16 +4,19 @@ import {
   BottomSheetView,
   type BottomSheetBackdropProps,
 } from '@gorhom/bottom-sheet';
+import { Image } from 'expo-image';
 import { forwardRef, useCallback, useImperativeHandle, useMemo, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Text, View } from 'react-native';
 import { SvgXml } from 'react-native-svg';
-import { useTranslation } from 'react-i18next';
 
 import { cairo } from '@/theme/typography';
 import { presentBottomSheet } from '@/utils/presentBottomSheet';
 
-import { QR_BADGE_ICON_XML, QR_GRAPHIC_ICON_XML } from '../constants/iconXml';
+import { QR_BADGE_ICON_XML } from '../constants/iconXml';
 import type { MemberCategory } from '../types';
+
+const qrCodeImage = require('@/assets/images/QR.png');
 
 export type MemberQrBottomSheetRef = {
   open: () => void;
@@ -60,9 +63,12 @@ export default forwardRef<MemberQrBottomSheetRef, MemberQrBottomSheetProps>(func
         <View className="size-12 items-center justify-center rounded-full bg-primary shadow-[0px_0px_3px_3px_rgba(1,138,67,0.2)]">
           <SvgXml xml={QR_BADGE_ICON_XML} width={28} height={28} />
         </View>
-        <View className="size-[140px] items-center justify-center overflow-hidden rounded-[7px] border border-slate-100 bg-white">
-          <SvgXml xml={QR_GRAPHIC_ICON_XML} width={110} height={110} />
-        </View>
+        <Image
+          source={qrCodeImage}
+          style={{ width: 160, height: 160 }}
+          contentFit="contain"
+          accessibilityLabel={t(titleKey)}
+        />
         <View className="items-center gap-2">
           <Text className="text-sm text-accent" style={{ fontFamily: cairo.regular }}>
             {t('members.qr.identifier')}

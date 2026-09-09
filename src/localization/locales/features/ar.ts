@@ -326,6 +326,13 @@ export const arFeatures = {
         ittihad: 'نادي الاتحاد',
         riyadh: 'نادي الرياض',
         hilal: 'نادي الهلال',
+        nassr: 'نادي النصر',
+        ahli: 'نادي الاهلي',
+        shabab: 'نادي الشباب',
+        fayha: 'نادي الفيحاء',
+        wehda: 'نادي الوحدة',
+        faisaly: 'نادي الفيصلي',
+        abha: 'نادي ابها',
       },
       weapon: {
         foil: 'الفلوريه',
@@ -450,6 +457,16 @@ export const arFeatures = {
       searchCompetitors: 'بحث في المنافسين',
       searchResults: 'بحث في نتائجي',
       youLabel: '{{name}} (انت)',
+      youSuffix: '(انت)',
+      tabs: {
+        info: 'معلومات عامة',
+        participants: 'المشتركين',
+        results: 'النتائج',
+      },
+    },
+    user: {
+      searchCompetitors: 'بحث في المنافسين',
+      searchResults: 'بحث في نتائجي',
       youSuffix: '(انت)',
       tabs: {
         info: 'معلومات عامة',
@@ -1138,6 +1155,26 @@ export const arFeatures = {
     },
     clubs: {
       playerCount: '{{count}} لاعبين',
+    },
+    browse: {
+      title: 'الاندية و الاكديميات',
+      search: 'بحث في الاندية',
+      filter: 'فلترة',
+      allClubs: 'كل الاندية و الاكديميات',
+      detailsTitle: 'تفاصيل النادي',
+      overview: 'نظرة عامة عن النادي',
+      players: 'الاعبين',
+      notFound: 'النادي غير موجود',
+      emptyPlayers: 'لا يوجد لاعبون مطابقون',
+      filters: {
+        all: 'كل المناطق',
+      },
+      fields: {
+        name: 'الاسم',
+        region: 'المنطقة',
+        category: 'الفئة',
+        playerCount: 'عدد اللاعبين',
+      },
     },
     rankings: {
       points: '{{count}} نقطة',

@@ -98,6 +98,7 @@ export default function RootLayout() {
               <Stack.Screen name="laws" />
               <Stack.Screen name="policies" />
               <Stack.Screen name="clubs" />
+              <Stack.Screen name="clubs/[id]" />
               <Stack.Screen name="results" />
               <Stack.Screen name="transfers" />
             </Stack>

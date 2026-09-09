@@ -326,6 +326,13 @@ export const enFeatures = {
         ittihad: 'Al Ittihad Club',
         riyadh: 'Al Riyadh Club',
         hilal: 'Al Hilal Club',
+        nassr: 'Al Nassr Club',
+        ahli: 'Al Ahli Club',
+        shabab: 'Al Shabab Club',
+        fayha: 'Al Fayha Club',
+        wehda: 'Al Wehda Club',
+        faisaly: 'Al Faisaly Club',
+        abha: 'Abha Club',
       },
       weapon: {
         foil: 'Foil',
@@ -450,6 +457,16 @@ export const enFeatures = {
       searchCompetitors: 'Search competitors',
       searchResults: 'Search my results',
       youLabel: '{{name}} (You)',
+      youSuffix: '(You)',
+      tabs: {
+        info: 'General info',
+        participants: 'Participants',
+        results: 'Results',
+      },
+    },
+    user: {
+      searchCompetitors: 'Search competitors',
+      searchResults: 'Search my results',
       youSuffix: '(You)',
       tabs: {
         info: 'General info',
@@ -1138,6 +1155,26 @@ export const enFeatures = {
     },
     clubs: {
       playerCount: '{{count}} players',
+    },
+    browse: {
+      title: 'Clubs & academies',
+      search: 'Search clubs',
+      filter: 'Filter',
+      allClubs: 'All clubs & academies',
+      detailsTitle: 'Club details',
+      overview: 'Club overview',
+      players: 'Players',
+      notFound: 'Club not found',
+      emptyPlayers: 'No matching players',
+      filters: {
+        all: 'All regions',
+      },
+      fields: {
+        name: 'Name',
+        region: 'Region',
+        category: 'Category',
+        playerCount: 'Number of players',
+      },
     },
     rankings: {
       points: '{{count}} points',

@@ -8,6 +8,7 @@ import { ScrollView, Text, View } from "react-native";
 
 import ScreenSafeAreaView from "@/components/ScreenSafeAreaView";
 import { useAuthState } from "@/features/auth/hooks/useAuthState";
+import { getAuthRole } from "@/features/auth/utils/sessionRole";
 import CreateScreenHeader from "@/features/create/components/CreateScreenHeader";
 import { RTL_CONTAINER_STYLE, RTL_TEXT_STYLE } from "@/localization/direction";
 import { colors } from "@/theme/colors";
@@ -19,7 +20,7 @@ import { CornerFlag, ScoreBox } from "./matchResultShared";
 import NationalityFlag from "./NationalityFlag";
 
 const heroImage = require("@/assets/images/home/banner-fencers.jpg");
-const GUEST_SELF_NAME_KEY = "competitions.people.ahmedKhaldi";
+const SELF_NAME_KEY = "competitions.people.ahmedKhaldi";
 
 type InfoIcon = "fencing" | "stairs" | "clock-outline";
 
@@ -29,24 +30,24 @@ type InfoRow = {
   value: string;
 };
 
-function sideDisplayName(side: MatchSide, isGuest: boolean) {
+function sideDisplayName(side: MatchSide, showYouLabel: boolean) {
   return {
     nameKey: side.nameKey,
-    showYou: isGuest && side.nameKey === GUEST_SELF_NAME_KEY,
+    showYou: showYouLabel && side.nameKey === SELF_NAME_KEY,
   };
 }
 
 function SideNameText({
   side,
-  isGuest,
+  showYouLabel,
   nameSize = "text-sm",
 }: {
   side: MatchSide;
-  isGuest: boolean;
+  showYouLabel: boolean;
   nameSize?: string;
 }) {
   const { t } = useTranslation();
-  const { showYou } = sideDisplayName(side, isGuest);
+  const { showYou } = sideDisplayName(side, showYouLabel);
 
   return (
     <Text
@@ -60,7 +61,7 @@ function SideNameText({
           className="text-[10px] text-primary"
           style={{ fontFamily: cairo.medium }}
         >
-          {` ${t("competitions.guest.youSuffix")}`}
+          {` ${t("competitions.user.youSuffix")}`}
         </Text>
       ) : null}
     </Text>
@@ -124,10 +125,10 @@ function PeriodCell({
 
 function PlayerIdentity({
   side,
-  isGuest,
+  showYouLabel,
 }: {
   side: MatchSide;
-  isGuest: boolean;
+  showYouLabel: boolean;
 }) {
   const { t } = useTranslation();
 
@@ -135,7 +136,7 @@ function PlayerIdentity({
     <View className="flex-row items-center gap-2" style={RTL_CONTAINER_STYLE}>
       <NationalityFlag nationality={side.nationality} />
       <View className=" gap-0">
-        <SideNameText side={side} isGuest={isGuest} nameSize="text-xs" />
+        <SideNameText side={side} showYouLabel={showYouLabel} nameSize="text-xs" />
         <Text
           className="text-xs text-slate-400"
           numberOfLines={1}
@@ -152,12 +153,12 @@ function PeriodsTable({
   result,
   startPeriods,
   endPeriods,
-  isGuest,
+  showYouLabel,
 }: {
   result: MatchResult;
   startPeriods: number[];
   endPeriods: number[];
-  isGuest: boolean;
+  showYouLabel: boolean;
 }) {
   const { t } = useTranslation();
   const startWins = result.startSide.score > result.endSide.score;
@@ -198,8 +199,8 @@ function PeriodsTable({
           >
             {t("competitions.matchDetails.periods.name")}
           </Text>
-          <PlayerIdentity side={result.startSide} isGuest={isGuest} />
-          <PlayerIdentity side={result.endSide} isGuest={isGuest} />
+          <PlayerIdentity side={result.startSide} showYouLabel={showYouLabel} />
+          <PlayerIdentity side={result.endSide} showYouLabel={showYouLabel} />
         </View>
 
         <View
@@ -258,11 +259,11 @@ function StatBar({
 function StatsSection({
   result,
   stats,
-  isGuest,
+  showYouLabel,
 }: {
   result: MatchResult;
   stats: MatchStat[];
-  isGuest: boolean;
+  showYouLabel: boolean;
 }) {
   const { t } = useTranslation();
 
@@ -279,7 +280,7 @@ function StatsSection({
           <NationalityFlag nationality={result.startSide.nationality} />
           <SideNameText
             side={result.startSide}
-            isGuest={isGuest}
+            showYouLabel={showYouLabel}
             nameSize="text-xs"
           />
         </View>
@@ -354,11 +355,11 @@ function StatsSection({
 function MatchHeroCard({
   result,
   boutStatusKey,
-  isGuest,
+  showYouLabel,
 }: {
   result: MatchResult;
   boutStatusKey: string;
-  isGuest: boolean;
+  showYouLabel: boolean;
 }) {
   const { t } = useTranslation();
   const startWins = result.startSide.score > result.endSide.score;
@@ -383,7 +384,7 @@ function MatchHeroCard({
           style={RTL_CONTAINER_STYLE}
         >
           <View className="max-w-[110px] items-center gap-2">
-            <SideNameText side={result.startSide} isGuest={isGuest} />
+            <SideNameText side={result.startSide} showYouLabel={showYouLabel} />
             <Text
               className="text-xs text-slate-400"
               numberOfLines={1}
@@ -405,7 +406,7 @@ function MatchHeroCard({
             <ScoreBox score={result.endSide.score} winner={endWins} />
           </View>
           <View className="max-w-[110px] items-center gap-2">
-            <SideNameText side={result.endSide} isGuest={isGuest} />
+            <SideNameText side={result.endSide} showYouLabel={showYouLabel} />
             <Text
               className="text-xs text-slate-400"
               numberOfLines={1}
@@ -417,9 +418,9 @@ function MatchHeroCard({
         </View>
 
         <View className="z-10 items-center gap-2">
-          <View className="rounded-3xl bg-primary/10 px-1.5 py-1">
+          <View className="h-5 items-center justify-center rounded-3xl bg-pending-50 px-1.5">
             <Text
-              className="text-[9px] text-primary"
+              className="text-[9px] text-pending"
               style={{ fontFamily: cairo.medium }}
             >
               {t(result.roundKey)}
@@ -441,7 +442,7 @@ function MatchHeroCard({
               {t(result.dateKey)}
             </Text>
           </View>
-          <View className="rounded-3xl bg-slate-300/20 px-1.5 py-1">
+          <View className="h-5 items-center justify-center rounded-3xl bg-slate-300/20 px-1.5">
             <Text
               className="text-[9px] text-slate-400"
               style={{ fontFamily: cairo.medium }}
@@ -458,7 +459,7 @@ function MatchHeroCard({
 export default function MatchDetailsScreen() {
   const { t } = useTranslation();
   const { session } = useAuthState();
-  const isGuest = Boolean(session?.isGuest);
+  const showYouLabel = getAuthRole(session) === "user";
   const rawId = useLocalSearchParams<{ id: string | string[] }>().id;
   const id = Array.isArray(rawId) ? rawId[0] : rawId;
   const state = useCompetitionsState();
@@ -529,7 +530,7 @@ export default function MatchDetailsScreen() {
         <MatchHeroCard
           result={result}
           boutStatusKey={`competitions.matchDetails.status.${details.boutStatus}`}
-          isGuest={isGuest}
+          showYouLabel={showYouLabel}
         />
 
         <Text
@@ -554,7 +555,7 @@ export default function MatchDetailsScreen() {
           result={result}
           startPeriods={details.startPeriods}
           endPeriods={details.endPeriods}
-          isGuest={isGuest}
+          showYouLabel={showYouLabel}
         />
 
         <Text
@@ -563,7 +564,11 @@ export default function MatchDetailsScreen() {
         >
           {t("competitions.matchDetails.sections.stats")}
         </Text>
-        <StatsSection result={result} stats={details.stats} isGuest={isGuest} />
+        <StatsSection
+          result={result}
+          stats={details.stats}
+          showYouLabel={showYouLabel}
+        />
       </ScrollView>
     </ScreenSafeAreaView>
   );

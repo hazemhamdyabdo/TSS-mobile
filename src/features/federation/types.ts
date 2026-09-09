@@ -8,6 +8,31 @@ export type FederationClub = {
   attachmentUri?: string;
 };
 
+export type ClubLogoId =
+  | 'hilal'
+  | 'nassr'
+  | 'ahli'
+  | 'shabab'
+  | 'fayha'
+  | 'wehda'
+  | 'faisaly'
+  | 'abha'
+  | 'ittihad';
+
+export type ClubRegionFilter = 'all' | 'riyadh' | 'jeddah' | 'dammam';
+
+/** Guest/user browse catalog (read-only mock). */
+export type BrowseClub = {
+  id: string;
+  nameKey: string;
+  logoId: ClubLogoId;
+  federationId: string;
+  region: string;
+  category: string;
+  playerCount: number;
+  playerIds: string[];
+};
+
 export type FederationPunishment = {
   id: string;
   offenderType: string;

@@ -6,6 +6,7 @@ import { Alert, Pressable, ScrollView, Text, View } from "react-native";
 
 import ScreenSafeAreaView from "@/components/ScreenSafeAreaView";
 import { useAuthState } from "@/features/auth/hooks/useAuthState";
+import { getAuthRole } from "@/features/auth/utils/sessionRole";
 import CreateBackButton from "@/features/create/components/CreateBackButton";
 import { RTL_CONTAINER_STYLE, RTL_TEXT_STYLE } from "@/localization/direction";
 import { colors } from "@/theme/colors";
@@ -29,7 +30,9 @@ export default function CompetitionDetailsScreen() {
   const { t } = useTranslation();
   const router = useRouter();
   const { session } = useAuthState();
-  const isGuest = Boolean(session?.isGuest);
+  const role = getAuthRole(session);
+  const isGuest = role === "guest";
+  const isUser = role === "user";
   const rawId = useLocalSearchParams<{ id: string | string[] }>().id;
   const id = Array.isArray(rawId) ? rawId[0] : rawId;
   const state = useCompetitionsState();
@@ -93,7 +96,9 @@ export default function CompetitionDetailsScreen() {
             searchPlaceholderKey={
               isGuest
                 ? "competitions.guest.searchCompetitors"
-                : "competitions.searchParticipants"
+                : isUser
+                  ? "competitions.user.searchCompetitors"
+                  : "competitions.searchParticipants"
             }
           />
         );
@@ -104,7 +109,9 @@ export default function CompetitionDetailsScreen() {
             searchPlaceholderKey={
               isGuest
                 ? "competitions.guest.searchResults"
-                : "competitions.searchResults"
+                : isUser
+                  ? "competitions.user.searchResults"
+                  : "competitions.searchResults"
             }
           />
         );
@@ -165,7 +172,7 @@ export default function CompetitionDetailsScreen() {
           <CompetitionSegmentedTabs
             value={tab}
             onChange={setTab}
-            guest={isGuest}
+            role={role}
           />
           {renderTab()}
         </ScrollView>

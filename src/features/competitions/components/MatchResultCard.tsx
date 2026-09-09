@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Pressable, Text, View } from "react-native";
 
 import { useAuthState } from "@/features/auth/hooks/useAuthState";
+import { getAuthRole } from "@/features/auth/utils/sessionRole";
 import { RTL_CONTAINER_STYLE, RTL_TEXT_STYLE } from "@/localization/direction";
 import { colors } from "@/theme/colors";
 import { cairo } from "@/theme/typography";
@@ -11,16 +12,20 @@ import { cairo } from "@/theme/typography";
 import type { MatchResult, MatchSide } from "../types";
 import { CornerFlag, ScoreBox } from "./matchResultShared";
 
-const GUEST_SELF_NAME_KEY = "competitions.people.ahmedKhaldi";
+const SELF_NAME_KEY = "competitions.people.ahmedKhaldi";
 
 type MatchResultCardProps = {
   result: MatchResult;
 };
 
-function NameBlock({ side, isGuest }: { side: MatchSide; isGuest: boolean }) {
+function NameBlock({
+  side,
+  showYou,
+}: {
+  side: MatchSide;
+  showYou: boolean;
+}) {
   const { t } = useTranslation();
-  const name = t(side.nameKey);
-  const showYou = isGuest && side.nameKey === GUEST_SELF_NAME_KEY;
 
   return (
     <View className="max-w-[110px] items-center gap-2">
@@ -29,13 +34,13 @@ function NameBlock({ side, isGuest }: { side: MatchSide; isGuest: boolean }) {
         numberOfLines={1}
         style={{ fontFamily: cairo.medium, ...RTL_TEXT_STYLE }}
       >
-        {name}
+        {t(side.nameKey)}
         {showYou ? (
           <Text
             className="text-[10px] text-primary"
             style={{ fontFamily: cairo.medium }}
           >
-            {` ${t("competitions.guest.youSuffix")}`}
+            {` ${t("competitions.user.youSuffix")}`}
           </Text>
         ) : null}
       </Text>
@@ -54,7 +59,8 @@ export default function MatchResultCard({ result }: MatchResultCardProps) {
   const { t } = useTranslation();
   const router = useRouter();
   const { session } = useAuthState();
-  const isGuest = Boolean(session?.isGuest);
+  const role = getAuthRole(session);
+  const isUser = role === "user";
   const startWins = result.startSide.score > result.endSide.score;
   const endWins = result.endSide.score > result.startSide.score;
 
@@ -67,7 +73,10 @@ export default function MatchResultCard({ result }: MatchResultCardProps) {
         className="z-10 flex-row items-center justify-center gap-4 px-4 py-2"
         style={RTL_CONTAINER_STYLE}
       >
-        <NameBlock side={result.startSide} isGuest={isGuest} />
+        <NameBlock
+          side={result.startSide}
+          showYou={isUser && result.startSide.nameKey === SELF_NAME_KEY}
+        />
         <View
           className="flex-row items-center gap-2"
           style={RTL_CONTAINER_STYLE}
@@ -80,13 +89,16 @@ export default function MatchResultCard({ result }: MatchResultCardProps) {
           />
           <ScoreBox score={result.endSide.score} winner={endWins} />
         </View>
-        <NameBlock side={result.endSide} isGuest={isGuest} />
+        <NameBlock
+          side={result.endSide}
+          showYou={isUser && result.endSide.nameKey === SELF_NAME_KEY}
+        />
       </View>
 
       <View className="z-10 items-center gap-2">
-        <View className="rounded-3xl bg-slate-300/20 px-1.5 py-1">
+        <View className="h-5 items-center justify-center rounded-3xl bg-primary/10 px-1.5">
           <Text
-            className="text-[9px] text-slate-400"
+            className="text-[9px] text-primary"
             style={{ fontFamily: cairo.medium }}
           >
             {t(result.roundKey)}
@@ -108,27 +120,19 @@ export default function MatchResultCard({ result }: MatchResultCardProps) {
             {t(result.dateKey)}
           </Text>
         </View>
-        <View
-          className="flex-row items-center gap-1"
-          style={RTL_CONTAINER_STYLE}
-        >
-          <MaterialDesignIcons
-            name="clock-outline"
-            size={10}
-            color={colors.slate400}
-          />
+        <View className="h-5 items-center justify-center rounded-3xl bg-slate-300/20 px-1.5">
           <Text
-            className="text-[10px] text-slate-400"
+            className="text-[9px] text-slate-400"
             style={{ fontFamily: cairo.medium }}
           >
-            {t(result.timeKey)}
+            {t("competitions.matchDetails.status.ended")}
           </Text>
         </View>
       </View>
     </>
   );
 
-  if (!isGuest) {
+  if (role === "admin") {
     return (
       <View className="overflow-hidden rounded-lg border border-slate-100 bg-white pb-2">
         {content}
