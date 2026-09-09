@@ -37,6 +37,9 @@ export type RegulationDocument = {
   titleKey: string;
   descriptionKey: string;
   fileSizeMb: string;
+  publishedAt: string;
+  issuePeriod: string;
+  sectionKeys: string[];
 };
 
 export type MoreHubAction = {

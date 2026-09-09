@@ -1,4 +1,5 @@
 import { MaterialDesignIcons } from '@react-native-vector-icons/material-design-icons';
+import { useRouter, type Href } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -20,6 +21,7 @@ import RegulationDocumentCard from './RegulationDocumentCard';
 
 export default function RegulationsScreen() {
   const { t } = useTranslation();
+  const router = useRouter();
   const [query, setQuery] = useState('');
   const [filter, setFilter] = useState<RegulationFilter>('all');
 
@@ -109,7 +111,11 @@ export default function RegulationsScreen() {
 
         <View className="gap-2">
           {documents.map((document) => (
-            <RegulationDocumentCard key={document.id} document={document} />
+            <RegulationDocumentCard
+              key={document.id}
+              document={document}
+              onPress={() => router.push(`/regulations/${document.id}` as Href)}
+            />
           ))}
         </View>
       </ScrollView>
