@@ -1,8 +1,9 @@
 /**
  * TestFlight QA credentials
  *
- * Admin phone: +966 50 123 4567 (enter 501234567) → admin views
- * User phone:  +966 50 765 4321 (enter 507654321) → same views as guest
+ * Admin phone: +966 50 123 4567 (enter 501234567) → admin views (`role: 'admin'`)
+ * User phone:  +966 50 765 4321 (enter 507654321) → user/player views (`role: 'user'`)
+ * Guest entry: "Enter as guest" on login → guest session only (`role: 'guest'`)
  * OTP: 12345
  * Invalid login: any other valid SA number
  * Invalid OTP: any code other than 12345

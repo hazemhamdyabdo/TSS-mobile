@@ -102,7 +102,7 @@ export default function HomeRankingRow({
 
       <Text
         className={`text-[14px] leading-[21.6px] ${
-          isCurrent ? "text-accent" : "text-primary"
+          entry.rank <= 3 ? "text-primary" : "text-slate-500"
         }`}
         style={{ fontFamily: cairo.regular, ...RTL_TEXT_STYLE }}
       >

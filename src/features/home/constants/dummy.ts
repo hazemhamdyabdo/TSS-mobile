@@ -23,7 +23,7 @@ export const DUMMY_PROFILE: HomeProfile = {
 
 export const DUMMY_GUEST_PROFILE: HomeProfile = {
   nameKey: 'home.guest.userName',
-  roleKey: 'home.role.player',
+  roleKey: 'home.role.guest',
   notificationCount: 3,
 };
 
@@ -65,10 +65,10 @@ export const DUMMY_QUICK_ACTIONS: QuickAction[] = [
 ];
 
 export const DUMMY_GUEST_QUICK_ACTIONS: GuestQuickAction[] = [
-  { id: 'myCompetitions', labelKey: 'home.guest.quickActions.myCompetitions' },
-  { id: 'rankings', labelKey: 'home.guest.quickActions.rankings' },
-  { id: 'penalties', labelKey: 'home.guest.quickActions.penalties' },
-  { id: 'profile', labelKey: 'home.guest.quickActions.profile' },
+  { id: 'competitions', labelKey: 'home.guest.quickActions.competitions' },
+  { id: 'clubs', labelKey: 'home.guest.quickActions.clubs' },
+  { id: 'players', labelKey: 'home.guest.quickActions.players' },
+  { id: 'news', labelKey: 'home.guest.quickActions.news' },
 ];
 
 export const DUMMY_TASKS: RecentTask[] = [
@@ -122,19 +122,21 @@ export const DUMMY_TASKS: RecentTask[] = [
 export const DUMMY_UPCOMING_COMPETITIONS: UpcomingCompetition[] = [
   {
     id: 'upcoming-1',
-    titleKey: 'home.banner.kingdom.title',
-    eventTypeKey: 'home.banner.kingdom.eventType',
-    locationKey: 'home.banner.kingdom.location',
-    dateKey: 'home.banner.kingdom.date',
+    titleKey: 'competitions.items.asian.title',
+    eventTypeKey: 'competitions.eventType.individualFoil',
+    locationKey: 'competitions.items.asian.location',
+    dateKey: 'competitions.items.asian.date',
     timeKey: 'home.banner.kingdom.time',
+    status: 'ongoing',
   },
   {
     id: 'upcoming-2',
-    titleKey: 'home.banner.kingdom.title',
-    eventTypeKey: 'home.banner.kingdom.eventType',
-    locationKey: 'home.banner.kingdom.location',
+    titleKey: 'competitions.items.worldCup.title',
+    eventTypeKey: 'competitions.eventType.individualFoil',
+    locationKey: 'competitions.items.worldCup.location',
     dateKey: 'home.banner.kingdom.date',
     timeKey: 'home.banner.kingdom.time',
+    status: 'upcoming',
   },
 ];
 
@@ -168,8 +170,8 @@ export const DUMMY_RANKINGS_PREVIEW: HomeRankingsPreview = {
     {
       id: 'rank-4',
       rank: 4,
-      nameKey: 'home.guest.ranking.leaderName',
-      points: 1988,
+      nameKey: 'home.guest.ranking.runnerName',
+      points: 1966,
     },
     {
       id: 'rank-5',
@@ -243,6 +245,18 @@ export const DUMMY_LEADERBOARD: GuestLeaderboard = {
     {
       id: 'list-10',
       rank: 10,
+      nameKey: 'home.guest.ranking.runnerName',
+      points: 1833,
+    },
+    {
+      id: 'list-11',
+      rank: 11,
+      nameKey: 'home.guest.ranking.runnerName',
+      points: 1833,
+    },
+    {
+      id: 'list-12',
+      rank: 12,
       nameKey: 'home.guest.ranking.runnerName',
       points: 1833,
     },

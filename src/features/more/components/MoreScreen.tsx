@@ -5,6 +5,7 @@ import { Pressable, ScrollView, Text, View } from "react-native";
 
 import ScreenSafeAreaView from "@/components/ScreenSafeAreaView";
 import { useAuthState } from "@/features/auth/hooks/useAuthState";
+import { getAuthRole } from "@/features/auth/utils/sessionRole";
 import CreateScreenHeader from "@/features/create/components/CreateScreenHeader";
 import { RTL_CONTAINER_STYLE, RTL_TEXT_STYLE } from "@/localization/direction";
 import { cairo } from "@/theme/typography";
@@ -12,15 +13,32 @@ import { cairo } from "@/theme/typography";
 import {
   GUEST_MORE_HUB_ACTIONS,
   MORE_HUB_ACTIONS,
+  USER_MORE_HUB_ACTIONS,
 } from "../constants/actions";
 import MoreHubIcon from "./MoreHubIcon";
+
+function moreActionsForRole(role: ReturnType<typeof getAuthRole>) {
+  switch (role) {
+    case "guest":
+      return GUEST_MORE_HUB_ACTIONS;
+    case "user":
+      return USER_MORE_HUB_ACTIONS;
+    case "admin":
+      return MORE_HUB_ACTIONS;
+    case null:
+      return MORE_HUB_ACTIONS;
+    default: {
+      const exhaustive: never = role;
+      throw new Error(`Unhandled auth role: ${exhaustive}`);
+    }
+  }
+}
 
 export default function MoreScreen() {
   const { t } = useTranslation();
   const router = useRouter();
   const { session } = useAuthState();
-  const isGuest = Boolean(session?.isGuest);
-  const actions = isGuest ? GUEST_MORE_HUB_ACTIONS : MORE_HUB_ACTIONS;
+  const actions = moreActionsForRole(getAuthRole(session));
 
   return (
     <ScreenSafeAreaView

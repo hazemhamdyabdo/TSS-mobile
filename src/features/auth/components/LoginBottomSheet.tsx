@@ -92,6 +92,9 @@ const LoginBottomSheet = forwardRef<LoginBottomSheetRef>(function LoginBottomShe
             )
           }
           onContactPress={() => navigateAfterDismiss('/(auth)/contact')}
+          onGuestEntered={() =>
+            navigateAfterDismiss('/(tabs)', { replace: true })
+          }
         />
       </BottomSheetScrollView>
     </BottomSheetModal>

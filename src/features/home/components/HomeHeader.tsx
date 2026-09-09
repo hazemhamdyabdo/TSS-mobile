@@ -16,6 +16,8 @@ type HomeHeaderProps = {
   onNotificationsPress: () => void;
   onAvatarPress?: () => void;
   welcomeKey?: string;
+  showNotifications?: boolean;
+  avatarInitial?: string;
 };
 
 export default function HomeHeader({
@@ -26,6 +28,8 @@ export default function HomeHeader({
   onNotificationsPress,
   onAvatarPress,
   welcomeKey = 'home.welcome',
+  showNotifications = true,
+  avatarInitial,
 }: HomeHeaderProps) {
   const { t } = useTranslation();
   const resolvedAvatar = avatarSource ?? avatarImage;
@@ -38,9 +42,14 @@ export default function HomeHeader({
           accessibilityLabel={t('more.profile.title')}
           onPress={onAvatarPress}
           disabled={!onAvatarPress}
-          className="relative size-8 items-center justify-center overflow-hidden rounded-full"
-        >
-          <Image source={resolvedAvatar} style={{ width: 32, height: 32 }} contentFit="cover" />
+          className="relative size-8 items-center justify-center overflow-hidden rounded-full bg-primary/10">
+          {avatarInitial ? (
+            <Text className="text-xs text-primary" style={{ fontFamily: cairo.bold }}>
+              {avatarInitial}
+            </Text>
+          ) : (
+            <Image source={resolvedAvatar} style={{ width: 32, height: 32 }} contentFit="cover" />
+          )}
         </Pressable>
 
         <Image
@@ -50,22 +59,24 @@ export default function HomeHeader({
           accessibilityLabel={t('home.logoLabel')}
         />
 
-        <Pressable
-          accessibilityRole="button"
-          accessibilityLabel={t('home.notifications')}
-          onPress={onNotificationsPress}
-          className="relative size-8 items-center justify-center rounded-2xl border border-slate-100 bg-white">
-          <Image source={bellIcon} style={{ width: 16, height: 16 }} contentFit="contain" />
-          {notificationCount > 0 ? (
-            <View className="absolute -right-0.5 -top-0.5 size-3.5 items-center justify-center overflow-hidden rounded-md bg-primary">
-              <Text
-                className="text-[7px] leading-[8px] text-white"
-                style={{ fontFamily: cairo.bold }}>
-                {notificationCount}
-              </Text>
-            </View>
-          ) : null}
-        </Pressable>
+        {showNotifications ? (
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel={t('home.notifications')}
+            onPress={onNotificationsPress}
+            className="relative size-8 items-center justify-center rounded-2xl border border-slate-100 bg-white">
+            <Image source={bellIcon} style={{ width: 16, height: 16 }} contentFit="contain" />
+            {notificationCount > 0 ? (
+              <View className="absolute -right-0.5 -top-0.5 size-3.5 items-center justify-center overflow-hidden rounded-md bg-primary">
+                <Text
+                  className="text-[7px] leading-[8px] text-white"
+                  style={{ fontFamily: cairo.bold }}>
+                  {notificationCount}
+                </Text>
+              </View>
+            ) : null}
+          </Pressable>
+        ) : null}
       </View>
 
       <View className="flex-row items-center justify-between">

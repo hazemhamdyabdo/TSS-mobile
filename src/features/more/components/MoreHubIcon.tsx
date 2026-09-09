@@ -31,6 +31,8 @@ export default function MoreHubIcon({ actionId }: MoreHubIconProps) {
     case 'settings':
       return <SvgXml xml={SETTINGS_ICON_XML} width={20} height={20} />;
     case 'policies':
+    case 'laws':
+    case 'regulations':
       return <SvgXml xml={POLICIES_ICON_XML} width={24} height={24} />;
     case 'contact':
       return <SvgXml xml={CONTACT_ICON_XML} width={20} height={20} />;

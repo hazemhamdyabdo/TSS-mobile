@@ -5,6 +5,7 @@ export const enFeatures = {
     members: 'Members',
     more: 'More',
     add: 'Add',
+    live: 'Live',
     rankings: 'Ranking',
     penalties: 'My penalties',
   },
@@ -18,6 +19,7 @@ export const enFeatures = {
     role: {
       federationOfficial: 'Federation official',
       player: 'Player',
+      guest: 'Guest',
     },
     banner: {
       category: 'Championships',
@@ -53,19 +55,21 @@ export const enFeatures = {
     },
     guest: {
       userName: 'Ahmed',
-      welcome: 'Hello {{name}}',
+      welcome: 'Welcome',
+      avatarInitial: 'G',
       quickActions: {
         title: 'Quick access',
-        myCompetitions: 'My competitions',
-        rankings: 'Ranking',
-        penalties: 'Penalties',
-        profile: 'My profile',
+        competitions: 'Competitions',
+        clubs: 'Clubs',
+        players: 'Players',
+        news: 'Latest news',
       },
       upcoming: {
-        title: 'My upcoming competitions',
+        title: 'Competitions',
       },
       ranking: {
         title: 'Ranking',
+        playersTitle: 'Players ranking',
         search: 'Search rankings',
         filter: 'Filter',
         empty: 'No rankings match this search',
@@ -812,6 +816,14 @@ export const enFeatures = {
           title: 'Federation policies',
           subtitle: 'View policies to learn more about the federation',
         },
+        laws: {
+          title: 'Federation laws',
+          subtitle: 'View policies to learn more about the federation',
+        },
+        regulations: {
+          title: 'Federation regulations',
+          subtitle: 'View policies to learn more about the federation',
+        },
         contact: {
           title: 'Contact us',
           subtitle: 'Get in touch with us to resolve any issues',
@@ -827,6 +839,7 @@ export const enFeatures = {
       phone: 'Phone number',
       logout: 'Log out',
       logoutConfirm: 'Are you sure you want to log out?',
+      login: 'Log in',
       sections: {
         profile: 'Profile settings',
         app: 'App settings',

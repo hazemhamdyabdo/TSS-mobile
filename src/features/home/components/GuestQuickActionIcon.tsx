@@ -1,10 +1,10 @@
 import { SvgXml } from 'react-native-svg';
 
 import {
+  GUEST_CLUBS_ICON_XML,
   GUEST_COMPETITIONS_ICON_XML,
-  GUEST_PENALTIES_ICON_XML,
-  GUEST_PROFILE_ICON_XML,
-  GUEST_RANKINGS_ICON_XML,
+  GUEST_NEWS_ICON_XML,
+  GUEST_PLAYERS_ICON_XML,
 } from '../constants/guestIcons';
 import type { GuestQuickActionId } from '../types';
 
@@ -18,14 +18,14 @@ export default function GuestQuickActionIcon({
   size = 24,
 }: GuestQuickActionIconProps) {
   switch (actionId) {
-    case 'myCompetitions':
+    case 'competitions':
       return <SvgXml xml={GUEST_COMPETITIONS_ICON_XML} width={size} height={size} />;
-    case 'rankings':
-      return <SvgXml xml={GUEST_RANKINGS_ICON_XML} width={size} height={size} />;
-    case 'penalties':
-      return <SvgXml xml={GUEST_PENALTIES_ICON_XML} width={size} height={size} />;
-    case 'profile':
-      return <SvgXml xml={GUEST_PROFILE_ICON_XML} width={size} height={size} />;
+    case 'clubs':
+      return <SvgXml xml={GUEST_CLUBS_ICON_XML} width={size} height={size} />;
+    case 'players':
+      return <SvgXml xml={GUEST_PLAYERS_ICON_XML} width={size} height={size} />;
+    case 'news':
+      return <SvgXml xml={GUEST_NEWS_ICON_XML} width={size} height={size} />;
     default: {
       const exhaustive: never = actionId;
       throw new Error(`Unhandled guest quick action: ${exhaustive}`);

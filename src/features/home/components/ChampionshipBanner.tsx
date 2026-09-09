@@ -29,6 +29,8 @@ const SCREEN_GUTTER = 40;
 type ChampionshipBannerProps = {
   banners: ChampionshipBannerType[];
   onDiscoverPress: () => void;
+  /** When set, tapping the banner surface (not only Discover) uses this. */
+  onBannerPress?: () => void;
 };
 
 function BannerGradient({
@@ -61,11 +63,13 @@ function BannerGradient({
 export default function ChampionshipBanner({
   banners,
   onDiscoverPress,
+  onBannerPress,
 }: ChampionshipBannerProps) {
   const { t } = useTranslation();
   const { width: windowWidth } = useWindowDimensions();
   const [bannerWidth, setBannerWidth] = useState(windowWidth - SCREEN_GUTTER);
   const [activeIndex, setActiveIndex] = useState(0);
+  const handleBannerPress = onBannerPress ?? onDiscoverPress;
 
   const syncActiveIndex = (
     event: NativeSyntheticEvent<NativeScrollEvent>,
@@ -108,8 +112,10 @@ export default function ChampionshipBanner({
         onScrollEndDrag={syncActiveIndex}
       >
         {banners.map((banner) => (
-          <View
+          <Pressable
             key={banner.id}
+            accessibilityRole="button"
+            onPress={handleBannerPress}
             className="overflow-hidden rounded-lg"
             style={{ width: bannerWidth, height: BANNER_HEIGHT }}
           >
@@ -127,6 +133,7 @@ export default function ChampionshipBanner({
             <View
               className="absolute inset-0 items-start gap-3 p-3 pb-10"
               style={RTL_CONTAINER_STYLE}
+              pointerEvents="box-none"
             >
               <View className="rounded-3xl bg-primary/50 px-3 py-1.5">
                 <Text
@@ -182,7 +189,7 @@ export default function ChampionshipBanner({
 
             <Pressable
               accessibilityRole="button"
-              onPress={onDiscoverPress}
+              onPress={handleBannerPress}
               className="absolute bottom-3 left-3 flex-row items-center gap-1 rounded-full bg-primary px-2.5 py-2"
               style={{ direction: "ltr" }}
             >
@@ -198,7 +205,7 @@ export default function ChampionshipBanner({
                 {t("home.banner.discoverMore")}
               </Text>
             </Pressable>
-          </View>
+          </Pressable>
         ))}
       </ScrollView>
 

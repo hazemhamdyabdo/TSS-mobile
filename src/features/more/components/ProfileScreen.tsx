@@ -22,6 +22,7 @@ import ScreenSafeAreaView from "@/components/ScreenSafeAreaView";
 import PrimaryButton from "@/components/ui/PrimaryButton";
 import PhoneNumberField from "@/features/auth/components/PhoneNumberField";
 import { useAuthState } from "@/features/auth/hooks/useAuthState";
+import { isGuestSession, getAuthRole } from "@/features/auth/utils/sessionRole";
 import CreateScreenHeader from "@/features/create/components/CreateScreenHeader";
 import { RTL_CONTAINER_STYLE, RTL_TEXT_STYLE } from "@/localization/direction";
 import { colors } from "@/theme/colors";
@@ -65,7 +66,7 @@ export default function ProfileScreen() {
   const router = useRouter();
   const { session } = useAuthState();
   const { profile: storeProfile } = useMoreState();
-  const isGuest = Boolean(session?.isGuest);
+  const isGuest = isGuestSession(session);
   const profile = isGuest ? DUMMY_GUEST_PROFILE : storeProfile;
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [avatarUri, setAvatarUri] = useState(profile.avatarUri);
@@ -86,7 +87,7 @@ export default function ProfileScreen() {
 
   const avatarSource = resolveProfileAvatarSource(
     { ...profile, avatarUri },
-    isGuest,
+    getAuthRole(session),
   );
 
   const pickAvatar = async () => {

@@ -24,7 +24,7 @@ export default function UpcomingCompetitionsSection({
         <Text
           className="text-sm capitalize text-label"
           style={{ fontFamily: cairo.semiBold, ...RTL_TEXT_STYLE }}>
-          {t('home.guest.upcoming.title')}
+          {t('tabs.competitions')}
         </Text>
         <Pressable
           accessibilityRole="button"

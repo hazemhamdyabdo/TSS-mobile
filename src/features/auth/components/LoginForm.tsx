@@ -12,7 +12,7 @@ import PrimaryButton from "@/components/ui/PrimaryButton";
 
 import { getMockErrorMessage } from "@/utils/formErrors";
 
-import { requestOtp } from "../api";
+import { enterAsGuest, requestOtp } from "../api";
 import { MOCK_QA_PHONE } from "../constants/dummy";
 import {
   createLoginSchema,
@@ -25,15 +25,18 @@ import PhoneNumberField from "./PhoneNumberField";
 type LoginFormProps = {
   onOtpRequested?: (phone: string) => void;
   onContactPress?: () => void;
+  onGuestEntered?: () => void;
 };
 
 export default function LoginForm({
   onOtpRequested,
   onContactPress,
+  onGuestEntered,
 }: LoginFormProps) {
   const { t } = useTranslation();
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isGuestSubmitting, setIsGuestSubmitting] = useState(false);
   const schema = useMemo(() => createLoginSchema(t), [t]);
 
   const {
@@ -45,6 +48,8 @@ export default function LoginForm({
     resolver: zodResolver(schema),
     defaultValues: { phone: MOCK_QA_PHONE },
   });
+
+  const isBusy = isSubmitting || isGuestSubmitting;
 
   const onSubmit = async (values: LoginFormValues) => {
     setIsSubmitting(true);
@@ -64,6 +69,20 @@ export default function LoginForm({
       });
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const onEnterAsGuest = async () => {
+    setIsGuestSubmitting(true);
+    try {
+      await enterAsGuest();
+      if (onGuestEntered) {
+        onGuestEntered();
+      } else {
+        router.replace("/(tabs)");
+      }
+    } finally {
+      setIsGuestSubmitting(false);
     }
   };
 
@@ -93,6 +112,7 @@ export default function LoginForm({
           title={t("auth.verify")}
           onPress={handleSubmit(onSubmit)}
           loading={isSubmitting}
+          disabled={isBusy}
         />
       </View>
 
@@ -102,7 +122,14 @@ export default function LoginForm({
           <OutlineButton
             title={t("auth.contactFederation")}
             onPress={onContactPress ?? (() => router.push("/(auth)/contact"))}
-            disabled={isSubmitting}
+            disabled={isBusy}
+          />
+          <OutlineButton
+            title={t("auth.enterAsGuest")}
+            variant="muted"
+            onPress={onEnterAsGuest}
+            loading={isGuestSubmitting}
+            disabled={isBusy}
           />
         </View>
       </View>

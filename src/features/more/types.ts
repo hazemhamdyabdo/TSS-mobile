@@ -6,6 +6,8 @@ export type MoreHubId =
   | 'transfers'
   | 'settings'
   | 'policies'
+  | 'laws'
+  | 'regulations'
   | 'contact';
 
 export type MoreHubHref =
@@ -32,7 +34,8 @@ export type SettingsRowId =
   | 'privacy'
   | 'help'
   | 'darkMode'
-  | 'logout';
+  | 'logout'
+  | 'login';
 
 export type UserProfile = {
   name: string;

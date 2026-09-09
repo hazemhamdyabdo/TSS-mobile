@@ -6,13 +6,13 @@ import { Alert, ScrollView, Text, View } from "react-native";
 import ScreenSafeAreaView from "@/components/ScreenSafeAreaView";
 import { signOut } from "@/features/auth/api";
 import { useAuthState } from "@/features/auth/hooks/useAuthState";
+import { isGuestSession } from "@/features/auth/utils/sessionRole";
 import CreateScreenHeader from "@/features/create/components/CreateScreenHeader";
 import { RTL_CONTAINER_STYLE, RTL_TEXT_STYLE } from "@/localization/direction";
 import { cairo } from "@/theme/typography";
 
 import { setDarkMode } from "../api";
 import { APP_COPYRIGHT_YEAR, APP_VERSION_LABEL } from "../constants/app";
-import { DUMMY_GUEST_PROFILE } from "../constants/dummy";
 import { useMoreState } from "../hooks/useMoreState";
 import SettingsProfileCard from "./SettingsProfileCard";
 import SettingsRow from "./SettingsRow";
@@ -21,8 +21,8 @@ export default function SettingsScreen() {
   const { t } = useTranslation();
   const router = useRouter();
   const { session } = useAuthState();
-  const { profile: storeProfile, darkMode } = useMoreState();
-  const profile = session?.isGuest ? DUMMY_GUEST_PROFILE : storeProfile;
+  const { profile, darkMode } = useMoreState();
+  const isGuest = isGuestSession(session);
 
   const handleLogout = () => {
     Alert.alert(t("more.settings.logout"), t("more.settings.logoutConfirm"), [
@@ -38,6 +38,11 @@ export default function SettingsScreen() {
     ]);
   };
 
+  const handleLogin = async () => {
+    await signOut();
+    router.replace("/(auth)/login");
+  };
+
   return (
     <ScreenSafeAreaView
       className="flex-1 bg-background"
@@ -51,21 +56,23 @@ export default function SettingsScreen() {
         contentContainerClassName="gap-4 px-5 pb-8 pt-2"
         showsVerticalScrollIndicator={false}
       >
-        <SettingsProfileCard profile={profile} />
+        {isGuest ? null : <SettingsProfileCard profile={profile} />}
 
-        <View className="w-full gap-4">
-          <Text
-            className="w-full text-xs capitalize tracking-[0.1px] text-accent"
-            style={{ fontFamily: cairo.medium, ...RTL_TEXT_STYLE }}
-          >
-            {t("more.settings.sections.profile")}
-          </Text>
-          <SettingsRow
-            rowId="profile"
-            label={t("more.settings.rows.profile")}
-            onPress={() => router.push("/profile")}
-          />
-        </View>
+        {isGuest ? null : (
+          <View className="w-full gap-4">
+            <Text
+              className="w-full text-xs capitalize tracking-[0.1px] text-accent"
+              style={{ fontFamily: cairo.medium, ...RTL_TEXT_STYLE }}
+            >
+              {t("more.settings.sections.profile")}
+            </Text>
+            <SettingsRow
+              rowId="profile"
+              label={t("more.settings.rows.profile")}
+              onPress={() => router.push("/profile")}
+            />
+          </View>
+        )}
 
         <View className="w-full gap-4">
           <Text
@@ -74,20 +81,29 @@ export default function SettingsScreen() {
           >
             {t("more.settings.sections.app")}
           </Text>
-          <View>
-            <SettingsRow
-              rowId="notifications"
-              label={t("more.settings.rows.notifications")}
-              position="first"
-              onPress={() => router.push("/notifications")}
-            />
+          {isGuest ? (
             <SettingsRow
               rowId="language"
               label={t("more.settings.rows.language")}
-              position="last"
+              position="single"
               onPress={() => router.push("/language")}
             />
-          </View>
+          ) : (
+            <View>
+              <SettingsRow
+                rowId="notifications"
+                label={t("more.settings.rows.notifications")}
+                position="first"
+                onPress={() => router.push("/notifications")}
+              />
+              <SettingsRow
+                rowId="language"
+                label={t("more.settings.rows.language")}
+                position="last"
+                onPress={() => router.push("/language")}
+              />
+            </View>
+          )}
         </View>
 
         <View className="w-full gap-4">
@@ -120,14 +136,27 @@ export default function SettingsScreen() {
                 void setDarkMode(value);
               }}
             />
-            <SettingsRow
-              rowId="logout"
-              label={t("more.settings.logout")}
-              variant="action"
-              tone="danger"
-              position="last"
-              onPress={handleLogout}
-            />
+            {isGuest ? (
+              <SettingsRow
+                rowId="login"
+                label={t("more.settings.login")}
+                variant="action"
+                tone="default"
+                position="last"
+                onPress={() => {
+                  void handleLogin();
+                }}
+              />
+            ) : (
+              <SettingsRow
+                rowId="logout"
+                label={t("more.settings.logout")}
+                variant="action"
+                tone="danger"
+                position="last"
+                onPress={handleLogout}
+              />
+            )}
           </View>
         </View>
 

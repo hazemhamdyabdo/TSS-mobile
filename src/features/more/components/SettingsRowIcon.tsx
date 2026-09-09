@@ -30,6 +30,7 @@ export default function SettingsRowIcon({ rowId }: SettingsRowIconProps) {
     case 'darkMode':
       return <SvgXml xml={DARK_MODE_ICON_XML} width={22} height={22} />;
     case 'logout':
+    case 'login':
       return <SvgXml xml={LOGOUT_ICON_XML} width={22} height={22} />;
     default: {
       const exhaustive: never = rowId;

@@ -8,9 +8,13 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { SvgXml } from "react-native-svg";
 
 import TabIcon, { type TabName } from "@/components/TabIcon";
+import { MORE_TAB_ICON_XML } from "@/components/tabIconXml";
 import { useAuthState } from "@/features/auth/hooks/useAuthState";
+import { getAuthRole } from "@/features/auth/utils/sessionRole";
 import {
   GUEST_COMPETITIONS_ICON_XML,
+  GUEST_HOME_ICON_XML,
+  GUEST_LIVE_ICON_XML,
   GUEST_PENALTIES_ICON_XML,
   GUEST_RANKINGS_ICON_XML,
 } from "@/features/home/constants/guestIcons";
@@ -55,9 +59,16 @@ type TabItemProps = {
   focused: boolean;
   onPress: () => void;
   children: ReactNode;
+  widthClassName?: string;
 };
 
-function TabItem({ label, focused, onPress, children }: TabItemProps) {
+function TabItem({
+  label,
+  focused,
+  onPress,
+  children,
+  widthClassName,
+}: TabItemProps) {
   const color = focused ? colors.primary : colors.slate400;
 
   return (
@@ -65,7 +76,7 @@ function TabItem({ label, focused, onPress, children }: TabItemProps) {
       accessibilityRole="button"
       accessibilityState={{ selected: focused }}
       onPress={onPress}
-      className="h-full items-center justify-center gap-1"
+      className={`h-full items-center justify-center gap-1 ${widthClassName ?? ""}`}
     >
       {focused ? (
         <View className="absolute top-0 h-1 w-9 rounded-b-sm bg-tab-indicator" />
@@ -91,6 +102,7 @@ type GuestSideItemProps = {
   onPress: () => void;
   iconXml: string;
   size?: number;
+  widthClassName?: string;
 };
 
 function GuestSideItem({
@@ -99,14 +111,21 @@ function GuestSideItem({
   onPress,
   iconXml,
   size = 24,
+  widthClassName = "w-[45px]",
 }: GuestSideItemProps) {
   const color = focused ? colors.primary : colors.slate400;
   const xml = iconXml
     .replaceAll("#018A43", color)
+    .replaceAll("#CBD5E1", color)
     .replaceAll('stroke="#018A43"', `stroke="${color}"`);
 
   return (
-    <TabItem label={label} focused={focused} onPress={onPress}>
+    <TabItem
+      label={label}
+      focused={focused}
+      onPress={onPress}
+      widthClassName={widthClassName}
+    >
       <SvgXml xml={xml} width={size} height={size} />
     </TabItem>
   );
@@ -117,7 +136,7 @@ export default function AppTabBar({ state, navigation }: BottomTabBarProps) {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const { session } = useAuthState();
-  const isGuest = Boolean(session?.isGuest);
+  const role = getAuthRole(session);
   const focusedName = state.routes[state.index]?.name;
   const focusedTab = isTabName(focusedName ?? "") ? focusedName : null;
 
@@ -132,7 +151,96 @@ export default function AppTabBar({ state, navigation }: BottomTabBarProps) {
     navigateInTabs(navigation, state, name, focusedTab ?? undefined);
   }
 
-  if (isGuest) {
+  if (role === "guest") {
+    const rankingsFocused = focusedName === "rankings";
+    const competitionsFocused = focusedTab === "competitions";
+    const liveLabel = t("tabs.live");
+
+    return (
+      <View
+        className="overflow-visible bg-white"
+        style={{ paddingBottom: Math.max(insets.bottom, 8) }}
+      >
+        <View className="h-[70px] flex-row items-center justify-center gap-[122px] px-5">
+          <View className="h-full w-[118px] flex-row items-center justify-center gap-8">
+            <GuestSideItem
+              label={labels.index}
+              focused={focusedTab === "index"}
+              onPress={() => navigateTo("index")}
+              iconXml={GUEST_HOME_ICON_XML}
+              widthClassName="w-[41px]"
+            />
+            <GuestSideItem
+              label={t("tabs.rankings")}
+              focused={rankingsFocused}
+              onPress={() =>
+                navigateInTabs(navigation, state, "rankings", focusedName)
+              }
+              iconXml={GUEST_RANKINGS_ICON_XML}
+            />
+          </View>
+
+          <View className="h-full flex-row items-center justify-center gap-8">
+            <GuestSideItem
+              label={labels.competitions}
+              focused={competitionsFocused}
+              onPress={() => navigateTo("competitions")}
+              iconXml={GUEST_COMPETITIONS_ICON_XML}
+            />
+            <GuestSideItem
+              label={labels.more}
+              focused={focusedTab === "more"}
+              onPress={() => navigateTo("more")}
+              iconXml={MORE_TAB_ICON_XML}
+            />
+          </View>
+        </View>
+
+        <View
+          pointerEvents="box-none"
+          className="absolute left-0 right-0 items-center"
+          style={{ top: -22 }}
+        >
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel={liveLabel}
+            // TODO: wire guest live broadcast screen when available
+            onPress={() => undefined}
+            className="items-center gap-1"
+          >
+            <View
+              className="size-[60px] items-center justify-center rounded-full bg-primary/20"
+              style={{
+                shadowColor: "#000",
+                shadowOffset: { width: 0, height: 1 },
+                shadowOpacity: 0.15,
+                shadowRadius: 4,
+                elevation: 3,
+              }}
+            >
+              <View className="size-[45px] items-center justify-center rounded-full bg-primary">
+                <SvgXml xml={GUEST_LIVE_ICON_XML} width={24} height={24} />
+              </View>
+            </View>
+            <Text
+              className="text-[12px]"
+              numberOfLines={1}
+              adjustsFontSizeToFit
+              minimumFontScale={0.75}
+              style={{
+                fontFamily: cairo.regular,
+                color: colors.slate400,
+              }}
+            >
+              {liveLabel}
+            </Text>
+          </Pressable>
+        </View>
+      </View>
+    );
+  }
+
+  if (role === "user") {
     const rankingsFocused = focusedName === "rankings";
     const punishmentsFocused = focusedName === "punishments";
     const competitionsFocused = focusedTab === "competitions";

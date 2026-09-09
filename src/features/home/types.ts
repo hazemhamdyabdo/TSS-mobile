@@ -5,16 +5,16 @@ export type TaskType = 'transfer' | 'competition' | 'coach' | 'referee';
 export type QuickActionId = 'addPlayer' | 'addCoach' | 'addReferee' | 'addCompetition';
 
 export type GuestQuickActionId =
-  | 'myCompetitions'
-  | 'rankings'
-  | 'penalties'
-  | 'profile';
+  | 'competitions'
+  | 'clubs'
+  | 'players'
+  | 'news';
 
 export type RelativeTimeUnit = 'minutes' | 'hours';
 
 export type HomeProfile = {
   nameKey: 'home.userName' | 'home.guest.userName';
-  roleKey: 'home.role.federationOfficial' | 'home.role.player';
+  roleKey: 'home.role.federationOfficial' | 'home.role.player' | 'home.role.guest';
   notificationCount: number;
 };
 
@@ -55,6 +55,7 @@ export type UpcomingCompetition = {
   locationKey: string;
   dateKey: string;
   timeKey: string;
+  status: 'ongoing' | 'upcoming';
 };
 
 export type HomeRankingEntry = {

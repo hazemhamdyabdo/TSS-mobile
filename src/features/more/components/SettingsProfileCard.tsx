@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Text, View } from "react-native";
 
 import { useAuthState } from "@/features/auth/hooks/useAuthState";
+import { getAuthRole } from "@/features/auth/utils/sessionRole";
 import { RTL_CONTAINER_STYLE, RTL_TEXT_STYLE } from "@/localization/direction";
 import { cairo } from "@/theme/typography";
 
@@ -19,8 +20,7 @@ export default function SettingsProfileCard({
 }: SettingsProfileCardProps) {
   const { t } = useTranslation();
   const { session } = useAuthState();
-  const isGuest = Boolean(session?.isGuest);
-  const avatarSource = resolveProfileAvatarSource(profile, isGuest);
+  const avatarSource = resolveProfileAvatarSource(profile, getAuthRole(session));
 
   return (
     <View className="mt-6 w-full">

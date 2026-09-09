@@ -7,10 +7,11 @@ export const DUMMY_PROFILE: UserProfile = {
   roleKey: 'home.role.federationOfficial',
 };
 
-export const DUMMY_GUEST_PROFILE: UserProfile = {
+/** Authenticated player (user phone 507654321). */
+export const DUMMY_USER_PROFILE: UserProfile = {
   name: 'احمد الخالدي',
   email: 'Ahmed@fencing_sa',
-  phone: '123456789',
+  phone: '507654321',
   roleKey: 'home.role.player',
   playerDetails: {
     club: 'نادي الاتحاد',
@@ -24,6 +25,12 @@ export const DUMMY_GUEST_PROFILE: UserProfile = {
     contractStart: '29-06-2026',
     contractEnd: '29-06-2027',
   },
+};
+
+/** Guest display profile (settings card hidden; used on guest home/avatar). */
+export const DUMMY_GUEST_PROFILE: UserProfile = {
+  ...DUMMY_USER_PROFILE,
+  phone: '123456789',
 };
 
 export const EMPTY_MORE_STATE: MoreState = {

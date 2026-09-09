@@ -5,6 +5,7 @@ export const arFeatures = {
     members: 'الاعضاء',
     more: 'المزيد',
     add: 'اضافة',
+    live: 'بث مباشر',
     rankings: 'التصنيف',
     penalties: 'عقوباتي',
   },
@@ -18,6 +19,7 @@ export const arFeatures = {
     role: {
       federationOfficial: 'مسؤول الاتحاد',
       player: 'لاعب',
+      guest: 'زائر',
     },
     banner: {
       category: 'البطولات',
@@ -53,19 +55,21 @@ export const arFeatures = {
     },
     guest: {
       userName: 'احمد',
-      welcome: 'مرحبا {{name}}',
+      welcome: 'مرحبا بك',
+      avatarInitial: 'ز',
       quickActions: {
         title: 'الوصول السريع',
-        myCompetitions: 'مسابقاتي',
-        rankings: 'التصنيف',
-        penalties: 'العقوبات',
-        profile: 'ملفي الشخصي',
+        competitions: 'المسابقات',
+        clubs: 'الاندية',
+        players: 'الاعبين',
+        news: 'اخر الاخبار',
       },
       upcoming: {
-        title: 'مسابقاتي القادمة',
+        title: 'المسابقات',
       },
       ranking: {
         title: 'التصنيف',
+        playersTitle: 'تصنيف الاعبين',
         search: 'بحث في التصنيف',
         filter: 'فلترة',
         empty: 'لا توجد نتائج مطابقة للبحث',
@@ -812,6 +816,14 @@ export const arFeatures = {
           title: 'سياسات الاتحاد',
           subtitle: 'قم برؤية السياسات لمعرفة المزيد عن الاتحاد',
         },
+        laws: {
+          title: 'قوانين الاتحاد',
+          subtitle: 'قم برؤية السياسات لمعرفة المزيد عن الاتحاد',
+        },
+        regulations: {
+          title: 'لوائح الاتحاد',
+          subtitle: 'قم برؤية السياسات لمعرفة المزيد عن الاتحاد',
+        },
         contact: {
           title: 'تواصل معنا',
           subtitle: 'قم بالتواصل معنا لحل جميع مشاكلك',
@@ -827,6 +839,7 @@ export const arFeatures = {
       phone: 'رقم الهاتف',
       logout: 'تسجيل الخروج',
       logoutConfirm: 'هل أنت متأكد أنك تريد تسجيل الخروج؟',
+      login: 'تسجيل الدخول',
       sections: {
         profile: 'إعدادات الملف الشخصي',
         app: 'إعدادات التطبيق',
