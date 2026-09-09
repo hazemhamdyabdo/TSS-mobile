@@ -18,7 +18,26 @@ export type MoreHubHref =
   | '/transfers'
   | '/settings'
   | '/privacy'
-  | '/help';
+  | '/help'
+  | '/regulations';
+
+export type RegulationCategory =
+  | 'competitions'
+  | 'players'
+  | 'clubs'
+  | 'nationalTeams'
+  | 'referees'
+  | 'rankings';
+
+export type RegulationFilter = 'all' | Exclude<RegulationCategory, 'nationalTeams' | 'rankings'>;
+
+export type RegulationDocument = {
+  id: string;
+  category: RegulationCategory;
+  titleKey: string;
+  descriptionKey: string;
+  fileSizeMb: string;
+};
 
 export type MoreHubAction = {
   id: MoreHubId;

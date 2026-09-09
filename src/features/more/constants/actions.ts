@@ -9,7 +9,7 @@ export const MORE_HUB_ROUTES: Record<MoreHubId, MoreHubHref> = {
   settings: '/settings',
   policies: '/privacy',
   laws: '/privacy',
-  regulations: '/privacy',
+  regulations: '/regulations',
   contact: '/help',
 };
 

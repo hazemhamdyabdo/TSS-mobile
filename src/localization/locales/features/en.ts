@@ -833,6 +833,50 @@ export const enFeatures = {
     placeholder: {
       body: 'This section will be added soon.',
     },
+    regulations: {
+      search: 'Search regulations',
+      fileType: 'PDF',
+      fileSize: '{{size}} MB',
+      filters: {
+        all: 'All',
+        competitions: 'Competitions',
+        players: 'Players',
+        clubs: 'Clubs',
+        referees: 'Referees',
+      },
+      documents: {
+        competitions: {
+          title: 'Competition regulations',
+          description:
+            'Sets the conditions and procedures for holding Saudi Fencing Federation competitions and participating in them.',
+        },
+        players: {
+          title: 'Player regulations',
+          description:
+            'Sets the conditions and procedures for holding Saudi Fencing Federation competitions and participating in them.',
+        },
+        clubs: {
+          title: 'Club regulations',
+          description:
+            'Sets the conditions and procedures for holding Saudi Fencing Federation competitions and participating in them.',
+        },
+        nationalTeams: {
+          title: 'National team regulations',
+          description:
+            'Sets the conditions and procedures for holding Saudi Fencing Federation competitions and participating in them.',
+        },
+        referees: {
+          title: 'Referee regulations',
+          description:
+            'Sets the conditions and procedures for holding Saudi Fencing Federation competitions and participating in them.',
+        },
+        rankings: {
+          title: 'Ranking regulations',
+          description:
+            'Sets the conditions and procedures for holding Saudi Fencing Federation competitions and participating in them.',
+        },
+      },
+    },
     settings: {
       title: 'Settings',
       email: 'Email',
