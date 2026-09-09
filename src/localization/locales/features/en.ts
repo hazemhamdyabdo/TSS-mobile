@@ -970,6 +970,67 @@ export const enFeatures = {
         },
       },
     },
+    policies: {
+      search: 'Search policies',
+      includesLabel: 'Includes:',
+      sections: {
+        privacy: {
+          title: 'Privacy policy',
+          summary: 'Explains how user data is collected, used, and protected.',
+          bullets: {
+            personalData: 'Personal data',
+            dataUse: 'Use of data',
+            dataSharing: 'Data sharing',
+            protection: 'Information protection',
+            userRights: 'User rights',
+          },
+        },
+        platformUse: {
+          title: 'Platform usage policy',
+          summary: 'Explains the terms of use for the federation application.',
+          bullets: {
+            acceptableUse: 'Acceptable use',
+            accountSuspension: 'Account suspension',
+            accountCreation: 'Account creation',
+            userResponsibility: 'User responsibility',
+            content: 'Content',
+          },
+        },
+        conduct: {
+          title: 'Conduct and discipline policy',
+          summary: 'Defines the standards of behavior expected from federation members.',
+          bullets: {
+            tournamentConduct: 'Conduct during tournaments',
+            violations: 'Violations',
+            sportsmanship: 'Sportsmanship',
+            respect: 'Respect',
+            referees: 'Dealing with referees',
+          },
+        },
+        playerProtection: {
+          title: 'Player protection policy',
+          summary: 'Procedures related to the safety and protection of participants.',
+          bullets: {
+            abusePrevention: 'Abuse prevention',
+            clubResponsibilities: 'Club responsibilities',
+            minors: 'Protection of minors',
+            professionalConduct: 'Professional conduct',
+            reporting: 'Reporting violations',
+          },
+        },
+        integrity: {
+          title: 'Sports integrity policy',
+          summary: 'Aims to maintain integrity and fairness in competitions.',
+          bullets: {
+            unsportsmanlike: 'Unsportsmanlike conduct',
+            reporting: 'Reporting violations',
+            integrity: 'Integrity',
+            conflictOfInterest: 'Conflict of interest',
+            manipulation: 'Competition manipulation',
+          },
+        },
+      },
+    },
     settings: {
       title: 'Settings',
       email: 'Email',

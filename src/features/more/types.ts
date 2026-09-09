@@ -20,7 +20,8 @@ export type MoreHubHref =
   | '/privacy'
   | '/help'
   | '/regulations'
-  | '/laws';
+  | '/laws'
+  | '/policies';
 
 export type RegulationCategory =
   | 'competitions'
@@ -81,6 +82,20 @@ export type FencingLawSection = {
   id: FencingLawSectionId;
   titleKey: string;
   articles: FencingLawArticle[];
+};
+
+export type PolicySectionId =
+  | 'privacy'
+  | 'platformUse'
+  | 'conduct'
+  | 'playerProtection'
+  | 'integrity';
+
+export type PolicySection = {
+  id: PolicySectionId;
+  titleKey: string;
+  summaryKey: string;
+  bulletKeys: string[];
 };
 
 export type MoreHubAction = {

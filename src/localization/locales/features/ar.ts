@@ -970,6 +970,67 @@ export const arFeatures = {
         },
       },
     },
+    policies: {
+      search: 'بحث في السياسات',
+      includesLabel: 'تشمل:',
+      sections: {
+        privacy: {
+          title: 'سياسة الخصوصية',
+          summary: 'توضح كيفية جمع واستخدام وحماية بيانات المستخدمين.',
+          bullets: {
+            personalData: 'البيانات الشخصية',
+            dataUse: 'استخدام البيانات',
+            dataSharing: 'مشاركة البيانات',
+            protection: 'حماية المعلومات',
+            userRights: 'حقوق المستخدم',
+          },
+        },
+        platformUse: {
+          title: 'سياسة استخدام المنصة',
+          summary: 'توضح شروط استخدام تطبيق الاتحاد',
+          bullets: {
+            acceptableUse: 'الاستخدام المقبول',
+            accountSuspension: 'إيقاف الحساب',
+            accountCreation: 'إنشاء الحساب',
+            userResponsibility: 'مسؤولية المستخدم',
+            content: 'المحتوى',
+          },
+        },
+        conduct: {
+          title: 'سياسة السلوك والانضباط',
+          summary: 'تحدد معايير السلوك المتوقع من اعضاء الاتحاد',
+          bullets: {
+            tournamentConduct: 'السلوك أثناء البطولات',
+            violations: 'المخالفات',
+            sportsmanship: 'السلوك الرياضي',
+            respect: 'الاحترام',
+            referees: 'التعامل مع الحكام',
+          },
+        },
+        playerProtection: {
+          title: 'سياسة حماية اللاعبين',
+          summary: 'الإجراءات المتعلقة بسلامة وحماية المشاركين',
+          bullets: {
+            abusePrevention: 'منع الإساءة',
+            clubResponsibilities: 'مسؤوليات الأندية',
+            minors: 'حماية القاصرين',
+            professionalConduct: 'السلوك المهني',
+            reporting: 'الإبلاغ عن المخالفات',
+          },
+        },
+        integrity: {
+          title: 'سياسة النزاهة الرياضية',
+          summary: 'تهدف إلى الحفاظ على النزاهة والعدالة في المنافسات',
+          bullets: {
+            unsportsmanlike: 'السلوك غير الرياضي',
+            reporting: 'الإبلاغ عن المخالفات',
+            integrity: 'النزاهة',
+            conflictOfInterest: 'تضارب المصالح',
+            manipulation: 'التلاعب بالمنافسات',
+          },
+        },
+      },
+    },
     settings: {
       title: 'الاعدادات',
       email: 'البريد الالكتروني',
