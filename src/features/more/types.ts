@@ -119,6 +119,7 @@ export type UserProfile = {
   name: string;
   email: string;
   phone: string;
+  federationId: string;
   roleKey: 'home.role.federationOfficial' | 'home.role.player';
   avatarUri?: string;
   playerDetails?: PlayerProfileDetails;

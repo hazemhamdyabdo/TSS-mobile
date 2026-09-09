@@ -1,5 +1,5 @@
 import { Image } from "expo-image";
-import { useRouter } from "expo-router";
+import { useRouter, type Href } from "expo-router";
 import type { BottomTabBarProps } from "expo-router/js-tabs";
 import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
@@ -204,8 +204,7 @@ export default function AppTabBar({ state, navigation }: BottomTabBarProps) {
           <Pressable
             accessibilityRole="button"
             accessibilityLabel={liveLabel}
-            // TODO: wire guest live broadcast screen when available
-            onPress={() => undefined}
+            onPress={() => router.push('/live' as Href)}
             className="items-center gap-1"
           >
             <View

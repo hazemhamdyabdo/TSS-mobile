@@ -4,6 +4,7 @@ export const DUMMY_PROFILE: UserProfile = {
   name: 'عبدالله فيصل',
   email: 'Faisal@fencing_sa',
   phone: '123456789',
+  federationId: 'SFF-A-XCFR7ZBW',
   roleKey: 'home.role.federationOfficial',
 };
 
@@ -12,6 +13,7 @@ export const DUMMY_USER_PROFILE: UserProfile = {
   name: 'احمد الخالدي',
   email: 'Ahmed@fencing_sa',
   phone: '507654321',
+  federationId: 'SFF-P-AHMD5K1D',
   roleKey: 'home.role.player',
   playerDetails: {
     club: 'نادي الاتحاد',

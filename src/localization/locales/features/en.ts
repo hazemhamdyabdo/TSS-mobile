@@ -1075,6 +1075,9 @@ export const enFeatures = {
       saved: 'Your changes were saved successfully.',
       saveFailed: 'Could not save profile changes. Try a different email.',
       changePhoto: 'Change photo',
+      qrCode: 'Your QR code',
+      qrTitle: 'Your QR code',
+      qrIdentifier: 'Identifier',
       fields: {
         name: 'Name',
         phone: 'Mobile number',
@@ -1135,6 +1138,26 @@ export const enFeatures = {
       required: 'This field is required',
       invalidEmail: 'Enter a valid email',
       invalidPhone: 'Enter a valid mobile number',
+    },
+  },
+  live: {
+    title: 'Live broadcast',
+    badge: 'Live',
+    empty: 'No live matches right now',
+    notFound: 'Live match not found',
+    status: {
+      ongoing: 'Ongoing',
+    },
+    tabs: {
+      broadcast: 'Live broadcast',
+      details: 'Match details',
+      stats: 'Statistics',
+    },
+    video: {
+      play: 'Play live video',
+      pause: 'Pause live video',
+      fullscreen: 'Fullscreen',
+      viewers: '{{count}} viewers',
     },
   },
   news: {

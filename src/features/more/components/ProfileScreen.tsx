@@ -4,7 +4,7 @@ import { Image } from "expo-image";
 import * as ImagePicker from "expo-image-picker";
 import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import {
@@ -38,6 +38,10 @@ import {
 } from "../schemas/profileSchema";
 import { toPhoneFieldValue } from "../utils/phone";
 import { resolveProfileAvatarSource } from "../utils/profileAvatar";
+import ProfileQrBottomSheet, {
+  type ProfileQrBottomSheetRef,
+} from "./ProfileQrBottomSheet";
+import ProfileQrButton from "./ProfileQrButton";
 import ProfileTextField from "./ProfileTextField";
 
 type ReadOnlyFieldProps = {
@@ -70,6 +74,7 @@ export default function ProfileScreen() {
   const profile = isGuest ? DUMMY_GUEST_PROFILE : storeProfile;
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [avatarUri, setAvatarUri] = useState(profile.avatarUri);
+  const qrRef = useRef<ProfileQrBottomSheetRef>(null);
   const schema = useMemo(() => createProfileSchema(t), [t]);
 
   const {
@@ -186,6 +191,10 @@ export default function ProfileScreen() {
             </View>
           </View>
 
+          {isGuest ? null : (
+            <ProfileQrButton onPress={() => qrRef.current?.open()} />
+          )}
+
           <View className="w-full gap-3">
             <Controller
               control={control}
@@ -295,6 +304,12 @@ export default function ProfileScreen() {
           />
         </ScrollView>
       </KeyboardAvoidingView>
+      {isGuest ? null : (
+        <ProfileQrBottomSheet
+          ref={qrRef}
+          federationId={profile.federationId}
+        />
+      )}
     </ScreenSafeAreaView>
   );
 }

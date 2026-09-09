@@ -48,7 +48,8 @@
           "image": "./assets/images/auth/splash-logo.png",
           "imageWidth": 220
         }
-      ]
+      ],
+      "expo-video"
     ],
     "extra": {
       "supportsRTL": true,

@@ -1075,6 +1075,9 @@ export const arFeatures = {
       saved: 'تم حفظ التغييرات بنجاح.',
       saveFailed: 'تعذر حفظ تغييرات الملف الشخصي. جرّب بريداً مختلفاً.',
       changePhoto: 'تغيير الصورة',
+      qrCode: 'كود الخاص بك QR',
+      qrTitle: 'كود الخاص بك QR',
+      qrIdentifier: 'المعرف',
       fields: {
         name: 'الاسم',
         phone: 'رقم الجوال',
@@ -1135,6 +1138,26 @@ export const arFeatures = {
       required: 'هذا الحقل مطلوب',
       invalidEmail: 'البريد الإلكتروني غير صالح',
       invalidPhone: 'رقم الجوال غير صالح',
+    },
+  },
+  live: {
+    title: 'البث المباشر',
+    badge: 'بث مباشر',
+    empty: 'لا توجد مباريات مباشرة حالياً',
+    notFound: 'المباراة المباشرة غير موجودة',
+    status: {
+      ongoing: 'جارية',
+    },
+    tabs: {
+      broadcast: 'البث المباشر',
+      details: 'تفاصيل المباراة',
+      stats: 'الاحصائيات',
+    },
+    video: {
+      play: 'تشغيل البث',
+      pause: 'ايقاف البث',
+      fullscreen: 'ملء الشاشة',
+      viewers: '{{count}} مشاهد',
     },
   },
   news: {

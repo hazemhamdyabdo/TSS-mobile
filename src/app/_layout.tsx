@@ -102,6 +102,8 @@ export default function RootLayout() {
               <Stack.Screen name="news/index" />
               <Stack.Screen name="news/category/[category]" />
               <Stack.Screen name="news/[id]" />
+              <Stack.Screen name="live/index" />
+              <Stack.Screen name="live/[id]" />
               <Stack.Screen name="results" />
               <Stack.Screen name="transfers" />
             </Stack>
