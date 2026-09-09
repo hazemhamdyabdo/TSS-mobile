@@ -8,7 +8,7 @@ export const MORE_HUB_ROUTES: Record<MoreHubId, MoreHubHref> = {
   transfers: '/transfers',
   settings: '/settings',
   policies: '/privacy',
-  laws: '/privacy',
+  laws: '/laws',
   regulations: '/regulations',
   contact: '/help',
 };

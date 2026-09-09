@@ -19,7 +19,8 @@ export type MoreHubHref =
   | '/settings'
   | '/privacy'
   | '/help'
-  | '/regulations';
+  | '/regulations'
+  | '/laws';
 
 export type RegulationCategory =
   | 'competitions'
@@ -40,6 +41,46 @@ export type RegulationDocument = {
   publishedAt: string;
   issuePeriod: string;
   sectionKeys: string[];
+};
+
+export type FencingLawFilter = 'all' | 'basics' | 'weapons' | 'match' | 'refereeing';
+
+export type FencingLawSectionId = Exclude<FencingLawFilter, 'all'>;
+
+export type FencingLawExplanationArticle = {
+  kind: 'explanation';
+  id: string;
+  titleKey: string;
+  bodyKey: string;
+};
+
+export type FencingLawPenaltyItem = {
+  titleKey: string;
+  bodyKey: string;
+};
+
+export type FencingLawPenaltiesArticle = {
+  kind: 'penalties';
+  id: string;
+  items: FencingLawPenaltyItem[];
+};
+
+export type FencingLawBulletsArticle = {
+  kind: 'bullets';
+  id: string;
+  titleKey: string;
+  bulletKeys: string[];
+};
+
+export type FencingLawArticle =
+  | FencingLawExplanationArticle
+  | FencingLawPenaltiesArticle
+  | FencingLawBulletsArticle;
+
+export type FencingLawSection = {
+  id: FencingLawSectionId;
+  titleKey: string;
+  articles: FencingLawArticle[];
 };
 
 export type MoreHubAction = {

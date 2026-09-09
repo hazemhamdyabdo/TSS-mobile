@@ -817,8 +817,8 @@ export const enFeatures = {
           subtitle: 'View policies to learn more about the federation',
         },
         laws: {
-          title: 'Federation laws',
-          subtitle: 'View policies to learn more about the federation',
+          title: 'Fencing rules',
+          subtitle: 'Learn the rules of fencing matches and weapons',
         },
         regulations: {
           title: 'Federation regulations',
@@ -896,6 +896,77 @@ export const enFeatures = {
           resultsRanking: 'Results and ranking',
           violations: 'Violations and penalties',
           closingProvisions: 'Closing provisions',
+        },
+      },
+    },
+    fencingLaws: {
+      search: 'Search rules',
+      briefLabel: 'Brief explanation :',
+      filters: {
+        all: 'All',
+        basics: 'Basics',
+        weapons: 'Weapons',
+        match: 'Match',
+        refereeing: 'Refereeing',
+      },
+      sections: {
+        basics: {
+          title: 'Fencing basics',
+          articles: {
+            howMatchStarts: {
+              title: 'How does the match start?',
+              body: 'The match begins with both fencers in the en garde position, and the bout starts after the referee’s signal. Fencers must follow the referee’s instructions and piste rules throughout the match.',
+            },
+          },
+        },
+        weapons: {
+          title: 'Weapons',
+          articles: {
+            foil: {
+              title: 'Foil — foil weapon',
+              body: 'A thrusting weapon that scores with the tip only. The valid target is the torso, and touches are decided by right of way. A touch must land on the valid target to count.',
+            },
+            epee: {
+              title: 'Epee — épée weapon',
+              body: 'A thrusting weapon where the entire body is a valid target. Right of way does not apply; the first touch scores. Double touches may count when they occur within the time window defined by the rules.',
+            },
+            sabre: {
+              title: 'Sabre — sabre weapon',
+              body: 'A weapon that allows thrusting and cutting with the blade. The valid target is the upper body, including the head and arms. Sabre uses right of way to decide the touch.',
+            },
+          },
+        },
+        match: {
+          title: 'Types of offences',
+          penalties: {
+            yellow: {
+              title: 'Yellow card',
+              body: 'A warning for the offence.',
+            },
+            red: {
+              title: 'Red card',
+              body: 'A penalty that awards a touch to the opponent.',
+            },
+            black: {
+              title: 'Black card',
+              body: 'Exclusion from the competition according to the type of offence.',
+            },
+          },
+        },
+        refereeing: {
+          title: 'Refereeing',
+          articles: {
+            refereePowers: {
+              title: 'Referee powers',
+              bullets: {
+                startStop: 'Start and stop the match.',
+                scoreTouches: 'Award touches.',
+                warnings: 'Issue warnings and penalties.',
+                video: 'Review situations using video review.',
+                announce: 'Announce the match result.',
+              },
+            },
+          },
         },
       },
     },
