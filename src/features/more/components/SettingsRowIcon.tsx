@@ -4,6 +4,7 @@ import {
   DARK_MODE_ICON_XML,
   HELP_ICON_XML,
   LANGUAGE_ICON_XML,
+  LOGIN_ICON_XML,
   LOGOUT_ICON_XML,
   NOTIFICATIONS_ICON_XML,
   PRIVACY_ICON_XML,
@@ -30,8 +31,9 @@ export default function SettingsRowIcon({ rowId }: SettingsRowIconProps) {
     case 'darkMode':
       return <SvgXml xml={DARK_MODE_ICON_XML} width={22} height={22} />;
     case 'logout':
-    case 'login':
       return <SvgXml xml={LOGOUT_ICON_XML} width={22} height={22} />;
+    case 'login':
+      return <SvgXml xml={LOGIN_ICON_XML} width={22} height={22} />;
     default: {
       const exhaustive: never = rowId;
       throw new Error(`Unhandled settings row: ${exhaustive}`);
