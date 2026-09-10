@@ -1,30 +1,27 @@
-import { useRouter, type Href } from 'expo-router';
-import { ScrollView } from 'react-native';
-import { useTranslation } from 'react-i18next';
+import { useRouter, type Href } from "expo-router";
+import { useTranslation } from "react-i18next";
+import { ScrollView } from "react-native";
 
-import ScreenSafeAreaView from '@/components/ScreenSafeAreaView';
-import { useAuthState } from '@/features/auth/hooks/useAuthState';
-import {
-  getAuthRole,
-  isGuestSession,
-} from '@/features/auth/utils/sessionRole';
-import { DUMMY_GUEST_PROFILE } from '@/features/more/constants/dummy';
-import { useMoreState } from '@/features/more/hooks/useMoreState';
-import { resolveProfileAvatarSource } from '@/features/more/utils/profileAvatar';
-import { useNotificationsState } from '@/features/notifications/hooks/useNotificationsState';
-import { useMockListFetch } from '@/hooks/useMockListFetch';
+import ScreenSafeAreaView from "@/components/ScreenSafeAreaView";
+import { useAuthState } from "@/features/auth/hooks/useAuthState";
+import { getAuthRole, isGuestSession } from "@/features/auth/utils/sessionRole";
+import { DUMMY_GUEST_PROFILE } from "@/features/more/constants/dummy";
+import { useMoreState } from "@/features/more/hooks/useMoreState";
+import { resolveProfileAvatarSource } from "@/features/more/utils/profileAvatar";
+import { useNotificationsState } from "@/features/notifications/hooks/useNotificationsState";
+import { useMockListFetch } from "@/hooks/useMockListFetch";
 
-import { getHome } from '../api';
-import { useHomeState } from '../hooks/useHomeState';
-import { navigateToNews } from '../utils/navigateToNews';
-import ChampionshipBanner from './ChampionshipBanner';
-import GuestQuickActionsSection from './GuestQuickActionsSection';
-import HomeHeader from './HomeHeader';
-import HomeRankingsPreviewSection from './HomeRankingsPreviewSection';
-import HomeSkeleton from './HomeSkeleton';
-import QuickActionsSection from './QuickActionsSection';
-import RecentTasksSection from './RecentTasksSection';
-import UpcomingCompetitionsSection from './UpcomingCompetitionsSection';
+import { getHome } from "../api";
+import { useHomeState } from "../hooks/useHomeState";
+import { navigateToNews } from "../utils/navigateToNews";
+import ChampionshipBanner from "./ChampionshipBanner";
+import GuestQuickActionsSection from "./GuestQuickActionsSection";
+import HomeHeader from "./HomeHeader";
+import HomeRankingsPreviewSection from "./HomeRankingsPreviewSection";
+import HomeSkeleton from "./HomeSkeleton";
+import QuickActionsSection from "./QuickActionsSection";
+import RecentTasksSection from "./RecentTasksSection";
+import UpcomingCompetitionsSection from "./UpcomingCompetitionsSection";
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -45,7 +42,7 @@ export default function HomeScreen() {
   );
 
   return (
-    <ScreenSafeAreaView className="flex-1 bg-background" edges={['top']}>
+    <ScreenSafeAreaView className="flex-1 bg-background" edges={["top"]}>
       <ScrollView
         className="flex-1"
         contentContainerClassName="gap-4 px-5 pb-28 pt-2"
@@ -53,7 +50,7 @@ export default function HomeScreen() {
       >
         {isLoading ? (
           <HomeSkeleton />
-        ) : role === 'guest' ? (
+        ) : role === "guest" ? (
           <>
             <HomeHeader
               name={headerName}
@@ -62,9 +59,9 @@ export default function HomeScreen() {
               notificationCount={unreadCount}
               welcomeKey="home.guest.welcome"
               showNotifications={false}
-              avatarInitial={t('home.guest.avatarInitial')}
-              onNotificationsPress={() => router.push('/inbox' as Href)}
-              onAvatarPress={() => router.push('/profile' as Href)}
+              avatarInitial={t("home.guest.avatarInitial")}
+              onNotificationsPress={() => router.push("/inbox" as Href)}
+              onAvatarPress={() => router.push("/profile" as Href)}
             />
             <ChampionshipBanner
               banners={home.banners}
@@ -77,20 +74,20 @@ export default function HomeScreen() {
             />
             <HomeRankingsPreviewSection rankings={home.rankingsPreview} />
           </>
-        ) : role === 'user' ? (
+        ) : role === "user" ? (
           <>
             <HomeHeader
               name={headerName}
               roleKey={headerRoleKey}
               avatarSource={headerAvatarSource}
               notificationCount={unreadCount}
-              onNotificationsPress={() => router.push('/inbox' as Href)}
-              onAvatarPress={() => router.push('/profile' as Href)}
+              onNotificationsPress={() => router.push("/inbox" as Href)}
+              onAvatarPress={() => router.push("/profile" as Href)}
             />
             <ChampionshipBanner
               banners={home.banners}
-              onDiscoverPress={() => router.push('/(tabs)/competitions')}
-              onBannerPress={() => router.push('/(tabs)/competitions')}
+              onDiscoverPress={() => router.push("/(tabs)/competitions")}
+              onBannerPress={() => router.push("/(tabs)/competitions")}
             />
             <GuestQuickActionsSection actions={home.guestQuickActions} />
             <UpcomingCompetitionsSection
@@ -105,17 +102,17 @@ export default function HomeScreen() {
               roleKey={headerRoleKey}
               avatarSource={headerAvatarSource}
               notificationCount={unreadCount}
-              onNotificationsPress={() => router.push('/inbox' as Href)}
-              onAvatarPress={() => router.push('/profile' as Href)}
+              onNotificationsPress={() => router.push("/inbox" as Href)}
+              onAvatarPress={() => router.push("/profile" as Href)}
             />
             <ChampionshipBanner
               banners={home.banners}
-              onDiscoverPress={() => router.push('/(tabs)/competitions')}
+              onDiscoverPress={() => router.push("/(tabs)/competitions")}
             />
             <QuickActionsSection actions={home.quickActions} />
             <RecentTasksSection
               tasks={home.tasks}
-              onViewAll={() => router.push('/transfers' as Href)}
+              onViewAll={() => router.push("/transfers" as Href)}
             />
           </>
         )}

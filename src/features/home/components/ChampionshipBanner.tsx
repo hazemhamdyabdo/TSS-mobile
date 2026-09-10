@@ -7,15 +7,12 @@ import {
   Text,
   useWindowDimensions,
   View,
-  type NativeSyntheticEvent,
   type NativeScrollEvent,
+  type NativeSyntheticEvent,
 } from "react-native";
 import Svg, { Defs, LinearGradient, Rect, Stop } from "react-native-svg";
 
-import {
-  RTL_CONTAINER_STYLE,
-  RTL_TEXT_STYLE,
-} from "@/localization/direction";
+import { RTL_CONTAINER_STYLE, RTL_TEXT_STYLE } from "@/localization/direction";
 import { cairo } from "@/theme/typography";
 
 import type { ChampionshipBanner as ChampionshipBannerType } from "../types";
@@ -23,7 +20,7 @@ import type { ChampionshipBanner as ChampionshipBannerType } from "../types";
 const bannerImage = require("@/assets/images/home/banner-fencers.jpg");
 const discoverArrow = require("@/assets/images/home/icons/discover-arrow.png");
 
-const BANNER_HEIGHT = 132;
+const BANNER_HEIGHT = 172;
 const SCREEN_GUTTER = 40;
 
 type ChampionshipBannerProps = {
@@ -71,24 +68,20 @@ export default function ChampionshipBanner({
   const [activeIndex, setActiveIndex] = useState(0);
   const handleBannerPress = onBannerPress ?? onDiscoverPress;
 
-  const syncActiveIndex = (
-    event: NativeSyntheticEvent<NativeScrollEvent>,
-  ) => {
+  const syncActiveIndex = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const pageWidth = event.nativeEvent.layoutMeasurement.width;
     if (pageWidth <= 0) {
       return;
     }
 
-    const nextIndex = Math.round(
-      event.nativeEvent.contentOffset.x / pageWidth,
-    );
+    const nextIndex = Math.round(event.nativeEvent.contentOffset.x / pageWidth);
     const clamped = Math.min(Math.max(nextIndex, 0), banners.length - 1);
     setActiveIndex((current) => (current === clamped ? current : clamped));
   };
 
   return (
     <View
-      className="overflow-hidden rounded-lg"
+      className="overflow-hidden rounded-lg "
       style={{ height: BANNER_HEIGHT }}
       onLayout={(event) => {
         const width = Math.round(event.nativeEvent.layout.width);
@@ -159,7 +152,7 @@ export default function ChampionshipBanner({
                     {t(banner.eventTypeKey)}
                   </Text>
                   <View
-                    className="flex-row items-center gap-1"
+                    className="flex-row items-center gap-1 "
                     style={RTL_CONTAINER_STYLE}
                   >
                     <Text
