@@ -1,12 +1,12 @@
-import { Image } from 'expo-image';
-import { Text, View } from 'react-native';
-import { useTranslation } from 'react-i18next';
+import { Image } from "expo-image";
+import { useTranslation } from "react-i18next";
+import { Text, View } from "react-native";
 
-import { RTL_CONTAINER_STYLE, RTL_TEXT_STYLE } from '@/localization/direction';
-import { cairo } from '@/theme/typography';
+import { RTL_CONTAINER_STYLE, RTL_TEXT_STYLE } from "@/localization/direction";
+import { cairo } from "@/theme/typography";
 
-import { clubLogoSource } from '../constants/clubLogos';
-import type { BrowseClub } from '../types';
+import { clubLogoSource } from "../constants/clubLogos";
+import type { BrowseClub } from "../types";
 
 type ClubHeroCardProps = {
   club: BrowseClub;
@@ -17,9 +17,18 @@ export default function ClubHeroCard({ club }: ClubHeroCardProps) {
 
   return (
     <View className="overflow-hidden rounded-[8px] border border-slate-100 bg-white px-4 py-3">
-      <View className="absolute -top-[39px] size-[118px] rounded-full bg-primary" style={{ right: -20 }} />
-      <View className="absolute -top-[18px] size-[90px] rounded-full bg-[#002411]/40" style={{ right: -8 }} />
-      <View className="flex-row items-center gap-2.5" style={RTL_CONTAINER_STYLE}>
+      <View
+        className="absolute -top-[39px] size-[118px] rounded-full bg-primary"
+        style={{ right: -20 }}
+      />
+      <View
+        className="absolute -top-[18px] size-[90px] rounded-full bg-[#002411]/40"
+        style={{ right: -8 }}
+      />
+      <View
+        className="flex-row items-center gap-2.5"
+        style={RTL_CONTAINER_STYLE}
+      >
         <View className="size-[68px] items-center justify-center overflow-hidden rounded-full border-2 border-white bg-white">
           <Image
             source={clubLogoSource(club.logoId)}
@@ -27,9 +36,9 @@ export default function ClubHeroCard({ club }: ClubHeroCardProps) {
             contentFit="contain"
           />
         </View>
-        <View className="min-w-0 flex-1 items-start gap-2">
+        <View className="min-w-0 flex-1 items-start gap-2 ms-3.5">
           <Text
-            className="text-lg text-accent"
+            className="text-lg text-accent "
             style={{ fontFamily: cairo.medium, ...RTL_TEXT_STYLE }}
             numberOfLines={1}
           >

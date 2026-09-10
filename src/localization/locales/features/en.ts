@@ -632,6 +632,10 @@ export const enFeatures = {
     },
   },
   members: {
+    guest: {
+      search: 'Search players',
+      empty: 'No players match this search',
+    },
     title: 'Members',
     search: 'Search members',
     add: 'Add member',

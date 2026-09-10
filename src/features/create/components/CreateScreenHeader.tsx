@@ -1,9 +1,6 @@
 import { Text, View } from "react-native";
 
-import {
-  RTL_CONTAINER_STYLE,
-  RTL_TEXT_STYLE,
-} from "@/localization/direction";
+import { RTL_CONTAINER_STYLE, RTL_TEXT_STYLE } from "@/localization/direction";
 import { cairo } from "@/theme/typography";
 
 import CreateBackButton from "./CreateBackButton";

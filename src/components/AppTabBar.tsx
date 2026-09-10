@@ -151,6 +151,10 @@ export default function AppTabBar({ state, navigation }: BottomTabBarProps) {
     navigateInTabs(navigation, state, name, focusedTab ?? undefined);
   }
 
+  if (role === "guest" && focusedName === "members") {
+    return null;
+  }
+
   if (role === "guest") {
     const rankingsFocused = focusedName === "rankings";
     const competitionsFocused = focusedTab === "competitions";

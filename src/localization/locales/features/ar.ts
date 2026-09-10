@@ -632,6 +632,10 @@ export const arFeatures = {
     },
   },
   members: {
+    guest: {
+      search: 'بحث في اللاعبين',
+      empty: 'لا يوجد لاعبون يطابقون البحث',
+    },
     title: 'الاعضاء',
     search: 'بحث في الاعضاء',
     add: 'اضافة عضو',

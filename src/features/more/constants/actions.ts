@@ -13,6 +13,27 @@ export const MORE_HUB_ROUTES: Record<MoreHubId, MoreHubHref> = {
   contact: '/help',
 };
 
+const FEDERATION_MORE_HUB_ACTIONS: MoreHubAction[] = [
+  {
+    id: 'policies',
+    titleKey: 'more.hub.items.policies.title',
+    subtitleKey: 'more.hub.items.policies.subtitle',
+    href: MORE_HUB_ROUTES.policies,
+  },
+  {
+    id: 'laws',
+    titleKey: 'more.hub.items.laws.title',
+    subtitleKey: 'more.hub.items.laws.subtitle',
+    href: MORE_HUB_ROUTES.laws,
+  },
+  {
+    id: 'regulations',
+    titleKey: 'more.hub.items.regulations.title',
+    subtitleKey: 'more.hub.items.regulations.subtitle',
+    href: MORE_HUB_ROUTES.regulations,
+  },
+];
+
 export const MORE_HUB_ACTIONS: MoreHubAction[] = [
   {
     id: 'clubs',
@@ -44,6 +65,7 @@ export const MORE_HUB_ACTIONS: MoreHubAction[] = [
     subtitleKey: 'more.hub.items.transfers.subtitle',
     href: MORE_HUB_ROUTES.transfers,
   },
+  ...FEDERATION_MORE_HUB_ACTIONS,
   {
     id: 'settings',
     titleKey: 'more.hub.items.settings.title',
@@ -53,24 +75,7 @@ export const MORE_HUB_ACTIONS: MoreHubAction[] = [
 ];
 
 export const GUEST_MORE_HUB_ACTIONS: MoreHubAction[] = [
-  {
-    id: 'policies',
-    titleKey: 'more.hub.items.policies.title',
-    subtitleKey: 'more.hub.items.policies.subtitle',
-    href: MORE_HUB_ROUTES.policies,
-  },
-  {
-    id: 'laws',
-    titleKey: 'more.hub.items.laws.title',
-    subtitleKey: 'more.hub.items.laws.subtitle',
-    href: MORE_HUB_ROUTES.laws,
-  },
-  {
-    id: 'regulations',
-    titleKey: 'more.hub.items.regulations.title',
-    subtitleKey: 'more.hub.items.regulations.subtitle',
-    href: MORE_HUB_ROUTES.regulations,
-  },
+  ...FEDERATION_MORE_HUB_ACTIONS,
   {
     id: 'contact',
     titleKey: 'more.hub.items.contact.title',
@@ -105,6 +110,7 @@ export const USER_MORE_HUB_ACTIONS: MoreHubAction[] = [
     subtitleKey: 'more.hub.items.punishments.subtitle',
     href: MORE_HUB_ROUTES.punishments,
   },
+  ...FEDERATION_MORE_HUB_ACTIONS,
   {
     id: 'contact',
     titleKey: 'more.hub.items.contact.title',
