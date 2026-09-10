@@ -1,28 +1,26 @@
-import { MaterialDesignIcons } from '@react-native-vector-icons/material-design-icons';
-import { StatusBar } from 'expo-status-bar';
-import { useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { ScrollView, TextInput, View } from 'react-native';
+import { MaterialDesignIcons } from "@react-native-vector-icons/material-design-icons";
+import { StatusBar } from "expo-status-bar";
+import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { ScrollView, TextInput, View } from "react-native";
 
-import ScreenSafeAreaView from '@/components/ScreenSafeAreaView';
-import CreateScreenHeader from '@/features/create/components/CreateScreenHeader';
+import ScreenSafeAreaView from "@/components/ScreenSafeAreaView";
+import CreateScreenHeader from "@/features/create/components/CreateScreenHeader";
 import {
   RTL_CONTAINER_STYLE,
   TEXT_INPUT_START_ALIGN,
-} from '@/localization/direction';
-import { colors } from '@/theme/colors';
-import { cairo } from '@/theme/typography';
+} from "@/localization/direction";
+import { colors } from "@/theme/colors";
+import { cairo } from "@/theme/typography";
 
-import { DUMMY_POLICY_SECTIONS } from '../constants/policies';
-import type { PolicySectionId } from '../types';
-import PolicySectionAccordion from './PolicySectionAccordion';
+import { DUMMY_POLICY_SECTIONS } from "../constants/policies";
+import type { PolicySectionId } from "../types";
+import PolicySectionAccordion from "./PolicySectionAccordion";
 
 export default function PoliciesScreen() {
   const { t } = useTranslation();
-  const [query, setQuery] = useState('');
-  const [expandedIds, setExpandedIds] = useState<PolicySectionId[]>(
-    DUMMY_POLICY_SECTIONS.map((section) => section.id),
-  );
+  const [query, setQuery] = useState("");
+  const [expandedIds, setExpandedIds] = useState<PolicySectionId[]>([]);
 
   const sections = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
@@ -46,18 +44,20 @@ export default function PoliciesScreen() {
 
   const toggleSection = (id: PolicySectionId) => {
     setExpandedIds((current) =>
-      current.includes(id) ? current.filter((item) => item !== id) : [...current, id],
+      current.includes(id)
+        ? current.filter((item) => item !== id)
+        : [...current, id],
     );
   };
 
   return (
     <ScreenSafeAreaView
       className="flex-1 bg-background"
-      edges={['top', 'bottom']}
+      edges={["top", "bottom"]}
       style={RTL_CONTAINER_STYLE}
     >
       <StatusBar style="auto" />
-      <CreateScreenHeader title={t('more.hub.items.policies.title')} />
+      <CreateScreenHeader title={t("more.hub.items.policies.title")} />
       <ScrollView
         className="flex-1"
         contentContainerClassName="gap-4 px-5 pb-8 pt-4"
@@ -68,11 +68,15 @@ export default function PoliciesScreen() {
           className="h-[42px] w-full flex-row items-center gap-2 rounded-lg border border-slate-100 bg-white px-4"
           style={RTL_CONTAINER_STYLE}
         >
-          <MaterialDesignIcons name="magnify" size={20} color={colors.primary} />
+          <MaterialDesignIcons
+            name="magnify"
+            size={20}
+            color={colors.primary}
+          />
           <TextInput
             value={query}
             onChangeText={setQuery}
-            placeholder={t('more.policies.search')}
+            placeholder={t("more.policies.search")}
             placeholderTextColor={colors.slate300}
             textAlign={TEXT_INPUT_START_ALIGN}
             returnKeyType="search"

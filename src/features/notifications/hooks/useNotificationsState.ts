@@ -1,21 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useReducer } from 'react';
 
-import {
-  getNotificationsState,
-  getUnreadNotificationCount,
-  subscribeToNotifications,
-} from '../store/notificationsState';
+import { useAuthState } from '@/features/auth/hooks/useAuthState';
+import { getAuthRole } from '@/features/auth/utils/sessionRole';
+import { getNotificationsState, subscribeToNotifications } from '../store/notificationsState';
 
 export function useNotificationsState() {
-  const [state, setState] = useState(getNotificationsState());
-  const [unreadCount, setUnreadCount] = useState(getUnreadNotificationCount());
+  const { session } = useAuthState();
+  const [, refresh] = useReducer((revision: number) => revision + 1, 0);
 
-  useEffect(() => {
-    return subscribeToNotifications(() => {
-      setState(getNotificationsState());
-      setUnreadCount(getUnreadNotificationCount());
-    });
-  }, []);
+  useEffect(() => subscribeToNotifications(refresh), []);
 
-  return { items: state.items, unreadCount };
+  const { items } = getNotificationsState(getAuthRole(session));
+  return { items, unreadCount: items.filter((item) => !item.read).length };
 }

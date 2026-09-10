@@ -4,6 +4,7 @@ export const DUMMY_NOTIFICATIONS_STATE: NotificationsState = {
   items: [
     {
       id: 'notif-1',
+      audience: 'admin',
       titleKey: 'inbox.items.transfer.title',
       bodyKey: 'inbox.items.transfer.body',
       createdAt: '2026-08-25T08:14:00.000Z',
@@ -12,6 +13,7 @@ export const DUMMY_NOTIFICATIONS_STATE: NotificationsState = {
     },
     {
       id: 'notif-2',
+      audience: 'admin',
       titleKey: 'inbox.items.competition.title',
       bodyKey: 'inbox.items.competition.body',
       createdAt: '2026-08-25T07:00:00.000Z',
@@ -20,11 +22,39 @@ export const DUMMY_NOTIFICATIONS_STATE: NotificationsState = {
     },
     {
       id: 'notif-3',
+      audience: 'admin',
       titleKey: 'inbox.items.member.title',
       bodyKey: 'inbox.items.member.body',
       createdAt: '2026-08-24T18:30:00.000Z',
       read: false,
       href: '/(tabs)/members',
+    },
+    {
+      id: 'player-competition-invitation',
+      audience: 'user',
+      titleKey: 'inbox.items.playerInvitation.title',
+      bodyKey: 'inbox.items.playerInvitation.body',
+      createdAt: '2026-08-25T08:14:00.000Z',
+      read: false,
+      href: '/competition/world-cup-senior',
+    },
+    {
+      id: 'player-competition-reminder',
+      audience: 'user',
+      titleKey: 'inbox.items.playerReminder.title',
+      bodyKey: 'inbox.items.playerReminder.body',
+      createdAt: '2026-08-25T07:00:00.000Z',
+      read: false,
+      href: '/competition/kingdom-upcoming',
+    },
+    {
+      id: 'player-violation',
+      audience: 'user',
+      titleKey: 'inbox.items.playerViolation.title',
+      bodyKey: 'inbox.items.playerViolation.body',
+      createdAt: '2026-08-24T18:30:00.000Z',
+      read: false,
+      href: '/(tabs)/punishments',
     },
   ],
 };

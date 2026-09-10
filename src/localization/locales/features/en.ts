@@ -1354,6 +1354,18 @@ export const enFeatures = {
     unreadCount: '{{count}} unread',
     notFound: 'Notification not found',
     items: {
+      playerInvitation: {
+        title: 'Competition call-up',
+        body: 'You have been called up to a competition. Tap to view its details.',
+      },
+      playerReminder: {
+        title: 'Your competition is approaching',
+        body: 'A competition you are participating in is approaching. Check the schedule and prepare to attend.',
+      },
+      playerViolation: {
+        title: 'A violation has been recorded',
+        body: 'A violation has been recorded against you. Tap to view its details.',
+      },
       transfer: {
         title: 'Player transfer request',
         body: 'A new transfer request is waiting for review.',

@@ -1,5 +1,6 @@
 export type AppNotification = {
   id: string;
+  audience: 'admin' | 'user';
   titleKey: string;
   bodyKey: string;
   createdAt: string;
