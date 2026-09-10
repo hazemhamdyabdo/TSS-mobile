@@ -1,5 +1,5 @@
-import ClubsScreen from '@/features/federation/components/ClubsScreen';
+import BrowseClubsScreen from '@/features/federation/components/BrowseClubsScreen';
 
 export default function ClubsRoute() {
-  return <ClubsScreen />;
+  return <BrowseClubsScreen />;
 }
