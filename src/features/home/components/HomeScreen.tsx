@@ -61,7 +61,6 @@ export default function HomeScreen() {
               showNotifications={false}
               avatarInitial={t("home.guest.avatarInitial")}
               onNotificationsPress={() => router.push("/inbox" as Href)}
-              onAvatarPress={() => router.push("/profile" as Href)}
             />
             <ChampionshipBanner
               banners={home.banners}
