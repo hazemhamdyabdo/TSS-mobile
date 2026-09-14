@@ -1,21 +1,35 @@
-import { useRef } from "react";
+import { useRouter } from "expo-router";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Image, Pressable, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
+import { enterAsGuest } from "@/features/auth/api";
 import { RTL_TEXT_STYLE } from "@/localization/direction";
 import { cairo } from "@/theme/typography";
 import AuthHeroBackground from "./AuthHeroBackground";
-import LoginBottomSheet, {
-  type LoginBottomSheetRef,
-} from "./LoginBottomSheet";
 
 const startIcon = require("@/assets/images/start-icon.png");
 
 export default function OnboardingScreen() {
   const { t } = useTranslation();
+  const router = useRouter();
   const insets = useSafeAreaInsets();
-  const loginSheetRef = useRef<LoginBottomSheetRef>(null);
+  const [isEntering, setIsEntering] = useState(false);
+
+  const handleStart = async () => {
+    if (isEntering) {
+      return;
+    }
+
+    setIsEntering(true);
+    try {
+      await enterAsGuest();
+      router.replace("/(tabs)");
+    } finally {
+      setIsEntering(false);
+    }
+  };
 
   return (
     <AuthHeroBackground>
@@ -44,7 +58,11 @@ export default function OnboardingScreen() {
 
           <Pressable
             accessibilityRole="button"
-            onPress={() => loginSheetRef.current?.open()}
+            accessibilityState={{ disabled: isEntering, busy: isEntering }}
+            disabled={isEntering}
+            onPress={() => {
+              void handleStart();
+            }}
             className="h-11 w-29 flex-row items-center justify-center gap-2 rounded-full bg-primary px-4"
           >
             <Text
@@ -57,7 +75,6 @@ export default function OnboardingScreen() {
           </Pressable>
         </View>
       </View>
-      <LoginBottomSheet ref={loginSheetRef} />
     </AuthHeroBackground>
   );
 }

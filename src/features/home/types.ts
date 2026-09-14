@@ -10,6 +10,12 @@ export type GuestQuickActionId =
   | 'players'
   | 'news';
 
+export type PlayerQuickActionId =
+  | 'myCompetitions'
+  | 'rankings'
+  | 'punishments'
+  | 'profile';
+
 export type RelativeTimeUnit = 'minutes' | 'hours';
 
 export type HomeProfile = {
@@ -35,6 +41,11 @@ export type QuickAction = {
 
 export type GuestQuickAction = {
   id: GuestQuickActionId;
+  labelKey: string;
+};
+
+export type PlayerQuickAction = {
+  id: PlayerQuickActionId;
   labelKey: string;
 };
 
@@ -84,6 +95,7 @@ export type HomeDashboard = {
   tasks: RecentTask[];
   guestProfile: HomeProfile;
   guestQuickActions: GuestQuickAction[];
+  playerQuickActions: PlayerQuickAction[];
   upcomingCompetitions: UpcomingCompetition[];
   rankingsPreview: HomeRankingsPreview;
   leaderboard: GuestLeaderboard;

@@ -1,4 +1,5 @@
 import { MaterialDesignIcons } from "@react-native-vector-icons/material-design-icons";
+import { BottomSheetTextInput } from "@gorhom/bottom-sheet";
 import { useRef, useState } from "react";
 import { Pressable, Text, TextInput, View } from "react-native";
 
@@ -34,6 +35,7 @@ type PhoneNumberFieldProps = {
   placeholder: string;
   hasError?: boolean;
   variant?: "default" | "profile";
+  insideBottomSheet?: boolean;
 };
 
 export default function PhoneNumberField({
@@ -42,6 +44,7 @@ export default function PhoneNumberField({
   placeholder,
   hasError = false,
   variant = "default",
+  insideBottomSheet = false,
 }: PhoneNumberFieldProps) {
   const countrySheetRef = useRef<CountryPickerBottomSheetRef>(null);
   const [iso2, setIso2] = useState("sa");
@@ -50,6 +53,7 @@ export default function PhoneNumberField({
     COUNTRIES.find((country) => country.iso2 === iso2)?.dialCode ?? "+966";
   const national = nationalDigitsFromDisplay(value, dialCode);
   const isProfile = variant === "profile";
+  const InputComponent = insideBottomSheet ? BottomSheetTextInput : TextInput;
   const borderClass = hasError
     ? "border-rejected"
     : focused
@@ -89,7 +93,7 @@ export default function PhoneNumberField({
 
   const phoneInput = (
     <View className="min-w-0 flex-1 self-stretch justify-center">
-      <TextInput
+      <InputComponent
         value={isProfile ? formatProfilePhone(national) : national}
         onChangeText={(text) => {
           const digits = onlyDigits(text);

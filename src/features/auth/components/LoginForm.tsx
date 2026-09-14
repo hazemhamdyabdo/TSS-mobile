@@ -26,12 +26,14 @@ type LoginFormProps = {
   onOtpRequested?: (phone: string) => void;
   onContactPress?: () => void;
   onGuestEntered?: () => void;
+  insideBottomSheet?: boolean;
 };
 
 export default function LoginForm({
   onOtpRequested,
   onContactPress,
   onGuestEntered,
+  insideBottomSheet = false,
 }: LoginFormProps) {
   const { t } = useTranslation();
   const router = useRouter();
@@ -100,6 +102,7 @@ export default function LoginForm({
                 onChangeText={onChange}
                 placeholder={t("auth.phonePlaceholder")}
                 hasError={Boolean(errors.phone)}
+                insideBottomSheet={insideBottomSheet}
               />
             )}
           />

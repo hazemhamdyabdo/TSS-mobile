@@ -86,6 +86,7 @@ const LoginBottomSheet = forwardRef<LoginBottomSheetRef>(function LoginBottomShe
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}>
         <LoginContent
+          insideBottomSheet
           onOtpRequested={(phone) =>
             navigateAfterDismiss(
               `/(auth)/otp?phone=${encodeURIComponent(phone)}` as unknown as Href,

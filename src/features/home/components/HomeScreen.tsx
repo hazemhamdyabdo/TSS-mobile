@@ -19,6 +19,7 @@ import GuestQuickActionsSection from "./GuestQuickActionsSection";
 import HomeHeader from "./HomeHeader";
 import HomeRankingsPreviewSection from "./HomeRankingsPreviewSection";
 import HomeSkeleton from "./HomeSkeleton";
+import PlayerQuickActionsSection from "./PlayerQuickActionsSection";
 import QuickActionsSection from "./QuickActionsSection";
 import RecentTasksSection from "./RecentTasksSection";
 import UpcomingCompetitionsSection from "./UpcomingCompetitionsSection";
@@ -88,7 +89,7 @@ export default function HomeScreen() {
               onDiscoverPress={() => router.push("/(tabs)/competitions")}
               onBannerPress={() => router.push("/(tabs)/competitions")}
             />
-            <GuestQuickActionsSection actions={home.guestQuickActions} />
+            <PlayerQuickActionsSection actions={home.playerQuickActions} />
             <UpcomingCompetitionsSection
               competitions={home.upcomingCompetitions}
             />

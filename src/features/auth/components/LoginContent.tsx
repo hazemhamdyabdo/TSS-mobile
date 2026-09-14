@@ -10,12 +10,14 @@ type LoginContentProps = {
   onOtpRequested?: (phone: string) => void;
   onContactPress?: () => void;
   onGuestEntered?: () => void;
+  insideBottomSheet?: boolean;
 };
 
 export default function LoginContent({
   onOtpRequested,
   onContactPress,
   onGuestEntered,
+  insideBottomSheet = false,
 }: LoginContentProps) {
   const { t } = useTranslation();
 
@@ -39,6 +41,7 @@ export default function LoginContent({
         onOtpRequested={onOtpRequested}
         onContactPress={onContactPress}
         onGuestEntered={onGuestEntered}
+        insideBottomSheet={insideBottomSheet}
       />
     </View>
   );

@@ -7,6 +7,7 @@ import type {
   HomeDashboard,
   HomeProfile,
   HomeRankingsPreview,
+  PlayerQuickAction,
   QuickAction,
   RecentTask,
   UpcomingCompetition,
@@ -69,6 +70,13 @@ export const DUMMY_GUEST_QUICK_ACTIONS: GuestQuickAction[] = [
   { id: 'clubs', labelKey: 'home.guest.quickActions.clubs' },
   { id: 'players', labelKey: 'home.guest.quickActions.players' },
   { id: 'news', labelKey: 'home.guest.quickActions.news' },
+];
+
+export const DUMMY_PLAYER_QUICK_ACTIONS: PlayerQuickAction[] = [
+  { id: 'myCompetitions', labelKey: 'home.player.quickActions.myCompetitions' },
+  { id: 'rankings', labelKey: 'home.player.quickActions.rankings' },
+  { id: 'punishments', labelKey: 'home.player.quickActions.punishments' },
+  { id: 'profile', labelKey: 'home.player.quickActions.profile' },
 ];
 
 export const DUMMY_TASKS: RecentTask[] = [
@@ -270,6 +278,7 @@ export const DUMMY_HOME: HomeDashboard = {
   tasks: DUMMY_TASKS,
   guestProfile: DUMMY_GUEST_PROFILE,
   guestQuickActions: DUMMY_GUEST_QUICK_ACTIONS,
+  playerQuickActions: DUMMY_PLAYER_QUICK_ACTIONS,
   upcomingCompetitions: DUMMY_UPCOMING_COMPETITIONS,
   rankingsPreview: DUMMY_RANKINGS_PREVIEW,
   leaderboard: DUMMY_LEADERBOARD,

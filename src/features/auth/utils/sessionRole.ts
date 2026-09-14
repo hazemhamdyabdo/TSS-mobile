@@ -53,11 +53,11 @@ export function normalizeAuthSession(
   return withSessionRole(session.phone, session.token, 'admin');
 }
 
-export function getAuthRole(session: AuthSession | null | undefined): AuthRole | null {
+export function getAuthRole(session: AuthSession | null | undefined): AuthRole {
   if (!session) {
-    return null;
+    return 'guest';
   }
-  return normalizeAuthSession(session)?.role ?? null;
+  return normalizeAuthSession(session)?.role ?? 'guest';
 }
 
 export function isGuestSession(session: AuthSession | null | undefined) {

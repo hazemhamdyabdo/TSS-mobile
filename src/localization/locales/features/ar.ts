@@ -53,6 +53,15 @@ export const arFeatures = {
       addReferee: 'اضافة حكم',
       addCompetition: 'اضافة مسابقة',
     },
+    player: {
+      quickActions: {
+        title: 'الوصول السريع',
+        myCompetitions: 'مسابقاتي',
+        rankings: 'التصنيف',
+        punishments: 'العقوبات',
+        profile: 'ملفي الشخصي',
+      },
+    },
     guest: {
       userName: 'احمد',
       welcome: 'مرحبا بك',

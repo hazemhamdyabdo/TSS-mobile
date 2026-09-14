@@ -53,6 +53,15 @@ export const enFeatures = {
       addReferee: 'Add referee',
       addCompetition: 'Add competition',
     },
+    player: {
+      quickActions: {
+        title: 'Quick access',
+        myCompetitions: 'My competitions',
+        rankings: 'Ranking',
+        punishments: 'Sanctions',
+        profile: 'My profile',
+      },
+    },
     guest: {
       userName: 'Ahmed',
       welcome: 'Welcome',
